@@ -1,0 +1,10 @@
+{
+  "description": "Streamline business operations for F&B, retail, and service sectors in Indonesia with an integrated platform that enhances management, insights, and growth.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
