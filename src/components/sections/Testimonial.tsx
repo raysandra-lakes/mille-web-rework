@@ -81,6 +81,7 @@ export default function Testimonial() {
 
             {/* Metrics placeholder row */}
             <div
+              className="testimonial-metrics"
               style={{
                 display: "grid",
                 gridTemplateColumns: "repeat(3, 1fr)",

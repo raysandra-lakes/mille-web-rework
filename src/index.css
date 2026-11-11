@@ -110,6 +110,18 @@ body {
   line-height: 1.6;
 }
 
+/* Media should never force a page wider than its container */
+img,
+video {
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3 {
+  overflow-wrap: break-word;
+}
+
 /* === SCROLLBAR === */
 ::-webkit-scrollbar {
   width: 6px;
@@ -494,9 +506,12 @@ html {
 @media (max-width: 768px) {
   .final-cta-grid {
     grid-template-columns: 1fr !important;
+    gap: 28px !important;
+    padding: clamp(32px, 6vw, 48px) clamp(24px, 5vw, 40px) !important;
   }
   .final-cta-grid > div:last-child {
-    flex-direction: row !important;
+    width: 100%;
+    min-width: 0 !important;
   }
 }
 
@@ -504,9 +519,19 @@ html {
 @media (max-width: 768px) {
   .testimonial-grid {
     grid-template-columns: 1fr !important;
+    gap: 0 !important;
   }
   .testimonial-image {
     min-height: 280px !important;
+  }
+  .testimonial-grid > div:last-child {
+    padding: 28px 24px 32px !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .testimonial-metrics {
+    grid-template-columns: 1fr !important;
   }
 }
 
@@ -522,5 +547,99 @@ html {
 @media (max-width: 600px) {
   .blog-grid {
     grid-template-columns: 1fr !important;
+  }
+}
+
+/* Dashboard split rows inside solution hero mockups */
+@media (max-width: 480px) {
+  .dashboard-split,
+  .grid-2col-tight {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* QSR multi-outlet table: drop secondary columns on very small screens */
+.qsr-meta {
+  display: none;
+}
+@media (max-width: 480px) {
+  .qsr-row {
+    grid-template-columns: minmax(0, 1fr) 76px !important;
+    gap: 8px !important;
+  }
+  .qsr-hide-sm {
+    display: none !important;
+  }
+  .qsr-meta {
+    display: block;
+    margin-top: 2px;
+    font-size: 9px;
+    color: rgba(255, 255, 255, 0.35);
+    white-space: nowrap;
+  }
+}
+
+/* Small-screen typography and button sizing */
+@media (max-width: 480px) {
+  .type-display-xl {
+    font-size: clamp(32px, 10vw, 48px);
+  }
+  .type-display-lg {
+    font-size: clamp(28px, 8.5vw, 38px);
+  }
+  .type-display-md {
+    font-size: clamp(24px, 7.5vw, 32px);
+  }
+  .btn {
+    white-space: normal;
+    text-align: center;
+  }
+  .btn-lg {
+    padding: 14px 22px;
+    font-size: 15px;
+  }
+  .btn-sm {
+    padding: 9px 14px;
+  }
+}
+
+@media (max-width: 360px) {
+  .container-page {
+    padding-inline: 16px;
+  }
+}
+
+.shimmer-blue {
+  background: linear-gradient(
+    110deg,
+    #009AE5 35%,
+    #ffffff 50%,
+    #009AE5 65%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+
+.shimmer-orange {
+  background: linear-gradient(
+    110deg,
+    #F28C28 30%,
+    #FFAB52 40%,
+    #FFFFFF 50%,
+    #FFAB52 60%,
+    #F28C28 70%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+ @keyframes shimmer {
+  to {
+    background-position: 200% center;
   }
 }

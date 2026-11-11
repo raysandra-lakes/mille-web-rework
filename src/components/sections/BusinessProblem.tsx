@@ -63,6 +63,7 @@ export default function BusinessProblem() {
       <div className="container-page">
         {/* Headline */}
         <div style={{ maxWidth: 620, marginBottom: "clamp(48px, 5vw, 72px)" }}>
+          <br />
           <h2
             style={{
               fontFamily: "var(--font-display-family)",
@@ -88,7 +89,7 @@ export default function BusinessProblem() {
               margin: 0,
               padding: 0,
               textAlign: "justify",
-              width: 667,
+              maxWidth: "100%",
             }}
           >
             Pengelolaan operasional dengan satu cabang memiliki dinamika yang relatif sederhana. Seiring berkembangnya skala usaha, setiap alur kerja menuntut kontrol, efisiensi, dan standardisasi yang presisi. Mille menghadirkan ekosistem terpadu untuk menyederhanakan seluruh kompleksitas operasional bisnis Anda.

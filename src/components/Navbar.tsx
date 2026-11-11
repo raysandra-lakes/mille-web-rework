@@ -143,7 +143,7 @@ function SolusiMenu({ onClose }: { onClose: () => void }) {
           {solusiItems.map((item) => (
             <Link
               key={item.title}
-              to={item.href}
+              to={item.title}
               onClick={onClose}
               style={{
                 display: "flex",
@@ -338,7 +338,7 @@ function MobileNav({ open, onClose }: { open: boolean; onClose: () => void }) {
         ))}
         <div style={{ marginTop: 28, display: "flex", flexDirection: "column", gap: 12 }}>
           <a href="#" onClick={onClose} className="btn btn-primary" style={{ justifyContent: "center" }}>Coba Gratis</a>
-          <a href="#" onClick={onClose} className="btn btn-secondary" style={{ justifyContent: "center" }}>Masuk</a>
+          <a target="_blank" rel="noopener noreferrer" href="https://partner.millehub.com/login" className="btn btn-secondary" style={{ justifyContent: "center" }}>Masuk</a>
         </div>
       </div>
     </div>
@@ -572,7 +572,7 @@ export default function Navbar() {
 
           {/* Actions */}
           <div className="nav-actions">
-            <a href="#" className="btn btn-ghost btn-sm" style={{ color: "var(--muted-foreground)", fontSize: 14, fontWeight: 500 }}>
+            <a target="_blank" rel="noopener noreferrer" href="https://partner.millehub.com/login" className="btn btn-ghost btn-sm" style={{ color: "var(--muted-foreground)", fontSize: 14, fontWeight: 500}}>
               Masuk
             </a>
             <a href="#" className="btn btn-primary btn-sm">

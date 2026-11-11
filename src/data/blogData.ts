@@ -64,7 +64,7 @@ function practicalContent(
   ]
 }
 
-export const posts: BlogPost[] = [
+const postsUnsorted: BlogPost[] = [
   {
     slug: "harga-naik-pelanggan-pergi",
     category: "Business Insight",
@@ -304,7 +304,9 @@ export const posts: BlogPost[] = [
       "Pembayaran digital tetap membutuhkan alur kasir yang sederhana, terlatih, dan mudah direkonsiliasi.",
     ),
   },
-].sort((a, b) => b.dateValue.localeCompare(a.dateValue))
+]
+
+export const posts = postsUnsorted.sort((a, b) => b.dateValue.localeCompare(a.dateValue))
 
 export function getPostBySlug(slug: string) {
   return posts.find((post) => post.slug === slug)

@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+  <body style="margin:0">
+    <iframe id="f" style="border:0;width:1280px;height:800px"></iframe>
+    <pre id="result">pending</pre>
+    <script>
+      const f = document.getElementById("f");
+      f.src = "/";
+      f.onload = () => {
+        setTimeout(() => {
+          const out = [];
+          try {
+            const w = f.contentWindow;
+            const doc = f.contentDocument;
+            const marquee = doc.querySelector(".marquee");
+            marquee.scrollIntoView({ block: "center", behavior: "instant" });
+            out.push({ step: "after-scroll", y: Math.round(w.scrollY) });
+            const btn = doc.querySelector(".logo-item.is-clickable");
+            out.push({ step: "found-button", name: btn && btn.getAttribute("aria-label") });
+            btn.click();
+            out.push({ step: "after-click", y: Math.round(w.scrollY), modal: !!doc.querySelector(".tm-backdrop") });
+            setTimeout(() => {
+              out.push({
+                step: "after-600ms",
+                y: Math.round(w.scrollY),
+                modal: !!doc.querySelector(".tm-backdrop"),
+                active: doc.activeElement && doc.activeElement.className,
+                bodyOverflow: doc.body.style.overflow,
+                htmlOverflow: getComputedStyle(doc.documentElement).overflow,
+              });
+              const close = doc.querySelector(".tm-close");
+              if (close) close.click();
+              setTimeout(() => {
+                out.push({ step: "after-close", y: Math.round(w.scrollY), modal: !!doc.querySelector(".tm-backdrop") });
+                document.getElementById("result").textContent = JSON.stringify(out, null, 2);
+              }, 400);
+            }, 600);
+          } catch (error) {
+            document.getElementById("result").textContent = "ERROR " + error;
+          }
+        }, 1500);
+      };
+    </script>
+  </body>
+</html>

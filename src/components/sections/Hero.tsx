@@ -276,8 +276,7 @@ export default function Hero() {
           objectFit: "cover",
         }}
       >
-        <source src="/assets/video/hero-operations.webm" type="video/webm" />
-        <source src="/assets/video/hero-operations.mp4" type="video/mp4" />
+        <source src="/assets/video/mille-hero-banner.webm" type="video/webm" />
       </video>
 
       <div
@@ -318,12 +317,11 @@ export default function Hero() {
             >
               Satu Sistem untuk{" "}
               <span
-                style={{
-                  color: "#8DDBFF",
-                }}
+                className="shimmer-blue"
               >
                 Mengelola, Memahami,
-              </span>{" "}
+              </span>
+              {" "}
               dan Mengembangkan Bisnis
             </h1>
 

@@ -19,7 +19,7 @@ const footerColumns: FooterColumn[] = [
     heading: "Produk Lainnya",
     links: [
       ...produkGroups
-        .slice(1)
+        .slice(0)
         .map((group) => ({ label: group.title, href: group.href })),
       { label: "OptiMille AI", href: "/optimille" },
     ],
@@ -55,7 +55,7 @@ const footerColumns: FooterColumn[] = [
 const socials = [
   {
     label: "Instagram",
-    href: "#",
+    href: "https://www.instagram.com/mille.hub/",
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
         <rect
@@ -80,7 +80,7 @@ const socials = [
   },
   {
     label: "LinkedIn",
-    href: "#",
+    href: "https://www.linkedin.com/company/lakes-system/mycompany/",
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
         <path
@@ -95,7 +95,7 @@ const socials = [
   },
   {
     label: "YouTube",
-    href: "#",
+    href: "https://www.youtube.com/@millepos2009",
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
         <path
@@ -172,6 +172,8 @@ export default function Footer() {
                 <a
                   key={s.label}
                   href={s.href}
+                  target="_blank" 
+                  rel="noopener noreferrer"
                   aria-label={s.label}
                   style={{
                     width: 34,

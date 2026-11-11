@@ -558,7 +558,7 @@ export default function Ecosystem() {
           }
         }
 
-        @media (max-width: 760px) {
+        @media (max-width: 900px) {
           .ecosystem-section {
             overflow: visible;
           }

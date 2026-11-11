@@ -54,7 +54,7 @@ function BakeryDashboard() {
     <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
       {/* Batch production panel */}
       <div style={{ background: "#111110", borderRadius: 16, overflow: "hidden", border: "1px solid rgba(255,255,255,0.08)", boxShadow: "0 20px 60px rgba(0,0,0,0.18)" }}>
-        <div style={{ background: "#17171A", padding: "10px 16px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div style={{ background: "#17171A", padding: "10px 16px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 4 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
             <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#27C93F" }} />
             <span style={{ fontSize: 10, fontWeight: 700, color: "rgba(255,255,255,0.5)", letterSpacing: "0.06em" }}>JADWAL PRODUKSI HARI INI</span>
@@ -80,7 +80,7 @@ function BakeryDashboard() {
       </div>
 
       {/* Expiry alerts + distribution row */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+      <div className="dashboard-split" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
         {/* Expiry monitor */}
         <div style={{ background: "var(--card)", borderRadius: 14, border: "1px solid var(--border)", padding: "14px 14px 12px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
@@ -141,7 +141,7 @@ function Hero() {
 
       <div className="container-page">
         <Breadcrumb />
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(48px, 6vw, 88px)", alignItems: "center" }}>
+        <div className="grid-2col-to-1" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(48px, 6vw, 88px)", alignItems: "center" }}>
           {/* Left copy */}
           <div style={{ maxWidth: 520 }}>
             <div style={{ display: "inline-flex", alignItems: "center", gap: 7, padding: "5px 14px", background: "var(--brand-subtle)", borderRadius: 999, marginBottom: 24 }}>
@@ -356,7 +356,7 @@ function FeaturesSection() {
   return (
     <section style={{ background: "var(--background)", paddingBlock: "clamp(80px, 9vw, 120px)" }}>
       <div className="container-page">
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(32px, 4vw, 72px)", alignItems: "end", marginBottom: "clamp(40px, 5vw, 64px)" }}>
+        <div className="grid-2col-to-1" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(32px, 4vw, 72px)", alignItems: "end", marginBottom: "clamp(40px, 5vw, 64px)" }}>
           <div>
             <p className="type-eyebrow" style={{ marginBottom: 14 }}>Fitur untuk Bakery</p>
             <h2 style={{ fontFamily: "var(--font-display-family)", fontWeight: 800, fontSize: "clamp(26px, 2.8vw, 42px)", lineHeight: 1.1, letterSpacing: "-0.025em", color: "var(--foreground)" }}>
@@ -368,7 +368,7 @@ function FeaturesSection() {
           </p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14 }}>
+        <div className="grid-3col-to-2" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14 }}>
           {features.map((f, i) => (
             <div
               key={f.title}
@@ -420,7 +420,7 @@ function OptiMilleSection() {
       <div style={{ position: "absolute", top: "10%", left: "25%", width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(0,154,229,0.07) 0%, transparent 70%)", pointerEvents: "none" }} />
 
       <div className="container-page" style={{ position: "relative", zIndex: 1 }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px, 5vw, 72px)", alignItems: "start" }}>
+        <div className="grid-2col-to-1" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px, 5vw, 72px)", alignItems: "start" }}>
           {/* Left: AI chat */}
           <div style={{ background: "#17171A", borderRadius: 18, overflow: "hidden", border: "1px solid rgba(255,255,255,0.07)", boxShadow: "0 24px 64px rgba(0,0,0,0.3)" }}>
             <div style={{ background: "#111113", padding: "10px 16px", display: "flex", alignItems: "center", gap: 8, borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
@@ -554,9 +554,9 @@ function TestimonialSection() {
   return (
     <section style={{ background: "var(--background)", paddingBlock: "clamp(72px, 8vw, 108px)" }}>
       <div className="container-page">
-        <div style={{ display: "grid", gridTemplateColumns: "0.9fr 1.1fr", gap: "clamp(40px, 5vw, 72px)", alignItems: "center", background: "var(--card)", border: "1px solid var(--border)", borderRadius: "var(--radius-xl)", overflow: "hidden" }}>
+        <div className="testimonial-grid" style={{ display: "grid", gridTemplateColumns: "0.9fr 1.1fr", gap: "clamp(40px, 5vw, 72px)", alignItems: "center", background: "var(--card)", border: "1px solid var(--border)", borderRadius: "var(--radius-xl)", overflow: "hidden" }}>
           {/* Image */}
-          <div style={{ position: "relative", minHeight: 440 }}>
+          <div className="testimonial-image" style={{ position: "relative", minHeight: 440 }}>
             <img
               src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&h=680&fit=crop&auto=format"
               alt="Etalase bakery dengan berbagai roti segar"

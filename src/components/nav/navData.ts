@@ -47,12 +47,12 @@ export const produkGroups = [
 ];
 
 export const solusiItems = [
-  { title: "Restoran", desc: "Kelola pesanan, meja, dapur, inventaris, hingga keuangan.", icon: "🍽" },
-  { title: "Kedai Kopi", desc: "Kelola transaksi, menu, stok bahan, pelanggan, hingga laporan bisnis.", icon: "☕" },
-  { title: "Cepat Saji", desc: "Percepat proses pemesanan dan operasional outlet.", icon: "🥡" },
-  { title: "Bakery", desc: "Kelola penjualan, produksi, inventaris, hingga distribusi.", icon: "🥐" },
-  { title: "Toko Ritel", desc: "Kendalikan transaksi, stok, outlet, dan performa penjualan.", icon: "🛍" },
-  { title: "Salon & Spa", desc: "Kelola reservasi, pelanggan, karyawan, layanan, dan transaksi.", icon: "💆" },
+  { title: "Restoran", href: "/solusi/restoran", desc: "Kelola pesanan, meja, dapur, inventaris, hingga keuangan.", icon: "🍽" },
+  { title: "Kedai Kopi", href: "/solusi/kedai-kopi", desc: "Kelola transaksi, menu, stok bahan, pelanggan, hingga laporan bisnis.", icon: "☕" },
+  { title: "Cepat Saji", href: "/solusi/cepat-saji", desc: "Percepat proses pemesanan dan operasional outlet.", icon: "🥡" },
+  { title: "Bakery", href: "/solusi/bakery", desc: "Kelola penjualan, produksi, inventaris, hingga distribusi.", icon: "🥐" },
+  { title: "Toko Ritel", href: "/solusi/toko-retail", desc: "Kendalikan transaksi, stok, outlet, dan performa penjualan.", icon: "🛍" },
+  { title: "Salon & Spa", href: "/solusi/salon-spa", desc: "Kelola reservasi, pelanggan, karyawan, layanan, dan transaksi.", icon: "💆" },
 ];
 
 export const optimiItems = [

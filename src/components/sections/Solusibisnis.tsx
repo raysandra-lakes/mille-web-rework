@@ -176,6 +176,7 @@ export default function SolusiSection() {
       <div className="container-page">
         {/* Header */}
         <div
+          className="grid-2col-to-1"
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr",

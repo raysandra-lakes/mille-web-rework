@@ -136,7 +136,7 @@ function ReservationDashboard() {
         </div>
         <span className="badge badge-neutral">Contoh data</span>
       </div>
-      <div className="mb-5 grid grid-cols-3 gap-2">
+      <div className="mb-5 grid grid-cols-2 gap-2 sm:grid-cols-3">
         {[
           ["Booking terisi", "6"],
           ["Slot kosong", "6"],
@@ -206,7 +206,7 @@ function ReservationDashboard() {
                       }`}
                     >
                       <span
-                        className={`block whitespace-nowrap font-semibold ${
+                        className={`block font-semibold ${
                           booking ? "text-brand" : "text-muted-foreground"
                         }`}
                       >

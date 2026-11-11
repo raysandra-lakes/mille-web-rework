@@ -2,6 +2,7 @@ import { Outlet, useLocation } from "react-router";
 import { useEffect } from "react";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
+import FloatingWhatsApp from "../shared/FloatingWhatsApp";
 
 function useScrollReveal(pathname: string) {
   useEffect(() => {
@@ -41,6 +42,7 @@ export default function Root() {
       <main style={{ paddingTop: 64 }}>
         <Outlet />
       </main>
+      <FloatingWhatsApp />
       <Footer />
     </div>
   );

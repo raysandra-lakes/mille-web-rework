@@ -51,7 +51,7 @@ function QsrDashboard() {
     <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
       {/* Multi-outlet panel */}
       <div style={{ background: "#111110", borderRadius: 16, overflow: "hidden", border: "1px solid rgba(255,255,255,0.08)", boxShadow: "0 20px 60px rgba(0,0,0,0.18)" }}>
-        <div style={{ background: "#17171A", padding: "10px 16px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div style={{ background: "#17171A", padding: "10px 16px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 4 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
             <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#27C93F" }} />
             <span style={{ fontSize: 10, fontWeight: 700, color: "rgba(255,255,255,0.5)", letterSpacing: "0.06em" }}>PERFORMA SEMUA OUTLET</span>
@@ -60,19 +60,22 @@ function QsrDashboard() {
         </div>
         <div style={{ padding: 12, display: "flex", flexDirection: "column", gap: 6 }}>
           {/* Column headers */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 72px 72px 80px", gap: 6, padding: "0 4px 4px", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+          <div className="qsr-row" style={{ display: "grid", gridTemplateColumns: "1fr 72px 72px 80px", gap: 6, padding: "0 4px 4px", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
             {["Outlet", "Waktu Tx", "Transaksi", "Kepatuhan"].map((h) => (
-              <span key={h} style={{ fontSize: 9, fontWeight: 600, color: "rgba(255,255,255,0.3)", letterSpacing: "0.04em", textTransform: "uppercase" }}>{h}</span>
+              <span key={h} className={h === "Waktu Tx" || h === "Transaksi" ? "qsr-hide-sm" : undefined} style={{ fontSize: 9, fontWeight: 600, color: "rgba(255,255,255,0.3)", letterSpacing: "0.04em", textTransform: "uppercase" }}>{h}</span>
             ))}
           </div>
           {outlets.map((o) => (
-            <div key={o.name} style={{ display: "grid", gridTemplateColumns: "1fr 72px 72px 80px", gap: 6, alignItems: "center", padding: "6px 4px", borderRadius: 7, background: "rgba(255,255,255,0.02)" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                <div style={{ width: 6, height: 6, borderRadius: "50%", background: statusColor[o.status], flexShrink: 0 }} />
-                <span style={{ fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.8)" }}>{o.name}</span>
+            <div key={o.name} className="qsr-row" style={{ display: "grid", gridTemplateColumns: "1fr 72px 72px 80px", gap: 6, alignItems: "center", padding: "6px 4px", borderRadius: 7, background: "rgba(255,255,255,0.02)" }}>
+              <div style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 6, minWidth: 0 }}>
+                  <div style={{ width: 6, height: 6, borderRadius: "50%", background: statusColor[o.status], flexShrink: 0 }} />
+                  <span style={{ fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.8)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{o.name}</span>
+                </div>
+                <span className="qsr-meta">{o.txTime} · {o.txCount} tx</span>
               </div>
-              <span style={{ fontSize: 11, fontWeight: 700, color: o.status === "alert" ? "#E84545" : o.status === "warn" ? "#E8820C" : "rgba(255,255,255,0.7)" }}>{o.txTime}</span>
-              <span style={{ fontSize: 11, color: "rgba(255,255,255,0.55)" }}>{o.txCount}</span>
+              <span className="qsr-hide-sm" style={{ fontSize: 11, fontWeight: 700, color: o.status === "alert" ? "#E84545" : o.status === "warn" ? "#E8820C" : "rgba(255,255,255,0.7)" }}>{o.txTime}</span>
+              <span className="qsr-hide-sm" style={{ fontSize: 11, color: "rgba(255,255,255,0.55)" }}>{o.txCount}</span>
               <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
                 <div style={{ flex: 1, height: 3, background: "rgba(255,255,255,0.08)", borderRadius: 2 }}>
                   <div style={{ width: `${o.compliance}%`, height: "100%", background: o.compliance >= 95 ? "#0EA86B" : o.compliance >= 85 ? "#E8820C" : "#E84545", borderRadius: 2 }} />
@@ -90,7 +93,7 @@ function QsrDashboard() {
       </div>
 
       {/* Recipe compliance + daily tx row */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+      <div className="dashboard-split" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
         {/* Recipe compliance */}
         <div style={{ background: "var(--card)", borderRadius: 14, border: "1px solid var(--border)", padding: "14px 14px 12px" }}>
           <p style={{ fontSize: 10, fontWeight: 700, color: "var(--foreground)", marginBottom: 10 }}>Kepatuhan Standar Resep</p>
@@ -120,7 +123,7 @@ function QsrDashboard() {
                   <span style={{ fontSize: 9.5, fontWeight: 600, color: "var(--foreground)" }}>{val} tx</span>
                 </div>
                 <div style={{ height: 3, background: "var(--border)", borderRadius: 2 }}>
-                  <div style={{ width: `${pct * 3}%`, height: "100%", background: "linear-gradient(90deg, var(--brand), #0072CC)", borderRadius: 2 }} />
+                  <div style={{ width: `${Number(pct) * 3}%`, height: "100%", background: "linear-gradient(90deg, var(--brand), #0072CC)", borderRadius: 2 }} />
                 </div>
               </div>
             ))}
@@ -148,7 +151,7 @@ function Hero() {
 
       <div className="container-page">
         <Breadcrumb />
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(48px, 6vw, 88px)", alignItems: "center" }}>
+        <div className="grid-2col-to-1" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(48px, 6vw, 88px)", alignItems: "center" }}>
           {/* Left copy */}
           <div style={{ maxWidth: 520 }}>
             <div style={{ display: "inline-flex", alignItems: "center", gap: 7, padding: "5px 14px", background: "var(--brand-subtle)", borderRadius: 999, marginBottom: 24 }}>
@@ -369,7 +372,7 @@ function FeaturesSection() {
   return (
     <section style={{ background: "var(--background)", paddingBlock: "clamp(80px, 9vw, 120px)" }}>
       <div className="container-page">
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(32px, 4vw, 72px)", alignItems: "end", marginBottom: "clamp(40px, 5vw, 64px)" }}>
+        <div className="grid-2col-to-1" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(32px, 4vw, 72px)", alignItems: "end", marginBottom: "clamp(40px, 5vw, 64px)" }}>
           <div>
             <p className="type-eyebrow" style={{ marginBottom: 14 }}>Fitur untuk Cepat Saji</p>
             <h2 style={{ fontFamily: "var(--font-display-family)", fontWeight: 800, fontSize: "clamp(26px, 2.8vw, 42px)", lineHeight: 1.1, letterSpacing: "-0.025em", color: "var(--foreground)" }}>
@@ -381,7 +384,7 @@ function FeaturesSection() {
           </p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14 }}>
+        <div className="grid-3col-to-2" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14 }}>
           {features.map((f, i) => (
             <div
               key={f.title}
@@ -434,7 +437,7 @@ function OptiMilleSection() {
       <div style={{ position: "absolute", top: "10%", left: "25%", width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(0,154,229,0.07) 0%, transparent 70%)", pointerEvents: "none" }} />
 
       <div className="container-page" style={{ position: "relative", zIndex: 1 }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px, 5vw, 72px)", alignItems: "start" }}>
+        <div className="grid-2col-to-1" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px, 5vw, 72px)", alignItems: "start" }}>
           {/* Left: AI chat */}
           <div style={{ background: "#17171A", borderRadius: 18, overflow: "hidden", border: "1px solid rgba(255,255,255,0.07)", boxShadow: "0 24px 64px rgba(0,0,0,0.3)" }}>
             <div style={{ background: "#111113", padding: "10px 16px", display: "flex", alignItems: "center", gap: 8, borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
@@ -577,9 +580,9 @@ function TestimonialSection() {
   return (
     <section style={{ background: "var(--background)", paddingBlock: "clamp(72px, 8vw, 108px)" }}>
       <div className="container-page">
-        <div style={{ display: "grid", gridTemplateColumns: "0.9fr 1.1fr", gap: "clamp(40px, 5vw, 72px)", alignItems: "center", background: "var(--card)", border: "1px solid var(--border)", borderRadius: "var(--radius-xl)", overflow: "hidden" }}>
+        <div className="testimonial-grid" style={{ display: "grid", gridTemplateColumns: "0.9fr 1.1fr", gap: "clamp(40px, 5vw, 72px)", alignItems: "center", background: "var(--card)", border: "1px solid var(--border)", borderRadius: "var(--radius-xl)", overflow: "hidden" }}>
           {/* Image */}
-          <div style={{ position: "relative", minHeight: 440 }}>
+          <div className="testimonial-image" style={{ position: "relative", minHeight: 440 }}>
             <img
               src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=600&h=680&fit=crop&auto=format"
               alt="Outlet restoran cepat saji modern"

@@ -141,7 +141,7 @@ function RetailDashboard() {
         </div>
         <span className="badge badge-neutral">Contoh data</span>
       </div>
-      <div className="mb-5 grid grid-cols-3 gap-2">
+      <div className="mb-5 grid grid-cols-2 gap-2 sm:grid-cols-3">
         {[
           ["Total SKU", "2.480"],
           ["Outlet aktif", "3"],
@@ -173,7 +173,7 @@ function RetailDashboard() {
                 (label) => (
                   <th
                     key={label}
-                    className="whitespace-nowrap border-b border-border px-2 py-3 font-medium"
+                    className="border-b border-border px-2 py-3 font-medium"
                   >
                     {label}
                   </th>
@@ -184,7 +184,7 @@ function RetailDashboard() {
           <tbody>
             {products.map((product) => (
               <tr key={product.sku}>
-                <td className="whitespace-nowrap border-b border-border px-2 py-3">
+                <td className="border-b border-border px-2 py-3">
                   <span className="block font-semibold">{product.name}</span>
                   <span className="text-muted-foreground">{product.sku}</span>
                 </td>

@@ -3,7 +3,6 @@ export default function FinalCTA() {
     <section
       style={{
         background: "var(--background)",
-        height: 409,
         paddingTop: 57,
         paddingBottom: 57,
       }}

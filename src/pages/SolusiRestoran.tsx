@@ -46,7 +46,7 @@ function Hero() {
       <div className="container-page">
         <Breadcrumb />
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(48px, 6vw, 88px)", alignItems: "center" }}>
+        <div className="grid-2col-to-1" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(48px, 6vw, 88px)", alignItems: "center" }}>
           {/* Left */}
           <div style={{ maxWidth: 520 }}>
             <div style={{ display: "inline-flex", alignItems: "center", gap: 7, padding: "5px 14px", background: "var(--brand-subtle)", borderRadius: 999, marginBottom: 24 }}>
@@ -128,7 +128,7 @@ function RestaurantDashboard() {
           </div>
           <span style={{ fontSize: 10, color: "rgba(255,255,255,0.35)" }}>12:34 WIB</span>
         </div>
-        <div style={{ padding: "12px", display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 8 }}>
+        <div className="grid-2col-tight" style={{ padding: "12px", display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 8 }}>
           {orders.map((o) => (
             <div key={o.id} style={{ background: "#1C1C20", borderRadius: 10, padding: "10px 12px", border: `1px solid ${o.color}30` }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
@@ -150,7 +150,7 @@ function RestaurantDashboard() {
       </div>
 
       {/* Table Map + POS summary row */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+      <div className="dashboard-split" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
         {/* Table map */}
         <div style={{ background: "var(--card)", borderRadius: 14, border: "1px solid var(--border)", padding: "14px 14px 12px" }}>
           <p style={{ fontSize: 10, fontWeight: 700, color: "var(--foreground)", marginBottom: 10 }}>Status Meja</p>
@@ -320,7 +320,7 @@ function FeaturesSection() {
   return (
     <section style={{ background: "var(--background)", paddingBlock: "clamp(80px, 9vw, 120px)" }}>
       <div className="container-page">
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(32px, 4vw, 72px)", alignItems: "end", marginBottom: "clamp(40px, 5vw, 64px)" }}>
+        <div className="grid-2col-to-1" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(32px, 4vw, 72px)", alignItems: "end", marginBottom: "clamp(40px, 5vw, 64px)" }}>
           <div>
             <p className="type-eyebrow" style={{ marginBottom: 14 }}>Fitur untuk Restoran</p>
             <h2 style={{ fontFamily: "var(--font-display-family)", fontWeight: 800, fontSize: "clamp(26px, 2.8vw, 42px)", lineHeight: 1.1, letterSpacing: "-0.025em", color: "var(--foreground)" }}>
@@ -379,7 +379,7 @@ function OptiMilleSection() {
       <div style={{ position: "absolute", top: "10%", left: "25%", width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(0,154,229,0.07) 0%, transparent 70%)", pointerEvents: "none" }} />
 
       <div className="container-page" style={{ position: "relative", zIndex: 1 }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px, 5vw, 72px)", alignItems: "start" }}>
+        <div className="grid-2col-to-1" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px, 5vw, 72px)", alignItems: "start" }}>
           {/* Left: AI chat */}
           <div style={{ background: "#17171A", borderRadius: 18, overflow: "hidden", border: "1px solid rgba(255,255,255,0.07)", boxShadow: "0 24px 64px rgba(0,0,0,0.3)" }}>
             {/* Bar */}
