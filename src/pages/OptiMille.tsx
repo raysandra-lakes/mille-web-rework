@@ -120,7 +120,7 @@ export default function OptiMille() {
 
       <div id="simulasi-ai"><DemoSandbox /></div>
 
-      <section className="relative overflow-hidden bg-white py-20 text-center lg:py-28"><div className="absolute left-1/2 top-0 h-64 w-[48rem] -translate-x-1/2 rounded-full bg-brand/10 blur-3xl" /><div className="container-page relative"><h2 className="mx-auto max-w-4xl font-display text-[clamp(2rem,4vw,3.4rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-foreground">Siap Menjalankan Bisnis yang Lebih Cerdas Bersama OptiMille?</h2><div className="mt-9 flex flex-wrap justify-center gap-3"><Link to="#" className="btn btn-primary btn-lg">Coba Gratis 30 Hari</Link><Link to="#" className="btn btn-secondary btn-lg">Jadwalkan Demo AI</Link></div></div></section>
+      <section className="relative overflow-hidden bg-white py-20 text-center lg:py-28"><div className="absolute left-1/2 top-0 h-64 w-[48rem] -translate-x-1/2 rounded-full bg-brand/10 blur-3xl" /><div className="container-page relative"><h2 className="mx-auto max-w-4xl font-display text-[clamp(2rem,4vw,3.4rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-foreground">Siap Menjalankan Bisnis yang Lebih Cerdas Bersama OptiMille?</h2><div className="mt-9 flex flex-wrap justify-center gap-3"><Link to="https://partner.millehub.com/register-user" target="_blank" rel="noreferrer" className="btn btn-primary btn-lg">Coba Gratis 30 Hari</Link><Link to="/jadwalkan-demo" className="btn btn-secondary btn-lg">Jadwalkan Demo AI</Link></div></div></section>
     </>
   );
 }

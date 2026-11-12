@@ -59,7 +59,7 @@ export default function PrimaryCTA() {
 
         <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center", marginBottom: 40 }}>
           <a
-            href="#"
+            href="https://partner.millehub.com/register-user"
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -75,6 +75,8 @@ export default function PrimaryCTA() {
               boxShadow: "0 8px 28px rgba(0,154,229,0.35)",
               fontFamily: "var(--font-body-family)",
             }}
+            target="_blank" 
+            rel="noreferrer"
             onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.transform = "translateY(-2px)"; el.style.boxShadow = "0 14px 40px rgba(0,154,229,0.45)"; }}
             onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.transform = "none"; el.style.boxShadow = "0 8px 28px rgba(0,154,229,0.35)"; }}
           >
@@ -82,7 +84,7 @@ export default function PrimaryCTA() {
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
           </a>
           <a
-            href="#"
+            href="/jadwalkan-demo"
             style={{
               display: "inline-flex",
               alignItems: "center",

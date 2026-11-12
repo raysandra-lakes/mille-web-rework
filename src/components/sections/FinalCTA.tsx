@@ -60,15 +60,17 @@ export default function FinalCTA() {
             }}
           >
             <a
-              href="#"
+              href="/jadwalkan-demo"
               className="btn btn-primary"
               style={{ justifyContent: "center", fontSize: 15, padding: "15px 28px" }}
             >
               Jadwalkan Demo
             </a>
             <a
-              href="#"
+              href="https://partner.millehub.com/register-user"
               className="btn btn-secondary"
+              target="_blank" 
+              rel="noreferrer"
               style={{ justifyContent: "center", fontSize: 15, padding: "14px 27px" }}
             >
               Coba Gratis 30 Hari

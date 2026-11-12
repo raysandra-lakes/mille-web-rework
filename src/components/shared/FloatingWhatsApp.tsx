@@ -10,8 +10,8 @@ export default function FloatingWhatsApp() {
           right: 20px;
           bottom: 20px;
           z-index: 9999;
-          width: 70px;
-          height: 70px;
+          width: 60px;
+          height: 60px;
           display: flex;
           align-items: center;
           justify-content: center;

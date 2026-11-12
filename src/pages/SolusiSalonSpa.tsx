@@ -82,10 +82,10 @@ function Icon({
 function Actions({ closing = false }: { closing?: boolean }) {
   return (
     <div className={`flex flex-wrap gap-3 ${closing ? "justify-center" : ""}`}>
-      <Link to="#" className="btn btn-primary btn-lg">
+      <Link target={closing? "" : "_blank"} rel={closing ? "" : "noreferrer"} to={closing ? "/jadwalkan-demo" : "https://partner.millehub.com/register-user"}  className="btn btn-primary btn-lg">
         {closing ? "Jadwalkan Demo" : "Coba Gratis"}
       </Link>
-      <Link to="#" className="btn btn-secondary btn-lg">
+      <Link  target={closing? "_blank" : ""} rel={closing ? "noreferrer" : ""} to={closing ? "https://partner.millehub.com/register-user" : "/jadwalkan-demo"} className="btn btn-secondary btn-lg">
         {closing ? "Coba Gratis" : "Jadwalkan Demo"}
       </Link>
     </div>

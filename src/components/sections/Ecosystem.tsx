@@ -1,628 +1,786 @@
-import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type ReactNode } from "react";
+import { Link } from "react-router";
 
-type NodePosition = "top" | "left" | "bottom" | "right" | "core";
+/* ------------------------------------------------------------------ */
+/* DATA                                                                */
+/* ------------------------------------------------------------------ */
 
-type EcosystemNode = {
-  id: string;
-  position: NodePosition;
+type NodeId = "sales" | "inventory" | "business" | "people" | "optimille";
+
+interface Group {
+  label?: string;
+  items: string[];
+  ordered?: boolean; // tampil bernomor (untuk alur kerja)
+}
+
+interface EcosystemNode {
+  id: NodeId;
+  short: string; // nama pendek untuk tombol di diagram
   title: string;
   description: string;
-  features: string[];
-  badge?: string;
-  detail?: string;
-};
+  note?: string;
+  groups: Group[];
+  to?: string; // halaman produk (kalau ada)
+  icon: ReactNode;
+}
 
-const ecosystemNodes: EcosystemNode[] = [
+const icon = (children: ReactNode) => (
+  <svg
+    width="22"
+    height="22"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.6"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    {children}
+  </svg>
+);
+
+const MODULES: EcosystemNode[] = [
   {
     id: "sales",
-    position: "top",
-    title: "OPERASIONAL, PEMESANAN, & PEMBAYARAN",
+    short: "Operasional & Pembayaran",
+    title: "Operasional, Pemesanan & Pembayaran",
     description: "Mengelola aktivitas bisnis sehari-hari, dari pemesanan hingga transaksi selesai.",
-    features: [
-      "Point of Sale",
-      "QR Order",
-      "Self Order Kiosk",
-      "Order Queue",
-      "Reservasi",
-      "Waiting List",
-      "Kitchen Display System",
-      "Tata Ruang & Meja",
-      "Integrasi Online",
+    to: "/produk/operasional-pemesanan-pembayaran",
+    icon: icon(
+      <>
+        <path d="M6 3h12v18l-3-2-3 2-3-2-3 2z" />
+        <path d="M9 8h6M9 12h6" />
+      </>
+    ),
+    groups: [
+      {
+        items: [
+          "Point of Sale",
+          "QR Order",
+          "Self Order Kiosk",
+          "Order Queue",
+          "Reservasi",
+          "Waiting List",
+          "Kitchen Display System",
+          "Tata Ruang & Meja",
+          "Integrasi Online",
+        ],
+      },
     ],
   },
   {
     id: "inventory",
-    position: "left",
-    title: "02 — INVENTARIS & RANTAI PASOKAN",
+    short: "Inventaris & Pasokan",
+    title: "Inventaris & Rantai Pasokan",
     description: "Mengontrol persediaan dan aliran barang dari pengadaan hingga penggunaan.",
-    features: [
-      "Pengelolaan Inventaris",
-      "Supplier & Pembelian",
-      "Gudang & Produksi",
-      "Transfer Stok",
-      "Stock Opname",
-      "Perhitungan HPP",
+    to: "/produk/inventaris-rantai-pasokan",
+    icon: icon(
+      <>
+        <path d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5z" />
+        <path d="M3 7.5 12 12l9-4.5M12 12v9" />
+      </>
+    ),
+    groups: [
+      {
+        items: [
+          "Pengelolaan Inventaris",
+          "Supplier & Pembelian",
+          "Gudang & Produksi",
+          "Transfer Stok",
+          "Stock Opname",
+          "Perhitungan HPP",
+        ],
+      },
     ],
   },
   {
     id: "business",
-    position: "bottom",
-    title: "03 — PENGELOLAAN BISNIS & KEUANGAN",
+    short: "Bisnis & Keuangan",
+    title: "Pengelolaan Bisnis & Keuangan",
     description: "Mengendalikan berbagai aspek bisnis dari satu pusat backoffice terintegrasi.",
-    features: [
-      "Pengelolaan Toko Cabang",
-      "Pengaturan Menu & Harga",
-      "Monitoring Performa Outlet",
-      "Laporan & Insight Bisnis",
-      "Sistem Akuntansi",
-      "Budgeting",
-      "HPP & Profit",
-      "Laporan Keuangan",
-      "Arus Kas",
-      "Centralized Backoffice",
+    to: "/produk/pengelolaan-bisnis-keuangan",
+    icon: icon(
+      <>
+        <path d="M4 20V4M4 20h16" />
+        <path d="M8 16v-4M12 16V8M16 16v-6" />
+      </>
+    ),
+    groups: [
+      {
+        items: [
+          "Pengelolaan Toko Cabang",
+          "Pengaturan Menu & Harga",
+          "Monitoring Performa Outlet",
+          "Laporan & Insight Bisnis",
+          "Sistem Akuntansi",
+          "Budgeting",
+          "HPP & Profit",
+          "Laporan Keuangan",
+          "Arus Kas",
+          "Centralized Backoffice",
+        ],
+      },
     ],
   },
   {
     id: "people",
-    position: "right",
-    title: "PENGELOLAAN KARYAWAN & PELANGGAN",
+    short: "Karyawan & Pelanggan",
+    title: "Pengelolaan Karyawan & Pelanggan",
     description: "Mengelola tim operasional sekaligus membangun hubungan dengan pelanggan.",
-    features: [
-      "Karyawan — Data, Absensi, Shift, Performa, Komisi, Payroll",
-      "Pelanggan — Database, Segmentasi, Program Loyalitas, Referral, Kampanye Marketing, Ulasan, Gift Card, Otomasi",
+    icon: icon(
+      <>
+        <circle cx="9" cy="8" r="3" />
+        <path d="M3.5 19c.6-3 2.7-4.5 5.5-4.5s4.9 1.5 5.5 4.5" />
+        <circle cx="17" cy="9" r="2.3" />
+        <path d="M16.5 14.6c2.3.1 3.7 1.4 4.2 4" />
+      </>
+    ),
+    groups: [
+      { label: "Karyawan", items: ["Data", "Absensi", "Shift", "Performa", "Komisi", "Payroll"] },
+      {
+        label: "Pelanggan",
+        items: [
+          "Database",
+          "Segmentasi",
+          "Program Loyalitas",
+          "Referral",
+          "Kampanye Marketing",
+          "Ulasan",
+          "Gift Card",
+          "Otomasi",
+        ],
+      },
     ],
-  },
-  {
-    id: "optimille",
-    position: "core",
-    title: "OPTIMILLE",
-    badge: "Intelligence Layer",
-    description: "Mengubah data dari seluruh aktivitas bisnis menjadi insight dan keputusan.",
-    features: [],
-    detail: "Intelligence layer mengolah data dari Penjualan, Inventaris, Keuangan, serta Karyawan & Pelanggan menjadi keputusan bisnis yang terarah.",
   },
 ];
 
-function EcosystemCard({
-  node,
-  isExpanded,
-  onExpand,
-  onCollapse,
-  destination,
-}: {
-  node: EcosystemNode;
-  isExpanded: boolean;
-  onExpand: () => void;
-  onCollapse: () => void;
-  destination?: string;
-}) {
-  const isCore = node.position === "core";
-  const navigate = useNavigate();
-  const openNode = () => destination ? navigate(destination) : isExpanded ? onCollapse() : onExpand();
+const FLOW = ["Data", "Analisis", "Insight", "Rekomendasi", "Keputusan"];
 
+const CORE: EcosystemNode = {
+  id: "optimille",
+  short: "OptiMille",
+  title: "OptiMille",
+  description: "Mengubah data dari seluruh aktivitas bisnis menjadi insight dan keputusan.",
+  note: "Intelligence layer mengolah data dari Penjualan, Inventaris, Keuangan, serta Karyawan & Pelanggan menjadi keputusan bisnis yang terarah.",
+  icon: icon(
+    <>
+      <path d="M12 3 3 8l9 5 9-5z" />
+      <path d="M3 12.5l9 5 9-5" />
+      <path d="M3 17l9 5 9-5" />
+    </>
+  ),
+  groups: [{ label: "Alur kerja", items: FLOW, ordered: true }],
+};
+
+const ORDER: NodeId[] = [...MODULES.map((m) => m.id), CORE.id];
+const ALL: EcosystemNode[] = [...MODULES, CORE];
+
+const AUTO_MS = 7000; // jeda perpindahan otomatis (sampai pengunjung mengklik sesuatu)
+
+/* ------------------------------------------------------------------ */
+/* DAFTAR FITUR                                                        */
+/* ------------------------------------------------------------------ */
+
+function FeatureGroups({ groups }: { groups: Group[] }) {
   return (
-    <article
-      className={`ecosystem-node ecosystem-node--${node.position}${isCore ? " ecosystem-node--intelligence" : ""}${isExpanded ? " is-expanded" : ""}`}
-      tabIndex={0}
-      aria-expanded={isExpanded}
-      onMouseEnter={onExpand}
-      onMouseLeave={onCollapse}
-      onFocus={onExpand}
-      onBlur={onCollapse}
-      role={destination ? "link" : undefined}
-      onClick={openNode}
-      onKeyDown={(event) => {
-        if (destination && (event.key === "Enter" || event.key === " ")) {
-          event.preventDefault();
-          navigate(destination);
-        }
-      }}
-    >
-      <div className="ecosystem-node__topline">
-        <span className="ecosystem-node__signal" aria-hidden="true">
-          <span />
-        </span>
-        {node.badge && <span className="ecosystem-node__badge">{node.badge}</span>}
-        <span className="ecosystem-node__hint" aria-hidden="true">{isExpanded ? "−" : "+"}</span>
-      </div>
-
-      <h3>{node.title}</h3>
-      <p>{node.description}</p>
-
-      {isCore && (
-        <div className="ecosystem-flow" aria-label="Data menuju analisis, insight, rekomendasi, dan keputusan">
-          {["DATA", "ANALISIS", "INSIGHT", "REKOMENDASI", "KEPUTUSAN"].map((step, index) => (
-            <span key={step}>
-              {step}
-              {index < 4 && <b aria-hidden="true">→</b>}
-            </span>
-          ))}
+    <div>
+      {groups.map((g, gi) => (
+        <div className="eco-group" key={g.label ?? gi}>
+          {g.label && <h4 className="eco-group__label">{g.label}</h4>}
+          <ul className={`eco-list${g.ordered ? " is-ordered" : ""}`}>
+            {g.items.map((item, i) => (
+              <li key={item} style={{ "--n": i } as CSSProperties}>
+                {g.ordered && <span className="eco-list__n">{String(i + 1).padStart(2, "0")}</span>}
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
-      )}
-
-      <div className="ecosystem-node__drawer" aria-hidden={!isExpanded}>
-        <div className="ecosystem-node__drawer-inner">
-          <div className="ecosystem-node__drawer-label">
-            {isCore ? "Cara kerja OptiMille" : "Fitur yang terhubung"}
-          </div>
-          {node.detail ? (
-            <p className="ecosystem-node__detail">{node.detail}</p>
-          ) : (
-            <div className="ecosystem-node__features">
-              {node.features.map((feature) => (
-                <span key={feature}>{feature}</span>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-    </article>
+      ))}
+    </div>
   );
 }
 
+/* ------------------------------------------------------------------ */
+/* SECTION                                                             */
+/* ------------------------------------------------------------------ */
+
 export default function Ecosystem() {
-  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [active, setActive] = useState<NodeId>("sales");
+  const [auto, setAuto] = useState(true); // berhenti permanen setelah pengunjung memilih sendiri
+  const [inView, setInView] = useState(false);
+  const [seen, setSeen] = useState(false);
+  const [paused, setPaused] = useState(false);
+
+  const stageRef = useRef<HTMLDivElement>(null);
+  const tabRefs = useRef<Partial<Record<NodeId, HTMLButtonElement | null>>>({});
+
+  // Matikan perpindahan otomatis untuk pengguna "reduce motion"
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) setAuto(false);
+  }, []);
+
+  // Deteksi apakah diagram sedang terlihat di layar
+  useEffect(() => {
+    const el = stageRef.current;
+    if (!el) return;
+    if (!("IntersectionObserver" in window)) {
+      setInView(true);
+      setSeen(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        setInView(entry.isIntersecting);
+        if (entry.isIntersecting) setSeen(true);
+      },
+      { threshold: 0.35 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const running = auto && inView && !paused;
+
+  useEffect(() => {
+    if (!running) return;
+    const t = window.setTimeout(() => {
+      setActive((cur) => ORDER[(ORDER.indexOf(cur) + 1) % ORDER.length]);
+    }, AUTO_MS);
+    return () => window.clearTimeout(t);
+  }, [running, active]);
+
+  const select = (id: NodeId, focus = false) => {
+    setActive(id);
+    setAuto(false);
+    if (focus) tabRefs.current[id]?.focus();
+  };
+
+  const onKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    const i = ORDER.indexOf(active);
+    let next = -1;
+    if (e.key === "ArrowRight" || e.key === "ArrowDown") next = (i + 1) % ORDER.length;
+    else if (e.key === "ArrowLeft" || e.key === "ArrowUp") next = (i - 1 + ORDER.length) % ORDER.length;
+    else if (e.key === "Home") next = 0;
+    else if (e.key === "End") next = ORDER.length - 1;
+    if (next >= 0) {
+      e.preventDefault();
+      select(ORDER[next], true);
+    }
+  };
+
+  const node = ALL.find((n) => n.id === active)!;
+  const isCore = active === "optimille";
+  const activeIdx = MODULES.findIndex((m) => m.id === active);
+
+  // Posisi segmen garis horizontal yang menyala (tengah tiap kolom dihitung persis dari grid)
+  const center = (i: number) => `calc((100% - 3 * var(--gap)) * ${(2 * i + 1) / 8} + ${i} * var(--gap))`;
+  let busOn: CSSProperties;
+  if (isCore) busOn = { left: center(0), right: `calc(100% - (${center(3)}))`, transformOrigin: "center" };
+  else if (activeIdx < 2) busOn = { left: center(activeIdx), right: "50%", transformOrigin: "left" };
+  else busOn = { left: "50%", right: `calc(100% - (${center(activeIdx)}))`, transformOrigin: "right" };
 
   return (
-    <section className="ecosystem-section">
+    <section className="eco-section">
       <div className="container-page">
-        <div className="ecosystem-heading">
-          <p className="type-eyebrow">EKOSISTEM TERINTEGRASI</p>
-          <h2>Satu Sistem untuk Seluruh Operasional Bisnis.</h2>
-          <p className="ecosystem-heading__description">
-            Mille menghubungkan berbagai kebutuhan operasional bisnis dalam satu ekosistem.
+        <div className="eco-head">
+          <div>
+            <p className="type-eyebrow">EKOSISTEM TERINTEGRASI</p>
+            <h2>Satu Sistem untuk Seluruh Operasional Bisnis.</h2>
+          </div>
+          <p className="eco-lead">
+            Mille menghubungkan berbagai kebutuhan operasional bisnis dalam satu ekosistem. Pilih
+            salah satu modul untuk melihat fitur yang terhubung.
           </p>
-          <a href="#" className="ecosystem-heading__link">
-            Lihat Semua Produk
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </a>
         </div>
 
-        <div className="ecosystem-diamond">
-          <svg className="ecosystem-connectors" viewBox="0 0 1180 664" preserveAspectRatio="none" aria-hidden="true">
-            <defs>
-              <linearGradient id="ecosystem-line" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="var(--brand)" stopOpacity="0.12" />
-                <stop offset="50%" stopColor="var(--brand)" stopOpacity="0.55" />
-                <stop offset="100%" stopColor="var(--brand)" stopOpacity="0.12" />
-              </linearGradient>
-              <filter id="ecosystem-glow" x="-300%" y="-300%" width="700%" height="700%">
-                <feGaussianBlur stdDeviation="4" result="blur" />
-                <feMerge>
-                  <feMergeNode in="blur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-            </defs>
+        <div
+          className="eco-root"
+          style={{ "--eco-ms": `${AUTO_MS}ms` } as CSSProperties}
+          onPointerEnter={() => setPaused(true)}
+          onPointerLeave={() => setPaused(false)}
+          onFocusCapture={() => setPaused(true)}
+          onBlurCapture={() => setPaused(false)}
+        >
+          <div ref={stageRef} className={`eco-stage${seen ? " is-in" : ""}`}>
+            <div role="tablist" aria-label="Modul ekosistem Mille" onKeyDown={onKeyDown}>
+              {/* Empat modul */}
+              <div className="eco-modules">
+                {MODULES.map((m, i) => {
+                  const on = active === m.id;
+                  const count = m.groups.reduce((n, g) => n + g.items.length, 0);
+                  return (
+                    <button
+                      key={m.id}
+                      ref={(el) => {
+                        tabRefs.current[m.id] = el;
+                      }}
+                      type="button"
+                      role="tab"
+                      id={`eco-tab-${m.id}`}
+                      aria-selected={on}
+                      aria-controls="eco-panel"
+                      tabIndex={on ? 0 : -1}
+                      className={`eco-tab${on ? " is-active" : ""}${on && running ? " is-timing" : ""}`}
+                      onClick={() => select(m.id)}
+                    >
+                      <span className="eco-tab__top">
+                        <span className="eco-tab__icon">{m.icon}</span>
+                        <span className="eco-tab__num">{String(i + 1).padStart(2, "0")}</span>
+                      </span>
+                      <span className="eco-tab__name">{m.short}</span>
+                      <span className="eco-tab__meta">{count} fitur</span>
+                      <span className="eco-bar" aria-hidden="true" />
+                    </button>
+                  );
+                })}
+              </div>
 
-            <path d="M590 184 C590 204 590 220 590 240" />
-            <path d="M352 332 C370 332 384 332 404 332" />
-            <path d="M828 332 C810 332 796 332 776 332" />
-            <path d="M590 480 C590 460 590 444 590 424" />
+              {/* Garis penghubung: modul terpilih tersambung ke OptiMille */}
+              <div className="eco-wires" aria-hidden="true" key={active}>
+                <div className="eco-stubs">
+                  {MODULES.map((m, i) => (
+                    <span key={m.id} className={`eco-stub${isCore || i === activeIdx ? " is-on" : ""}`} />
+                  ))}
+                </div>
+                <span className="eco-bus" />
+                <span className="eco-bus-on" style={busOn} />
+                <span className="eco-drop" />
+                <span className="eco-drop-on" />
+              </div>
 
-            <g className="ecosystem-pulses" filter="url(#ecosystem-glow)">
-              <circle r="4"><animateMotion dur="2.4s" repeatCount="indefinite" path="M590 184 C590 204 590 220 590 240" /></circle>
-              <circle r="4"><animateMotion dur="2.7s" begin="0.4s" repeatCount="indefinite" path="M352 332 C370 332 384 332 404 332" /></circle>
-              <circle r="4"><animateMotion dur="2.5s" begin="0.8s" repeatCount="indefinite" path="M828 332 C810 332 796 332 776 332" /></circle>
-              <circle r="4"><animateMotion dur="2.8s" begin="1.1s" repeatCount="indefinite" path="M590 480 C590 460 590 444 590 424" /></circle>
-            </g>
-          </svg>
+              {/* OptiMille */}
+              <button
+                ref={(el) => {
+                  tabRefs.current.optimille = el;
+                }}
+                type="button"
+                role="tab"
+                id="eco-tab-optimille"
+                aria-selected={isCore}
+                aria-controls="eco-panel"
+                tabIndex={isCore ? 0 : -1}
+                className={`eco-core${isCore ? " is-active" : ""}${isCore && running ? " is-timing" : ""}`}
+                onClick={() => select("optimille")}
+              >
+                <span className="eco-core__head">
+                  <span className="eco-core__icon">{CORE.icon}</span>
+                  <span className="eco-core__name">OptiMille</span>
+                  <span className="eco-core__badge">Intelligence Layer</span>
+                </span>
+                <span className="eco-core__desc">{CORE.description}</span>
+                <span className="eco-core__flow" aria-hidden="true">
+                  {FLOW.map((s, i) => (
+                    <span key={s}>
+                      {s}
+                      {i < FLOW.length - 1 && <i>→</i>}
+                    </span>
+                  ))}
+                </span>
+                <span className="eco-bar" aria-hidden="true" />
+              </button>
+            </div>
+          </div>
 
-          {ecosystemNodes.map((node) => (
-            <EcosystemCard
-              key={node.id}
-              node={node}
-              isExpanded={expandedId === node.id}
-              onExpand={() => setExpandedId(node.id)}
-              onCollapse={() => setExpandedId((current) => current === node.id ? null : current)}
-              destination={node.id === "sales" ? "/produk/operasional-pemesanan-pembayaran" : node.id === "inventory" ? "/produk/inventaris-rantai-pasokan" : node.id === "business" ? "/produk/pengelolaan-bisnis-keuangan" : undefined}
-            />
-          ))}
+          {/* Panel detail */}
+          <div className="eco-panel" id="eco-panel" role="tabpanel" aria-labelledby={`eco-tab-${active}`}>
+            <div className="eco-panel__inner" key={active}>
+              <div>
+                <p className="eco-panel__kicker">
+                  {isCore ? "Intelligence layer" : `${String(activeIdx + 1).padStart(2, "0")} / ${String(MODULES.length).padStart(2, "0")}`}
+                </p>
+                <h3>{node.title}</h3>
+                <p className="eco-panel__desc">{node.description}</p>
+                {node.note && <p className="eco-panel__note">{node.note}</p>}
+                {node.to && (
+                  <Link className="eco-cta" to={node.to}>
+                    Lihat selengkapnya
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                  </Link>
+                )}
+              </div>
+              <FeatureGroups groups={node.groups} />
+            </div>
+          </div>
         </div>
       </div>
 
       <style>{`
-        .ecosystem-section {
-          background: #f8fafc;
-          padding-block: clamp(80px, 9vw, 128px);
+        .eco-section {
+          background: var(--background);
+          padding-block: clamp(72px, 9vw, 128px);
           overflow: hidden;
         }
 
-        .ecosystem-heading {
-          max-width: 780px;
-          margin: 0 auto clamp(64px, 7vw, 92px);
-          text-align: center;
+        /* ---------- Heading ---------- */
+        .eco-head {
+          display: grid;
+          grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+          gap: clamp(24px, 5vw, 72px);
+          align-items: end;
+          margin-bottom: clamp(40px, 5vw, 64px);
         }
-
-        .ecosystem-heading > .type-eyebrow {
-          margin-bottom: 14px;
-        }
-
-        .ecosystem-heading h2 {
+        .eco-head .type-eyebrow { margin-bottom: 14px; }
+        .eco-head h2 {
           margin: 0;
           font-family: var(--font-display-family);
           font-weight: 800;
-          font-size: clamp(30px, 3.4vw, 48px);
-          line-height: 1.1;
+          font-size: clamp(30px, 3.6vw, 52px);
+          line-height: 1.06;
           letter-spacing: -0.03em;
           color: var(--foreground);
+          text-wrap: balance;
         }
-
-        .ecosystem-heading__description {
-          max-width: 640px;
-          margin: 20px auto 18px;
+        .eco-lead {
+          margin: 0;
           font-size: clamp(15px, 1.2vw, 17px);
           line-height: 1.7;
           color: var(--muted-foreground);
         }
 
-        .ecosystem-heading__link {
-          display: inline-flex;
-          align-items: center;
-          gap: 7px;
-          color: var(--brand);
-          font-size: 14px;
-          font-weight: 650;
-          text-decoration: none;
-          transition: gap 0.3s ease-in-out, color 0.3s ease-in-out;
+        /* ---------- Stage ---------- */
+        .eco-root { --gap: 14px; }
+        .eco-stage {
+          opacity: 0;
+          transform: translateY(20px);
+          transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
         }
+        .eco-stage.is-in { opacity: 1; transform: none; }
 
-        .ecosystem-heading__link:hover {
-          gap: 12px;
-          color: var(--brand-gradient-end);
-        }
-
-        .ecosystem-diamond {
-          position: relative;
-          isolation: isolate;
+        .eco-modules {
           display: grid;
-          grid-template-columns: minmax(250px, 1fr) minmax(320px, 1.18fr) minmax(250px, 1fr);
-          grid-template-rows: repeat(3, 184px);
-          grid-template-areas:
-            ". top ."
-            "left core right"
-            ". bottom .";
-          column-gap: clamp(36px, 5vw, 64px);
-          row-gap: 56px;
-          max-width: 1180px;
-          min-height: 664px;
-          margin: 0 auto 190px;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: var(--gap);
         }
 
-        .ecosystem-connectors {
-          position: absolute;
-          inset: 0;
-          z-index: -1;
-          width: 100%;
-          height: 100%;
-          overflow: visible;
-          pointer-events: none;
-        }
-
-        .ecosystem-connectors > path {
-          fill: none;
-          stroke: url(#ecosystem-line);
-          stroke-width: 2;
-          stroke-linecap: round;
-          stroke-dasharray: 5 7;
-        }
-
-        .ecosystem-pulses circle {
-          fill: var(--brand);
-        }
-
-        .ecosystem-node {
+        .eco-tab {
           position: relative;
-          z-index: 1;
-          min-width: 0;
-          min-height: 184px;
-          padding: 24px 26px;
-          background: rgba(255, 255, 255, 0.96);
-          border: 1px solid #e2e8f0;
-          border-radius: var(--radius-xl);
-          box-shadow: 0 10px 34px rgba(15, 23, 42, 0.045);
-          outline: none;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 4px;
+          padding: 18px 18px 20px;
+          text-align: left;
+          font: inherit;
+          color: var(--foreground);
+          background: transparent;
+          border: 1px solid var(--border);
+          border-radius: var(--radius-xl, 18px);
           cursor: pointer;
-          transition: all 0.3s ease-in-out;
+          overflow: hidden;
+          transition: background 0.25s, border-color 0.25s, transform 0.25s;
         }
-
-        .ecosystem-node--top { grid-area: top; }
-        .ecosystem-node--left { grid-area: left; }
-        .ecosystem-node--bottom { grid-area: bottom; }
-        .ecosystem-node--right { grid-area: right; }
-        .ecosystem-node--core { grid-area: core; }
-
-        .ecosystem-node:hover,
-        .ecosystem-node:focus-visible,
-        .ecosystem-node.is-expanded {
-          z-index: 10;
-          border-color: rgba(0, 154, 229, 0.45);
-          box-shadow: 0 22px 54px rgba(15, 23, 42, 0.12), 0 0 0 4px rgba(0, 154, 229, 0.07);
-          transform: translateY(-4px);
+        .eco-tab:hover {
+          border-color: color-mix(in srgb, var(--foreground) 35%, var(--border));
+          transform: translateY(-2px);
         }
-
-        .ecosystem-node--intelligence {
-          color: #ffffff;
-          background: linear-gradient(145deg, #087fba 0%, var(--brand) 48%, #0072cc 100%);
-          border-color: rgba(0, 154, 229, 0.8);
-          box-shadow: 0 22px 54px rgba(0, 114, 204, 0.22), 0 0 0 8px rgba(0, 154, 229, 0.07);
+        .eco-tab.is-active {
+          background: var(--card);
+          border-color: var(--foreground);
+          transform: none;
         }
-
-        .ecosystem-node--intelligence:hover,
-        .ecosystem-node--intelligence:focus-visible,
-        .ecosystem-node--intelligence.is-expanded {
-          border-color: rgba(255, 255, 255, 0.72);
-          box-shadow: 0 28px 64px rgba(0, 114, 204, 0.3), 0 0 0 10px rgba(0, 154, 229, 0.09);
-        }
-
-        .ecosystem-node__topline {
+        .eco-tab__top {
           display: flex;
           align-items: center;
-          min-height: 24px;
-          margin-bottom: 15px;
+          justify-content: space-between;
+          width: 100%;
+          margin-bottom: 14px;
         }
-
-        .ecosystem-node__signal {
-          display: grid;
-          width: 24px;
-          height: 24px;
-          place-items: center;
-          border-radius: 999px;
-          background: var(--brand-subtle);
-        }
-
-        .ecosystem-node__signal > span {
-          width: 7px;
-          height: 7px;
-          border-radius: inherit;
-          background: var(--brand);
-          box-shadow: 0 0 0 4px rgba(0, 154, 229, 0.12);
-        }
-
-        .ecosystem-node--intelligence .ecosystem-node__signal {
-          background: rgba(255, 255, 255, 0.16);
-        }
-
-        .ecosystem-node--intelligence .ecosystem-node__signal > span {
-          background: #ffffff;
-          box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.13);
-        }
-
-        .ecosystem-node__badge {
-          margin-left: 9px;
-          padding: 4px 9px;
-          color: #ffffff;
-          background: rgba(255, 255, 255, 0.14);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          border-radius: 999px;
-          font-size: 10px;
+        .eco-tab__icon { display: flex; color: var(--muted-foreground); transition: color 0.25s; }
+        .eco-tab.is-active .eco-tab__icon { color: var(--brand); }
+        .eco-tab__num {
+          font-size: 12px;
           font-weight: 700;
-          letter-spacing: 0.05em;
-          text-transform: uppercase;
-        }
-
-        .ecosystem-node__hint {
-          margin-left: auto;
-          color: var(--brand);
-          font-family: var(--font-display-family);
-          font-size: 20px;
-          font-weight: 500;
-          line-height: 1;
-          transition: transform 0.3s ease-in-out;
-        }
-
-        .ecosystem-node--intelligence .ecosystem-node__hint {
-          color: rgba(255, 255, 255, 0.8);
-        }
-
-        .ecosystem-node.is-expanded .ecosystem-node__hint {
-          transform: rotate(180deg);
-        }
-
-        .ecosystem-node h3 {
-          margin: 0 0 9px;
-          color: var(--foreground);
-          font-family: var(--font-display-family);
-          font-size: 16px;
-          font-weight: 800;
-          line-height: 1.38;
-          letter-spacing: -0.01em;
-          text-align: center;
-        }
-
-        .ecosystem-node > p {
-          margin: 0;
+          letter-spacing: 0.06em;
+          font-variant-numeric: tabular-nums;
           color: var(--muted-foreground);
-          font-size: 13px;
-          line-height: 1.55;
-          text-align: center;
+        }
+        .eco-tab__name {
+          font-family: var(--font-display-family);
+          font-weight: 700;
+          font-size: 16px;
+          line-height: 1.25;
+          letter-spacing: -0.01em;
+        }
+        .eco-tab__meta { font-size: 13px; color: var(--muted-foreground); }
+
+        /* Garis progres perpindahan otomatis */
+        .eco-bar {
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          height: 2px;
+          background: var(--brand);
+          transform: scaleX(0);
+          transform-origin: left;
+        }
+        .is-timing > .eco-bar { animation: eco-time var(--eco-ms, 7000ms) linear forwards; }
+
+        /* ---------- Garis penghubung ---------- */
+        .eco-wires { position: relative; height: 44px; }
+        .eco-stubs {
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: var(--gap);
+          height: 22px;
+        }
+        .eco-stub { position: relative; display: block; height: 100%; }
+        .eco-stub::before,
+        .eco-stub::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: calc(50% - 1px);
+          width: 2px;
+          height: 100%;
+        }
+        .eco-stub::before { background: var(--border); }
+        .eco-stub.is-on::after {
+          background: var(--brand);
+          transform-origin: top;
+          animation: eco-draw-y 0.28s ease-out both;
+        }
+        .eco-bus {
+          position: absolute;
+          top: 21px;
+          left: calc((100% - 3 * var(--gap)) / 8);
+          right: calc((100% - 3 * var(--gap)) / 8);
+          height: 2px;
+          background: var(--border);
+        }
+        .eco-bus-on {
+          position: absolute;
+          top: 21px;
+          height: 2px;
+          background: var(--brand);
+          animation: eco-draw-x 0.32s ease-out 0.26s both;
+        }
+        .eco-drop,
+        .eco-drop-on {
+          position: absolute;
+          top: 22px;
+          left: calc(50% - 1px);
+          width: 2px;
+          height: 22px;
+        }
+        .eco-drop { background: var(--border); }
+        .eco-drop-on {
+          background: var(--brand);
+          transform-origin: top;
+          animation: eco-draw-y 0.24s ease-out 0.54s both;
         }
 
-        .ecosystem-node--intelligence h3,
-        .ecosystem-node--intelligence > p {
-          color: #ffffff;
+        /* ---------- OptiMille ---------- */
+        .eco-core {
+          position: relative;
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 14px 28px;
+          width: 100%;
+          padding: 20px 24px;
+          text-align: left;
+          font: inherit;
+          color: #fff;
+          background: color-mix(in srgb, var(--brand) 80%, #031a29);
+          border: 0;
+          border-radius: var(--radius-xl, 18px);
+          cursor: pointer;
+          overflow: hidden;
+          transition: box-shadow 0.3s, transform 0.3s;
         }
-
-        .ecosystem-node--intelligence > p {
-          color: rgba(255, 255, 255, 0.78);
+        .eco-core:hover { transform: translateY(-2px); }
+        .eco-core.is-active {
+          transform: none;
+          box-shadow: 0 0 0 3px var(--surface), 0 0 0 5px var(--brand);
         }
-
-        .ecosystem-flow {
+        .eco-core__head { display: flex; align-items: center; gap: 12px; }
+        .eco-core__icon {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 5px;
-          margin-top: 17px;
-          padding-top: 14px;
-          border-top: 1px solid rgba(255, 255, 255, 0.18);
+          width: 38px;
+          height: 38px;
+          border-radius: 10px;
+          background: rgba(255, 255, 255, 0.14);
         }
-
-        .ecosystem-flow span {
-          display: inline-flex;
-          align-items: center;
-          gap: 5px;
-          color: rgba(255, 255, 255, 0.9);
-          font-size: 8px;
-          font-weight: 750;
-          letter-spacing: 0.04em;
+        .eco-core__name {
+          font-family: var(--font-display-family);
+          font-weight: 800;
+          font-size: 20px;
+          letter-spacing: -0.02em;
         }
-
-        .ecosystem-flow b {
-          color: rgba(255, 255, 255, 0.45);
+        .eco-core__badge {
+          padding: 3px 9px;
+          border: 1px solid rgba(255, 255, 255, 0.4);
+          border-radius: 999px;
           font-size: 10px;
-          font-weight: 500;
-        }
-
-        .ecosystem-node__drawer {
-          position: absolute;
-          top: calc(100% + 10px);
-          left: 0;
-          width: 100%;
-          max-height: 0;
-          opacity: 0;
-          overflow: hidden;
-          pointer-events: none;
-          transform: translateY(-8px);
-          transition: all 0.3s ease-in-out;
-        }
-
-        .ecosystem-node--bottom .ecosystem-node__drawer {
-          top: auto;
-          bottom: calc(100% + 10px);
-          transform: translateY(8px);
-        }
-
-        .ecosystem-node.is-expanded .ecosystem-node__drawer {
-          max-height: 420px;
-          opacity: 1;
-          pointer-events: auto;
-          transform: translateY(0);
-        }
-
-        .ecosystem-node__drawer-inner {
-          padding: 20px;
-          background: rgba(255, 255, 255, 0.98);
-          border: 1px solid #e2e8f0;
-          border-radius: var(--radius-xl);
-          box-shadow: 0 24px 60px rgba(15, 23, 42, 0.15);
-        }
-
-        .ecosystem-node__drawer-label {
-          margin-bottom: 12px;
-          color: var(--brand);
-          font-size: 10px;
-          font-weight: 750;
-          letter-spacing: 0.07em;
+          font-weight: 700;
+          letter-spacing: 0.08em;
           text-transform: uppercase;
         }
-
-        .ecosystem-node__features {
+        .eco-core__desc {
+          flex: 1 1 240px;
+          font-size: 14px;
+          line-height: 1.55;
+          color: rgba(255, 255, 255, 0.86);
+        }
+        .eco-core__flow {
           display: flex;
           flex-wrap: wrap;
-          gap: 7px;
-        }
-
-        .ecosystem-node__features span {
-          padding: 6px 9px;
-          color: #334155;
-          background: #f8fafc;
-          border: 1px solid #e2e8f0;
-          border-radius: 999px;
+          align-items: center;
+          gap: 4px 8px;
           font-size: 11px;
-          font-weight: 550;
-          line-height: 1.35;
+          font-weight: 700;
+          letter-spacing: 0.07em;
+          text-transform: uppercase;
+          color: rgba(255, 255, 255, 0.92);
         }
+        .eco-core__flow i { margin-left: 8px; font-style: normal; opacity: 0.5; }
+        .eco-core .eco-bar { background: #fff; opacity: 0.7; }
 
-        .ecosystem-node__detail {
+        /* ---------- Panel detail ---------- */
+        .eco-panel {
+          margin-top: clamp(20px, 3vw, 32px);
+          min-height: 340px;
+          padding: clamp(22px, 3.4vw, 44px);
+          background: var(--card);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-xl, 18px);
+        }
+        .eco-panel__inner {
+          display: grid;
+          grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+          gap: clamp(24px, 4vw, 64px);
+          animation: eco-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+        .eco-panel__kicker {
+          margin: 0 0 14px;
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          font-variant-numeric: tabular-nums;
+          color: var(--brand);
+        }
+        .eco-panel h3 {
+          margin: 0 0 12px;
+          font-family: var(--font-display-family);
+          font-weight: 800;
+          font-size: clamp(22px, 2.4vw, 32px);
+          line-height: 1.15;
+          letter-spacing: -0.025em;
+          color: var(--foreground);
+        }
+        .eco-panel__desc { margin: 0; font-size: 15px; line-height: 1.7; color: var(--muted-foreground); }
+        .eco-panel__note {
+          margin: 16px 0 0;
+          padding-left: 14px;
+          border-left: 2px solid var(--brand);
+          font-size: 14px;
+          line-height: 1.65;
+          color: var(--foreground);
+        }
+        .eco-cta {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          margin-top: 24px;
+          padding-bottom: 3px;
+          font-size: 14px;
+          font-weight: 650;
+          color: var(--foreground);
+          text-decoration: none;
+          border-bottom: 1.5px solid var(--brand);
+          transition: gap 0.25s, color 0.25s;
+        }
+        .eco-cta:hover { gap: 12px; color: var(--brand); }
+
+        .eco-group + .eco-group { margin-top: 28px; }
+        .eco-group__label {
+          margin: 0 0 4px;
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          color: var(--muted-foreground);
+        }
+        .eco-list {
+          list-style: none;
           margin: 0;
-          color: #475569 !important;
-          font-size: 12.5px !important;
-          line-height: 1.65 !important;
+          padding: 0;
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          column-gap: 32px;
+        }
+        .eco-list li {
+          display: flex;
+          align-items: baseline;
+          gap: 12px;
+          padding: 11px 0;
+          border-bottom: 1px solid var(--border);
+          font-size: 14.5px;
+          line-height: 1.4;
+          color: var(--foreground);
+          opacity: 0;
+          animation: eco-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+          animation-delay: calc(var(--n) * 28ms + 80ms);
+        }
+        .eco-list li::before {
+          content: "";
+          flex: none;
+          width: 5px;
+          height: 5px;
+          border-radius: 1px;
+          background: var(--brand);
+          transform: translateY(-2px) rotate(45deg);
+        }
+        .eco-list.is-ordered { grid-template-columns: 1fr; }
+        .eco-list.is-ordered li::before { display: none; }
+        .eco-list__n {
+          min-width: 22px;
+          font-size: 12px;
+          font-variant-numeric: tabular-nums;
+          color: var(--muted-foreground);
         }
 
-        @media (max-width: 980px) {
-          .ecosystem-diamond {
-            grid-template-columns: minmax(210px, 1fr) minmax(280px, 1.1fr) minmax(210px, 1fr);
-            column-gap: 28px;
-          }
+        .eco-tab:focus-visible,
+        .eco-core:focus-visible,
+        .eco-cta:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
 
-          .ecosystem-node {
-            padding: 21px;
-          }
+        /* ---------- Keyframes ---------- */
+        @keyframes eco-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+        @keyframes eco-time { to { transform: scaleX(1); } }
+        @keyframes eco-draw-y { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+        @keyframes eco-draw-x { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
-          .ecosystem-connectors {
-            opacity: 0.65;
-          }
-        }
-
+        /* ---------- Responsif ---------- */
         @media (max-width: 900px) {
-          .ecosystem-section {
-            overflow: visible;
-          }
-
-          .ecosystem-heading {
-            margin-bottom: 48px;
-            text-align: left;
-          }
-
-          .ecosystem-heading__description {
-            margin-left: 0;
-            margin-right: 0;
-          }
-
-          .ecosystem-diamond {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            min-height: 0;
-            margin-bottom: 0;
-          }
-
-          .ecosystem-connectors {
-            display: none;
-          }
-
-          .ecosystem-node {
-            min-height: 0;
-          }
-
-          .ecosystem-node--intelligence {
-            order: 5;
-          }
-
-          .ecosystem-node__drawer,
-          .ecosystem-node--bottom .ecosystem-node__drawer {
-            position: relative;
-            top: auto;
-            bottom: auto;
-            margin-top: 0;
-          }
-
-          .ecosystem-node.is-expanded .ecosystem-node__drawer {
-            margin-top: 16px;
-          }
-
-          .ecosystem-node__drawer-inner {
-            box-shadow: none;
-          }
+          .eco-head { grid-template-columns: 1fr; align-items: start; }
+          .eco-modules { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+          .eco-wires { display: none; }
+          .eco-core { margin-top: var(--gap); }
+          .eco-panel__inner { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 520px) {
+          .eco-list { grid-template-columns: 1fr; }
+          .eco-core { padding: 18px; }
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .ecosystem-section *,
-          .ecosystem-section *::before,
-          .ecosystem-section *::after {
-            scroll-behavior: auto !important;
-            transition-duration: 0.01ms !important;
-            animation-duration: 0.01ms !important;
-            animation-iteration-count: 1 !important;
-          }
-
-          .ecosystem-pulses {
-            display: none;
-          }
+          .eco-stage { opacity: 1; transform: none; transition: none; }
+          .eco-panel__inner,
+          .eco-stub.is-on::after,
+          .eco-bus-on,
+          .eco-drop-on,
+          .is-timing > .eco-bar { animation: none; }
+          .eco-list li { opacity: 1; animation: none; }
+          .eco-tab, .eco-core, .eco-cta { transition: none; }
+          .eco-tab:hover, .eco-core:hover { transform: none; }
         }
       `}</style>
     </section>

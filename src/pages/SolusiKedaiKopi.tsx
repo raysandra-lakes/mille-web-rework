@@ -171,8 +171,8 @@ function Hero() {
             </p>
 
             <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 28 }}>
-              <a href="#" className="btn btn-primary btn-lg">Coba Gratis</a>
-              <a href="#" className="btn btn-secondary btn-lg">Jadwalkan Demo</a>
+              <a target="_blank" rel="noreferrer" href="https://partner.millehub.com/register-user" className="btn btn-primary btn-lg">Coba Gratis</a>
+              <a href="/jadwalkan-demo" className="btn btn-secondary btn-lg">Jadwalkan Demo</a>
             </div>
 
             <div style={{ display: "flex", gap: 18, flexWrap: "wrap" }}>
@@ -615,7 +615,7 @@ function ClosingCTA() {
         </p>
         <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center", marginBottom: 28 }}>
           <a
-            href="#"
+            href="/jadwalkan-demo"
             style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "15px 34px", background: "linear-gradient(135deg, var(--brand), #0072CC)", borderRadius: "var(--radius-md)", fontSize: 15, fontWeight: 600, color: "#FFFFFF", textDecoration: "none", boxShadow: "0 8px 28px rgba(0,154,229,0.35)", fontFamily: "var(--font-body-family)", transition: "transform 0.18s, box-shadow 0.18s" }}
             onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.transform = "translateY(-2px)"; el.style.boxShadow = "0 14px 40px rgba(0,154,229,0.45)"; }}
             onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.transform = "none"; el.style.boxShadow = "0 8px 28px rgba(0,154,229,0.35)"; }}
@@ -623,7 +623,9 @@ function ClosingCTA() {
             Jadwalkan Demo
           </a>
           <a
-            href="#"
+            target="_blank" 
+            rel="noreferrer"
+            href="https://partner.millehub.com/register-user"
             style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "14px 33px", background: "transparent", borderRadius: "var(--radius-md)", border: "1.5px solid rgba(255,255,255,0.18)", fontSize: 15, fontWeight: 600, color: "rgba(255,255,255,0.78)", textDecoration: "none", fontFamily: "var(--font-body-family)", transition: "border-color 0.18s, color 0.18s, background 0.18s" }}
             onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "rgba(255,255,255,0.35)"; el.style.color = "#FFFFFF"; el.style.background = "rgba(255,255,255,0.05)"; }}
             onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "rgba(255,255,255,0.18)"; el.style.color = "rgba(255,255,255,0.78)"; el.style.background = "transparent"; }}

@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 import FloatingWhatsApp from "../shared/FloatingWhatsApp";
+import { captureTracking } from "@/lib/tracking";
 
 function useScrollReveal(pathname: string) {
   useEffect(() => {
@@ -29,10 +30,13 @@ function useScrollReveal(pathname: string) {
 }
 
 export default function Root() {
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
   }, [pathname]);
+  useEffect(() => {
+    captureTracking(search, `${pathname}${search}`);
+  }, [pathname , search]);
 
   useScrollReveal(pathname);
 

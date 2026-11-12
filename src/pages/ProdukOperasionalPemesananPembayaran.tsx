@@ -384,8 +384,8 @@ function Hero() {
               Integrasikan seluruh alur operasional dapur, kasir, inventaris, hingga pencatatan transaksi secara real-time. Mille memastikan koordinasi antar divisi berjalan presisi tanpa kendala komunikasi.
             </p>
             <div className="mb-7 flex flex-wrap gap-3">
-              <Link to="#" className="btn btn-primary btn-lg">Coba Gratis</Link>
-              <Link to="#" className="btn btn-secondary btn-lg">Jadwalkan Demo</Link>
+              <Link target="_blank" rel="noreferrer" to="https://partner.millehub.com/register-user" className="btn btn-primary btn-lg">Coba Gratis</Link>
+              <Link to="/jadwalkan-demo" className="btn btn-secondary btn-lg">Jadwalkan Demo</Link>
             </div>
             <div className="flex flex-wrap gap-x-5 gap-y-2">
               {["✓ Gratis 14 hari", "✓ Setup cepat", "✓ Dukungan onboarding"].map((item) => (
@@ -475,8 +475,8 @@ function ClosingCta() {
           Siap Mewujudkan Operasional Bisnis yang Lebih Cepat dan Bebas Hambatan?
         </h2>
         <div className="mt-9 flex flex-wrap justify-center gap-3">
-          <Link to="#" className="btn btn-primary btn-lg">Coba Gratis 30 Hari</Link>
-          <Link to="#" className="btn btn-lg border border-white/25 bg-white/8 text-white backdrop-blur transition hover:border-white/45 hover:bg-white/14">Jadwalkan Demo</Link>
+          <Link target="_blank" rel="noreferrer" to="https://partner.millehub.com/register-user" className="btn btn-primary btn-lg">Coba Gratis 30 Hari</Link>
+          <Link to="/jadwalkan-demo" className="btn btn-lg border border-white/25 bg-white/8 text-white backdrop-blur transition hover:border-white/45 hover:bg-white/14">Jadwalkan Demo</Link>
         </div>
       </div>
     </section>

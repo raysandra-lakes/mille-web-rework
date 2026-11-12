@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import MilleLogo from "./MilleLogo";
+
 import {
   produkGroups,
   solusiItems,
@@ -11,6 +12,8 @@ import {
 
 type MenuKey = "produk" | "solusi" | "optimille" | "berlangganan" | "lainnya" | null;
 
+const hasLink = (href?: string) => !!href && href.trim() !== "" && href !== "#";
+
 /* ─── Logo ─── */
 function NavbarLogo() {
   return (
@@ -18,6 +21,32 @@ function NavbarLogo() {
       <MilleLogo variant="light" height={28} />
     </a>
   );
+}
+
+/* ─── Scroll hash ─── */
+function ScrollToHash() {
+  const { hash, pathname, key } = useLocation();
+
+  useEffect(() => {
+    if (!hash) return;
+    const id = decodeURIComponent(hash.slice(1));
+    let tries = 0;
+    let timer: ReturnType<typeof setTimeout>;
+
+    const tryScroll = () => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else if (tries++ < 10) {
+        timer = setTimeout(tryScroll, 50); // tunggu halaman selesai render
+      }
+    };
+
+    timer = setTimeout(tryScroll, 0);
+    return () => clearTimeout(timer);
+  }, [hash, pathname, key]);
+
+  return null;
 }
 
 /* ─── Arrow icon ─── */
@@ -76,54 +105,50 @@ function ProdukMenu({ onClose }: { onClose: () => void }) {
                 </p>
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: 1 }}>
-                {group.items.map((item) => (
-                  <Link
-                    key={item.label}
-                    to={item.href}
-                    onClick={onClose}
-                    style={{
+                  {group.items.map((item) => {
+                    const itemStyle: React.CSSProperties = {
                       fontSize: 13.5,
                       color: "var(--muted-foreground)",
                       padding: "3px 0",
                       textDecoration: "none",
-                      transition: "color 0.15s",
                       display: "flex",
                       alignItems: "center",
                       gap: 6,
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = "var(--brand)")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "var(--muted-foreground)")}
-                  >
-                    <span style={{ width: 4, height: 4, borderRadius: "50%", backgroundColor: "var(--brand)", opacity: 0.35, display: "inline-block", flexShrink: 0 }} />
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
+                    };
+                    const dot = (
+                      <span style={{ width: 4, height: 4, borderRadius: "50%", backgroundColor: "var(--brand)", opacity: 0.35, display: "inline-block", flexShrink: 0 }} />
+                    );
+
+                    if (!hasLink(item.href)) {
+                      return (
+                        <span
+                          key={item.label}
+                          aria-disabled="true"
+                          style={{ ...itemStyle, opacity: 0.55, cursor: "default", userSelect: "none" }}
+                        >
+                          {dot}
+                          {item.label}
+                        </span>
+                      );
+                    }
+
+                    return (
+                      <Link
+                        key={item.label}
+                        to={item.href}
+                        onClick={onClose}
+                        style={{ ...itemStyle, transition: "color 0.15s" }}
+                        onMouseEnter={(e) => (e.currentTarget.style.color = "var(--brand)")}
+                        onMouseLeave={(e) => (e.currentTarget.style.color = "var(--muted-foreground)")}
+                      >
+                        {dot}
+                        {item.label}
+                      </Link>
+                    );
+                  })}
+                </div>
             </div>
           ))}
-        </div>
-
-        {/* Footer */}
-        <div style={{ marginTop: 8, paddingTop: 20, borderTop: "1px solid var(--border)" }}>
-          <a
-            href="#"
-            onClick={onClose}
-            style={{
-              fontSize: 14,
-              fontWeight: 600,
-              color: "var(--brand)",
-              textDecoration: "none",
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 6,
-              transition: "gap 0.15s",
-            }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.gap = "10px"; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.gap = "6px"; }}
-          >
-            Lihat Semua Produk
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-          </a>
         </div>
       </div>
     </div>
@@ -143,7 +168,7 @@ function SolusiMenu({ onClose }: { onClose: () => void }) {
           {solusiItems.map((item) => (
             <Link
               key={item.title}
-              to={item.title}
+              to={item.href}
               onClick={onClose}
               style={{
                 display: "flex",
@@ -157,7 +182,6 @@ function SolusiMenu({ onClose }: { onClose: () => void }) {
               onMouseEnter={(e) => (e.currentTarget.style.background = "var(--surface)")}
               onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
             >
-              <span style={{ fontSize: 18, lineHeight: 1, marginTop: 2, flexShrink: 0 }}>{item.icon}</span>
               <div>
                 <p style={{ fontSize: 14, fontWeight: 600, color: "var(--foreground)", marginBottom: 2 }}>{item.title}</p>
                 <p style={{ fontSize: 12.5, color: "var(--muted-foreground)", lineHeight: 1.45 }}>{item.desc}</p>
@@ -166,10 +190,6 @@ function SolusiMenu({ onClose }: { onClose: () => void }) {
           ))}
         </div>
         <div style={{ marginTop: 16, paddingTop: 16, borderTop: "1px solid var(--border)" }}>
-          <a href="#" onClick={onClose} style={{ fontSize: 13.5, fontWeight: 600, color: "var(--brand)", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 5 }}>
-            Lihat Semua Solusi
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-          </a>
         </div>
       </div>
     </div>
@@ -202,12 +222,9 @@ function OptiMilleMenu({ onClose }: { onClose: () => void }) {
 
         <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
           {optimiItems.map((item) => (
-            <a
+            <h1
               key={item.title}
-              href="#"
-              onClick={onClose}
               style={{ display: "flex", alignItems: "flex-start", gap: 12, padding: "9px 12px", borderRadius: "var(--radius-md)", textDecoration: "none", transition: "background 0.15s" }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = "var(--surface)")}
               onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
             >
               <div style={{ width: 6, height: 6, borderRadius: "50%", background: "linear-gradient(135deg, var(--brand), #0072CC)", flexShrink: 0, marginTop: 6 }} />
@@ -215,7 +232,7 @@ function OptiMilleMenu({ onClose }: { onClose: () => void }) {
                 <p style={{ fontSize: 13.5, fontWeight: 600, color: "var(--foreground)", marginBottom: 1 }}>{item.title}</p>
                 <p style={{ fontSize: 12, color: "var(--muted-foreground)" }}>{item.desc}</p>
               </div>
-            </a>
+            </h1>
           ))}
         </div>
 
@@ -234,13 +251,32 @@ function OptiMilleMenu({ onClose }: { onClose: () => void }) {
 function BerlanggananMenu({ onClose }: { onClose: () => void }) {
   return (
     <div className="dropdown-panel" style={{ width: 380 }}>
-      <div style={{ padding: "24px 28px 20px" }}>
-        <p style={{ fontFamily: "var(--font-display-family)", fontWeight: 700, fontSize: 15, color: "var(--foreground)", marginBottom: 16 }}>Berlangganan Mille</p>
+      <div style={{ padding: "24px 28px 20px" }}>  
+          <Link 
+            to="/optimille" 
+            onClick={onClose} 
+            style={{ 
+              fontFamily: "var(--font-display-family)",
+              fontSize: 15, 
+              fontWeight: 700, 
+              marginBottom: 16,
+              color: "var(--foreground)", 
+              textDecoration: "none", 
+              display: "inline-flex", 
+              alignItems: "center", 
+              gap: 5 
+              }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--brand)")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "var(--foreground)")}
+              >
+            Berlangganan Mille
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          </Link>
         <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
           {berlanggananItems.map((item) => (
-            <a
+            <Link
               key={item.title}
-              href="#"
+              to={item.href}
               onClick={onClose}
               style={{ display: "flex", flexDirection: "column", padding: "10px 12px", borderRadius: "var(--radius-md)", textDecoration: "none", transition: "background 0.15s" }}
               onMouseEnter={(e) => (e.currentTarget.style.background = "var(--surface)")}
@@ -248,14 +284,8 @@ function BerlanggananMenu({ onClose }: { onClose: () => void }) {
             >
               <p style={{ fontSize: 14, fontWeight: 600, color: "var(--foreground)", marginBottom: 2 }}>{item.title}</p>
               <p style={{ fontSize: 12.5, color: "var(--muted-foreground)" }}>{item.desc}</p>
-            </a>
+            </Link>
           ))}
-        </div>
-        <div style={{ marginTop: 16, paddingTop: 16, borderTop: "1px solid var(--border)" }}>
-          <Link to="/berlangganan" onClick={onClose} style={{ fontSize: 13.5, fontWeight: 600, color: "var(--brand)", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 5 }}>
-            Lihat Paket
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-          </Link>
         </div>
       </div>
     </div>
@@ -337,7 +367,7 @@ function MobileNav({ open, onClose }: { open: boolean; onClose: () => void }) {
           </div>
         ))}
         <div style={{ marginTop: 28, display: "flex", flexDirection: "column", gap: 12 }}>
-          <a href="#" onClick={onClose} className="btn btn-primary" style={{ justifyContent: "center" }}>Coba Gratis</a>
+          <a href="https://partner.millehub.com/register-user" target="_blank" rel="noreferrer" onClick={onClose} className="btn btn-primary" style={{ justifyContent: "center" }}>Coba Gratis</a>
           <a target="_blank" rel="noopener noreferrer" href="https://partner.millehub.com/login" className="btn btn-secondary" style={{ justifyContent: "center" }}>Masuk</a>
         </div>
       </div>
@@ -397,6 +427,7 @@ export default function Navbar() {
 
   return (
     <>
+    <ScrollToHash />
       <style>{`
         .navbar-root {
           position: fixed;
@@ -575,7 +606,7 @@ export default function Navbar() {
             <a target="_blank" rel="noopener noreferrer" href="https://partner.millehub.com/login" className="btn btn-ghost btn-sm" style={{ color: "var(--muted-foreground)", fontSize: 14, fontWeight: 500}}>
               Masuk
             </a>
-            <a href="#" className="btn btn-primary btn-sm">
+            <a href="https://partner.millehub.com/register-user" className="btn btn-primary btn-sm" target="_blank" rel="noreferrer">
               {"Coba Gratis  "}
             </a>
             {/* Mobile hamburger */}

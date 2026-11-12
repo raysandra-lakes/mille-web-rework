@@ -38,398 +38,31 @@ const steps = [
   },
 ];
 
-/* AI Chat UI */
-function AIChatInterface() {
-  const insights = [
-    { label: "Penjualan", value: "↑ 14%", sub: "vs bulan lalu", color: "#0EA86B" },
-    { label: "Produk Terlaris", value: "Arabika Latte", sub: "312 porsi terjual", color: ORANGE },
-    { label: "Outlet Terbaik", value: "Grand Indonesia", sub: "Rp 18.4jt revenue", color: ORANGE_LIGHT },
-    { label: "Margin Rata-rata", value: "62.3%", sub: "+3.1pp vs target", color: "#F8B36B" },
-  ];
 
+/* AI Chat Screenshot */
+function AIChatScreenshot() {
   return (
     <div
       style={{
-        background: "#0E0E10",
         borderRadius: 20,
         overflow: "hidden",
         border: "1px solid rgba(255,255,255,0.08)",
         boxShadow: "0 32px 80px rgba(0,0,0,0.35), 0 4px 16px rgba(0,0,0,0.2)",
-        fontFamily: "var(--font-body-family)",
-        userSelect: "none",
+        background: "#0E0E10",
+        maxWidth: 520,
+        margin: "0 auto",
       }}
     >
-      {/* Titlebar */}
-      <div
+      <img
+        src="/mille-ai-sales-analytics-dashboard.png"
+        alt="Mille AI menganalisis data penjualan outlet secara otomatis"
+        loading="lazy"
         style={{
-          background: "#17171A",
-          padding: "12px 18px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          borderBottom: "1px solid rgba(255,255,255,0.06)",
+          display: "block",
+          width: "100%",
+          height: "auto",
         }}
-      >
-        <div style={{ display: "flex", gap: 6 }}>
-          {["#FF5F56", "#FFBD2E", "#27C93F"].map((c) => (
-            <div
-              key={c}
-              style={{
-                width: 8,
-                height: 8,
-                borderRadius: "50%",
-                background: c,
-                opacity: 0.7,
-              }}
-            />
-          ))}
-        </div>
-
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <div
-            style={{
-              width: 20,
-              height: 20,
-              borderRadius: 6,
-              background: `linear-gradient(135deg, ${ORANGE}, ${ORANGE_DARK})`,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <svg width="10" height="10" viewBox="0 0 16 16" fill="none">
-              <path
-                d="M8 2L9.8 6.2L14 7L10.9 10.1L11.7 14.2L8 12L4.3 14.2L5.1 10.1L2 7L6.2 6.2L8 2Z"
-                fill="white"
-              />
-            </svg>
-          </div>
-          <span
-            style={{
-              fontSize: 11,
-              fontWeight: 700,
-              color: "rgba(255,255,255,0.6)",
-              letterSpacing: "0.04em",
-            }}
-          >
-            OPTIMILLE
-          </span>
-        </div>
-
-        <div
-          style={{
-            width: 6,
-            height: 6,
-            borderRadius: "50%",
-            background: "#27C93F",
-          }}
-        />
-      </div>
-
-      <div style={{ padding: "20px" }}>
-        {/* User question bubble */}
-        <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
-          <div
-            style={{
-              background: "rgba(242,140,40,0.16)",
-              border: "1px solid rgba(242,140,40,0.25)",
-              borderRadius: "16px 16px 4px 16px",
-              padding: "10px 16px",
-              maxWidth: "82%",
-            }}
-          >
-            <p style={{ fontSize: 13.5, color: "rgba(255,255,255,0.88)", lineHeight: 1.5 }}>
-              Bagaimana performa bisnis saya bulan ini?
-            </p>
-          </div>
-        </div>
-
-        {/* AI response */}
-        <div style={{ display: "flex", gap: 10, marginBottom: 16 }}>
-          <div
-            style={{
-              width: 28,
-              height: 28,
-              borderRadius: 9,
-              background: `linear-gradient(135deg, ${ORANGE}, ${ORANGE_DARK})`,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexShrink: 0,
-              marginTop: 2,
-            }}
-          >
-            <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
-              <path
-                d="M8 2L9.8 6.2L14 7L10.9 10.1L11.7 14.2L8 12L4.3 14.2L5.1 10.1L2 7L6.2 6.2L8 2Z"
-                fill="white"
-              />
-            </svg>
-          </div>
-
-          <div style={{ flex: 1 }}>
-            <div
-              style={{
-                background: "#1C1C20",
-                borderRadius: "4px 16px 16px 16px",
-                padding: "14px 16px",
-                border: "1px solid rgba(255,255,255,0.07)",
-                marginBottom: 10,
-              }}
-            >
-              <p
-                style={{
-                  fontSize: 10,
-                  color: "rgba(255,255,255,0.55)",
-                  marginBottom: 8,
-                  fontWeight: 600,
-                  letterSpacing: "0.03em",
-                  textTransform: "uppercase",
-                }}
-              >
-                Ringkasan Performa — Agustus 2025
-              </p>
-
-              <p
-                style={{
-                  fontSize: 13.5,
-                  color: "rgba(255,255,255,0.85)",
-                  lineHeight: 1.65,
-                  marginBottom: 12,
-                }}
-              >
-                Bisnis Anda menunjukkan pertumbuhan yang kuat bulan ini. Total penjualan mencapai{" "}
-                <strong style={{ color: ORANGE }}>Rp 287 juta</strong>, meningkat 14% dibanding Juli.
-                Margin bersih juga membaik ke{" "}
-                <strong style={{ color: "#0EA86B" }}>62.3%</strong>.
-              </p>
-
-              {/* Insight grid */}
-              <div
-                className="grid-2col-tight"
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr 1fr",
-                  gap: 8,
-                  marginBottom: 12,
-                }}
-              >
-                {insights.map((ins) => (
-                  <div
-                    key={ins.label}
-                    style={{
-                      background: "rgba(255,255,255,0.04)",
-                      borderRadius: 10,
-                      padding: "10px 12px",
-                      border: "1px solid rgba(255,255,255,0.06)",
-                    }}
-                  >
-                    <p
-                      style={{
-                        fontSize: 10,
-                        color: "rgba(255,255,255,0.4)",
-                        marginBottom: 3,
-                        fontWeight: 500,
-                      }}
-                    >
-                      {ins.label}
-                    </p>
-
-                    <p
-                      style={{
-                        fontSize: 15,
-                        fontWeight: 700,
-                        color: ins.color,
-                        fontFamily: "var(--font-display-family)",
-                        letterSpacing: "-0.02em",
-                        marginBottom: 1,
-                      }}
-                    >
-                      {ins.value}
-                    </p>
-
-                    <p style={{ fontSize: 10, color: "rgba(255,255,255,0.35)" }}>
-                      {ins.sub}
-                    </p>
-                  </div>
-                ))}
-              </div>
-
-              {/* Trend spark */}
-              <div
-                style={{
-                  background: "rgba(255,255,255,0.03)",
-                  borderRadius: 10,
-                  padding: "10px 12px",
-                  border: "1px solid rgba(255,255,255,0.05)",
-                  marginBottom: 12,
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginBottom: 8,
-                  }}
-                >
-                  <p
-                    style={{
-                      fontSize: 10,
-                      color: "rgba(255,255,255,0.4)",
-                      fontWeight: 600,
-                    }}
-                  >
-                    TREN PENJUALAN 30 HARI
-                  </p>
-                  <span style={{ fontSize: 10, color: "#0EA86B", fontWeight: 600 }}>
-                    +14%
-                  </span>
-                </div>
-
-                <div style={{ display: "flex", alignItems: "flex-end", gap: 3, height: 32 }}>
-                  {[38, 52, 44, 62, 55, 70, 60, 78, 68, 85, 74, 92, 82, 98, 88].map((h, i) => (
-                    <div
-                      key={i}
-                      style={{
-                        flex: 1,
-                        height: `${h}%`,
-                        borderRadius: "2px 2px 0 0",
-                        background:
-                          i === 14
-                            ? `linear-gradient(180deg, ${ORANGE_LIGHT}, ${ORANGE_DARK})`
-                            : `rgba(242,140,40,${0.15 + (i / 14) * 0.3})`,
-                        transition: "height 0.4s",
-                      }}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              {/* Recommendation */}
-              <div
-                style={{
-                  background: "rgba(242,140,40,0.08)",
-                  borderRadius: 10,
-                  padding: "10px 14px",
-                  border: "1px solid rgba(242,140,40,0.18)",
-                }}
-              >
-                <div style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
-                  <div
-                    style={{
-                      width: 16,
-                      height: 16,
-                      borderRadius: 5,
-                      background: "rgba(242,140,40,0.25)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexShrink: 0,
-                      marginTop: 1,
-                    }}
-                  >
-                    <svg width="8" height="8" viewBox="0 0 10 10" fill="none">
-                      <path
-                        d="M5 1v4M5 7.5v1"
-                        stroke={ORANGE_LIGHT}
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                  </div>
-
-                  <p
-                    style={{
-                      fontSize: 12.5,
-                      color: "rgba(255,255,255,0.7)",
-                      lineHeight: 1.55,
-                    }}
-                  >
-                    <strong style={{ color: ORANGE_LIGHT }}>Rekomendasi:</strong> Outlet SCBD
-                    menunjukkan pertumbuhan tertinggi (+12%). Pertimbangkan menambah kapasitas
-                    atau jam operasional.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Suggested action */}
-            <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-              {[
-                "Lihat detail per outlet",
-                "Analisis stok bulan ini",
-                "Bandingkan dengan Juli",
-              ].map((s) => (
-                <button
-                  key={s}
-                  style={{
-                    padding: "6px 12px",
-                    borderRadius: 20,
-                    background: "rgba(255,255,255,0.06)",
-                    border: "1px solid rgba(255,255,255,0.1)",
-                    fontSize: 11.5,
-                    color: "rgba(255,255,255,0.6)",
-                    cursor: "pointer",
-                    fontFamily: "var(--font-body-family)",
-                    transition: "background 0.15s, color 0.15s",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = "rgba(242,140,40,0.15)";
-                    e.currentTarget.style.color = "rgba(255,255,255,0.9)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = "rgba(255,255,255,0.06)";
-                    e.currentTarget.style.color = "rgba(255,255,255,0.6)";
-                  }}
-                >
-                  {s}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Input bar */}
-        <div
-          style={{
-            display: "flex",
-            gap: 10,
-            alignItems: "center",
-            background: "#17171A",
-            borderRadius: 12,
-            padding: "10px 14px",
-            border: "1px solid rgba(255,255,255,0.08)",
-          }}
-        >
-          <p
-            style={{
-              flex: 1,
-              fontSize: 13,
-              color: "rgba(255,255,255,0.25)",
-              fontStyle: "italic",
-            }}
-          >
-            Tanya tentang bisnis Anda...
-          </p>
-
-          <div
-            style={{
-              width: 28,
-              height: 28,
-              borderRadius: 8,
-              background: `linear-gradient(135deg, ${ORANGE}, ${ORANGE_DARK})`,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
-              <path d="M2 8l12-6-5 6 5 6-12-6z" fill="white" />
-            </svg>
-          </div>
-        </div>
-      </div>
+      />
     </div>
   );
 }
@@ -488,7 +121,7 @@ export default function OptiMilleSection() {
               alignItems: "center",
               gap: 7,
               padding: "5px 14px",
-              background: "rgba(242,140,40,0.12)",
+              background: "rgba(242, 141, 40, 0.27)",
               borderRadius: 999,
               border: "1px solid rgba(242,140,40,0.2)",
               marginBottom: 20,
@@ -496,21 +129,18 @@ export default function OptiMilleSection() {
           >
             <div
               style={{
-                width: 16,
-                height: 16,
-                borderRadius: 5,
-                background: `linear-gradient(135deg, ${ORANGE}, ${ORANGE_DARK})`,
+                width: 30,
+                height: 30,
+                borderRadius: 10,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
               }}
             >
-              <svg width="8" height="8" viewBox="0 0 16 16" fill="none">
-                <path
-                  d="M8 2L9.8 6.2L14 7L10.9 10.1L11.7 14.2L8 12L4.3 14.2L5.1 10.1L2 7L6.2 6.2L8 2Z"
-                  fill="white"
-                />
-              </svg>
+              <img src="/mille-partner-logo.png" alt="mille-partner" style={{
+                width: 30,
+                height: 30,
+              }} />
             </div>
 
             <span
@@ -571,7 +201,7 @@ export default function OptiMilleSection() {
           }}
         >
           {/* Left: AI chat UI */}
-          <AIChatInterface />
+          <AIChatScreenshot />
 
           {/* Right: Process steps */}
           <div style={{ paddingTop: 8 }}>
@@ -688,7 +318,7 @@ export default function OptiMilleSection() {
               }}
             >
               <a
-                href="#"
+                href="/optimille"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",

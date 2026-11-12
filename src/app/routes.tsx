@@ -23,6 +23,7 @@ import TentangPerusahaan from "../pages/TentangPerusahaan";
 import Karir from "../pages/Karir";
 import UnduhApp from "../pages/UnduhApp";
 import FiturPage from "../components/fitur/FiturPage";
+import JadwalkanDemo from "../pages/JadwalkanDemo";
 
 export const router = createBrowserRouter([
   {
@@ -52,6 +53,7 @@ export const router = createBrowserRouter([
       { path: "tentang-perusahaan", Component: TentangPerusahaan },
       { path: "karir", Component: Karir },
       { path: "unduh", Component: UnduhApp },
+      { path: "jadwalkan-demo", Component: JadwalkanDemo },
     ],
   },
 ]);

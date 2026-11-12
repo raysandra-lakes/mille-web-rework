@@ -341,14 +341,16 @@ export default function Hero() {
 
             <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center", justifyContent: "center" }}>
               <a
-                href="#"
+                href="https://partner.millehub.com/register-user"
                 className="btn btn-primary btn-lg"
+                target="_blank" 
+                rel="noreferrer"
                 style={{ gap: 8, boxShadow: "0 12px 36px rgba(0,154,229,0.35)" }}
               >
                 Coba Gratis
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
               </a>
-              <a href="#" className="btn btn-secondary btn-lg" style={{ color: "#FFFFFF", background: "rgba(255,255,255,0.1)", borderColor: "rgba(255,255,255,0.3)", backdropFilter: "blur(12px)" }}>
+              <a href="/jadwalkan-demo" className="btn btn-secondary btn-lg" style={{ color: "#FFFFFF", background: "rgba(255,255,255,0.1)", borderColor: "rgba(255,255,255,0.3)", backdropFilter: "blur(12px)" }}>
                 Jadwalkan Demo
               </a>
             </div>

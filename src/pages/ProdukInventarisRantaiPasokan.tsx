@@ -635,10 +635,10 @@ function Hero() {
               perhitungan HPP secara otomatis dalam satu sistem terpadu.
             </p>
             <div className="mb-7 flex flex-wrap gap-3">
-              <Link to="#" className="btn btn-primary btn-lg">
+              <Link to="https://partner.millehub.com/register-user" className="btn btn-primary btn-lg" target="_blank" rel="noreferrer">
                 Coba Gratis
               </Link>
-              <Link to="#" className="btn btn-secondary btn-lg">
+              <Link to="/jadwalkan-demo" className="btn btn-secondary btn-lg">
                 Jadwalkan Demo
               </Link>
             </div>
@@ -766,11 +766,11 @@ function ClosingCta() {
           Selisih?
         </h2>
         <div className="mt-9 flex flex-wrap justify-center gap-3">
-          <Link to="#" className="btn btn-primary btn-lg">
+          <Link target="_blank" rel="noreferrer" to="https://partner.millehub.com/register-user" className="btn btn-primary btn-lg">
             Coba Gratis 30 Hari
           </Link>
           <Link
-            to="#"
+            to="/jadwalkan-demo"
             className="btn btn-lg border border-white/25 bg-white/8 text-white backdrop-blur transition hover:border-white/45 hover:bg-white/14"
           >
             Jadwalkan Demo

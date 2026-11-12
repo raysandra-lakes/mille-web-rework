@@ -174,13 +174,13 @@ export default function Berlangganan() {
             <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-brand-subtle px-4 py-2 text-[11px] font-bold tracking-[0.08em] text-brand"><span className="size-1.5 rounded-full bg-brand" />BERLANGGANAN & SOLUSI MILLE</div>
             <h1 className="font-display text-[clamp(2.5rem,5vw,4.5rem)] font-extrabold leading-[1.04] tracking-[-0.04em] text-foreground">Solusi untuk Semua Kebutuhan Bisnis Anda.</h1>
             <p className="mx-auto mt-6 max-w-3xl text-[clamp(1rem,1.25vw,1.125rem)] leading-[1.75] text-muted-foreground">Mille terbukti dan berhasil membantu berbagai jenis usaha, mulai dari skala kecil, menengah hingga atas. Tentukan paket yang sesuai dengan kebutuhan atau lakukan upgrade untuk mendapatkan fitur dan layanan yang lebih baik.</p>
-            <div className="mt-9 flex flex-wrap justify-center gap-3"><Link to="#" className="btn btn-primary btn-lg">Jadwalkan Demo →</Link><Link to="#" className="btn btn-secondary btn-lg">Hubungi Kami →</Link></div>
+            <div className="mt-9 flex flex-wrap justify-center gap-3"><Link to="/jadwalkan-demo" className="btn btn-primary btn-lg">Jadwalkan Demo →</Link><Link to="#" className="btn btn-secondary btn-lg">Hubungi Kami →</Link></div>
             <div className="mt-7 flex flex-wrap justify-center gap-x-6 gap-y-2">{["✓ Uji coba gratis 14 hari", "✓ Onboarding terpandu", "✓ Tanpa biaya tersembunyi"].map((item) => <span key={item} className="text-xs font-medium text-muted-foreground">{item}</span>)}</div>
           </div>
         </div>
       </section>
 
-      <section id="basic" className="section-spacing bg-white">
+      <section id="basic" className="section-spacing bg-white scroll-mt-20">
         <div className="container-page">
           <div className="overflow-hidden rounded-[var(--radius-xl)] border border-slate-200 bg-white shadow-[0_24px_80px_rgba(15,23,42,.08)]">
             <div className="grid gap-10 p-7 lg:grid-cols-[1.02fr_.98fr] lg:p-12">
@@ -189,7 +189,7 @@ export default function Berlangganan() {
                 <h2 className="mt-5 font-display text-[clamp(2rem,3.5vw,3.15rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-foreground">Mille Basic — Fondasi Digital untuk UMKM agar Lebih Terstruktur & Terkontrol.</h2>
                 <p className="mt-5 text-base leading-relaxed text-muted-foreground">Berlangganan Mille Basic sudah mencakup kebutuhan untuk usaha kecil dan menengah (UMKM), termasuk aplikasi kasir, pengelolaan stok dasar, laporan penjualan menyeluruh, hingga dukungan purna jual.</p>
                 <div className="mt-8"><p className="mb-4 text-xs font-bold uppercase tracking-wider text-foreground">Cocok untuk bisnis</p><TargetList items={basicTargets} /></div>
-                <Link to="#" className="btn btn-secondary btn-lg mt-8">Jadwalkan Demo Sekarang</Link>
+                <Link to="/jadwalkan-demo" className="btn btn-secondary btn-lg mt-8">Jadwalkan Demo Sekarang</Link>
               </div>
               <div className="flex flex-col gap-5">
                 <PlanPreview />
@@ -200,7 +200,7 @@ export default function Berlangganan() {
         </div>
       </section>
 
-      <section id="add-on" className="section-spacing bg-[#F8FAFC]">
+      <section id="add-on" className="section-spacing scroll-mt-20 bg-[#F8FAFC]">
         <div className="container-page">
           <div className="mb-14 grid items-end gap-7 lg:grid-cols-[1.08fr_.92fr] lg:gap-20">
             <div><p className="type-eyebrow mb-4">FITUR TAMBAHAN</p><h2 className="font-display text-[clamp(2rem,3.6vw,3.2rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-foreground">Lengkapi Langganan Mille dengan Modul Tambahan.</h2></div>
@@ -210,7 +210,7 @@ export default function Berlangganan() {
         </div>
       </section>
 
-      <section id="pro" className="section-spacing bg-white">
+      <section id="pro" className="section-spacing scroll-mt-20 bg-white">
         <div className="container-page">
           <div className="relative overflow-hidden rounded-[var(--radius-xl)] border-2 border-brand bg-foreground text-white shadow-[0_28px_90px_rgba(0,154,229,.16)]">
             <div className="absolute right-0 top-0 size-[28rem] rounded-full bg-brand/15 blur-3xl" />
@@ -220,7 +220,7 @@ export default function Berlangganan() {
                 <h2 className="mt-5 font-display text-[clamp(2rem,3.5vw,3.15rem)] font-extrabold leading-[1.08] tracking-[-0.03em]">Mille Pro — Dirancang untuk Bisnis yang Siap Dikelola Secara Profesional.</h2>
                 <p className="mt-5 text-base leading-relaxed text-white/60">Satu paket komprehensif yang telah mencakup seluruh modul operasional, rantai pasokan, akuntansi, hingga integrasi lanjutan untuk pertumbuhan terarah dan berkelanjutan.</p>
                 <div className="mt-8"><p className="mb-4 text-xs font-bold uppercase tracking-wider text-white/80">Ideal untuk bisnis yang</p><TargetList items={proCriteria} inverse /></div>
-                <Link to="#" className="btn btn-primary btn-lg mt-8">Jadwalkan Demo Sekarang</Link>
+                <Link to="/jadwalkan-demo" className="btn btn-primary btn-lg mt-8">Jadwalkan Demo Sekarang</Link>
               </div>
               <div className="flex flex-col gap-5">
                 <PlanPreview pro />
@@ -231,7 +231,7 @@ export default function Berlangganan() {
         </div>
       </section>
 
-      <section id="hardware" className="section-spacing bg-surface">
+      <section id="hardware" className="section-spacing scroll-mt-20 bg-surface">
         <div className="container-page">
           <div className="mb-14 max-w-3xl"><p className="type-eyebrow mb-4">HARDWARE OPERASIONAL</p><h2 className="font-display text-[clamp(2rem,3.6vw,3.2rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-foreground">Jenis Perangkat yang Umum Digunakan.</h2><p className="mt-5 text-base leading-relaxed text-muted-foreground">Perangkat keras tangguh yang direkomendasikan dan teruji kompatibel penuh dengan sistem Mille POS.</p></div>
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
@@ -252,7 +252,7 @@ export default function Berlangganan() {
 
       <section className="relative overflow-hidden bg-foreground py-20 text-center text-white lg:py-28">
         <div className="absolute left-1/2 top-0 h-64 w-[48rem] -translate-x-1/2 rounded-full bg-brand/15 blur-3xl" />
-        <div className="container-page relative"><h2 className="mx-auto max-w-4xl font-display text-[clamp(2rem,4vw,3.5rem)] font-extrabold leading-[1.08] tracking-[-0.03em]">Siap Memulai Usaha dengan Solusi Kami?</h2><p className="mx-auto mt-5 max-w-2xl text-base text-white/55">Kembangkan dan Tingkatkan Omset Usaha Anda Dengan Mille Sekarang!</p><div className="mt-9"><Link to="#" className="btn btn-primary btn-lg">Jadwalkan Demo</Link></div></div>
+        <div className="container-page relative"><h2 className="mx-auto max-w-4xl font-display text-[clamp(2rem,4vw,3.5rem)] font-extrabold leading-[1.08] tracking-[-0.03em]">Siap Memulai Usaha dengan Solusi Kami?</h2><p className="mx-auto mt-5 max-w-2xl text-base text-white/55">Kembangkan dan Tingkatkan Omset Usaha Anda Dengan Mille Sekarang!</p><div className="mt-9"><Link to="/jadwalkan-demo" className="btn btn-primary btn-lg">Jadwalkan Demo</Link></div></div>
       </section>
     </>
   );

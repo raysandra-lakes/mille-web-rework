@@ -124,7 +124,7 @@ function HeroSection() {
             <div className="badge badge-brand mb-6"><span className="size-1.5 rounded-full bg-brand" />POINT OF SALE</div>
             <h1 className="mb-6 font-display text-[clamp(2.2rem,4vw,3.55rem)] font-extrabold leading-[1.06] tracking-[-0.035em] text-foreground">Proses Setiap Transaksi Lebih Cepat dan Akurat, dari Kasir hingga Laporan.</h1>
             <p className="mb-8 text-[clamp(1rem,1.25vw,1.125rem)] leading-[1.72] text-muted-foreground">Mille POS menyatukan pemesanan di kasir, berbagai metode pembayaran, pembaruan stok, dan laporan penjualan dalam satu sistem, sehingga antrean bergerak lebih cepat dan data bisnis selalu terbarui.</p>
-            <div className="mb-7 flex flex-wrap gap-3"><Link to="#" className="btn btn-primary btn-lg">Coba Gratis</Link><Link to="#" className="btn btn-secondary btn-lg">Jadwalkan Demo</Link></div>
+            <div className="mb-7 flex flex-wrap gap-3"><Link to="https://partner.millehub.com/register-user" target="_blank" rel="noreferrer" className="btn btn-primary btn-lg">Coba Gratis</Link><Link to="/jadwalkan-demo" className="btn btn-secondary btn-lg">Jadwalkan Demo</Link></div>
             <div className="flex flex-wrap gap-x-5 gap-y-2">{["✓ Gratis 30 hari", "✓ Setup cepat", "✓ Dukungan onboarding"].map((item) => <span key={item} className="text-xs font-medium text-muted-foreground">{item}</span>)}</div>
           </div>
           <PosScreen />
@@ -223,7 +223,7 @@ function ClosingCtaSection() {
   return (
     <section className="relative overflow-hidden bg-foreground py-20 text-center text-white lg:py-28">
       <div className="absolute left-1/2 top-0 h-64 w-[48rem] -translate-x-1/2 rounded-full bg-brand/15 blur-3xl" />
-      <div className="container-page relative"><h2 className="mx-auto max-w-4xl font-display text-[clamp(2rem,4vw,3.4rem)] font-extrabold leading-[1.1] tracking-[-0.03em]">Siap Membuat Proses Kasir Lebih Cepat dan Terkontrol?</h2><div className="mt-9 flex flex-wrap justify-center gap-3"><Link to="#" className="btn btn-primary btn-lg">Coba Gratis 30 Hari</Link><Link to="#" className="btn btn-lg border border-white/25 bg-white/8 text-white backdrop-blur transition hover:border-white/45 hover:bg-white/14">Jadwalkan Demo</Link></div><Link to={produkGroups[0].href} className="mt-7 inline-flex text-xs font-semibold text-white/45 no-underline transition hover:text-brand-light">Lihat semua produk Operasional, Pemesanan, & Pembayaran →</Link></div>
+      <div className="container-page relative"><h2 className="mx-auto max-w-4xl font-display text-[clamp(2rem,4vw,3.4rem)] font-extrabold leading-[1.1] tracking-[-0.03em]">Siap Membuat Proses Kasir Lebih Cepat dan Terkontrol?</h2><div className="mt-9 flex flex-wrap justify-center gap-3"><Link to="https://partner.millehub.com/register-user" target="_blank" rel="noreferrer" className="btn btn-primary btn-lg">Coba Gratis 30 Hari</Link><Link to="/jadwalkan-demo" className="btn btn-lg border border-white/25 bg-white/8 text-white backdrop-blur transition hover:border-white/45 hover:bg-white/14">Jadwalkan Demo</Link></div><Link to={produkGroups[0].href} className="mt-7 inline-flex text-xs font-semibold text-white/45 no-underline transition hover:text-brand-light">Lihat semua produk Operasional, Pemesanan, & Pembayaran →</Link></div>
     </section>
   );
 }

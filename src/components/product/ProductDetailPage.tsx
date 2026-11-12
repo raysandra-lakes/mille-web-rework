@@ -163,7 +163,7 @@ export default function ProductDetailPage({ config }: { config: ProductPageConfi
               <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-brand-subtle px-4 py-2 text-[11px] font-bold tracking-[0.08em] text-brand"><span className="size-1.5 rounded-full bg-brand" />PRODUK MILLE</div>
               <h1 className="mb-6 font-display text-[clamp(2.2rem,4vw,3.55rem)] font-extrabold leading-[1.06] tracking-[-0.035em] text-foreground">{config.headline}</h1>
               <p className="mb-8 text-[clamp(1rem,1.25vw,1.125rem)] leading-[1.72] text-muted-foreground">{config.intro}</p>
-              <div className="mb-7 flex flex-wrap gap-3"><Link to="#" className="btn btn-primary btn-lg">Coba Gratis</Link><Link to="#" className="btn btn-secondary btn-lg">Jadwalkan Demo</Link></div>
+              <div className="mb-7 flex flex-wrap gap-3"><Link to="https://partner.millehub.com/register-user" target="_blank" rel="noreferrer" className="btn btn-primary btn-lg">Coba Gratis</Link><Link to="/jadwalkan-demo" className="btn btn-secondary btn-lg">Jadwalkan Demo</Link></div>
               <div className="flex flex-wrap gap-x-5 gap-y-2">{["✓ Gratis 14 hari", "✓ Setup cepat", "✓ Dukungan onboarding"].map((item) => <span key={item} className="text-xs font-medium text-muted-foreground">{item}</span>)}</div>
             </div>
             <HeroDashboard mode={config.dashboard} />
@@ -196,7 +196,7 @@ export default function ProductDetailPage({ config }: { config: ProductPageConfi
 
       <section className="relative overflow-hidden bg-white py-20 text-center lg:py-28">
         <div className="absolute left-1/2 top-0 h-64 w-[48rem] -translate-x-1/2 rounded-full bg-brand/10 blur-3xl" />
-        <div className="container-page relative"><h2 className="mx-auto max-w-4xl font-display text-[clamp(2rem,4vw,3.4rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-foreground">{config.closingHeadline}</h2><div className="mt-9 flex flex-wrap justify-center gap-3"><Link to="#" className="btn btn-primary btn-lg">Coba Gratis 30 Hari</Link><Link to="#" className="btn btn-secondary btn-lg">Jadwalkan Demo</Link></div></div>
+        <div className="container-page relative"><h2 className="mx-auto max-w-4xl font-display text-[clamp(2rem,4vw,3.4rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-foreground">{config.closingHeadline}</h2><div className="mt-9 flex flex-wrap justify-center gap-3"><Link to="https://partner.millehub.com/register-user" target="_blank" rel="noreferrer" className="btn btn-primary btn-lg">Coba Gratis 30 Hari</Link><Link to="/jadwalkan-demo" className="btn btn-secondary btn-lg">Jadwalkan Demo</Link></div></div>
       </section>
     </>
   );
