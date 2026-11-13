@@ -1,14 +1,24 @@
-import { type ReactNode } from "react"
-import { Link } from "react-router"
+import { type ReactNode } from "react";
+import { Link } from "react-router";
 
-type IconName = "variance" | "price" | "alert" | "warehouse" | "inventory" | "supplier" | "production" | "transfer" | "opname" | "cogs"
+type IconName =
+  | "variance"
+  | "price"
+  | "alert"
+  | "warehouse"
+  | "inventory"
+  | "supplier"
+  | "production"
+  | "transfer"
+  | "opname"
+  | "cogs";
 
 function Icon({
   name,
   className = "size-5",
 }: {
-  name: IconName
-  className?: string
+  name: IconName;
+  className?: string;
 }) {
   const paths: Record<IconName, ReactNode> = {
     variance: (
@@ -71,7 +81,7 @@ function Icon({
         <path d="m7 7 4-3 4 2 5-4" />
       </>
     ),
-  }
+  };
 
   return (
     <svg
@@ -86,7 +96,7 @@ function Icon({
     >
       {paths[name]}
     </svg>
-  )
+  );
 }
 
 function Breadcrumb() {
@@ -113,7 +123,7 @@ function Breadcrumb() {
         Inventaris & Rantai Pasokan
       </span>
     </nav>
-  )
+  );
 }
 
 function InventoryDashboard() {
@@ -139,7 +149,7 @@ function InventoryDashboard() {
       level: 12,
       status: "Kritis",
     },
-  ]
+  ];
 
   return (
     <div className="relative mx-auto max-w-[590px]">
@@ -268,7 +278,7 @@ function InventoryDashboard() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 const problems = [
@@ -292,7 +302,7 @@ const problems = [
     title: "Koordinasi Antar Gudang & Cabang",
     copy: "Pengiriman dan transfer bahan antar gudang atau cabang rawan miskomunikasi tanpa adanya pencatatan surat jalan digital.",
   },
-]
+];
 
 const features = [
   {
@@ -331,7 +341,7 @@ const features = [
     copy: "Hitung Harga Pokok Penjualan (HPP) secara presisi menggunakan metode COGS terintegrasi untuk menjaga tingkat profitabilitas.",
     visual: "cogs",
   },
-]
+];
 
 function FeatureVisual({ kind }: { kind: string }) {
   if (kind === "inventory") {
@@ -371,7 +381,7 @@ function FeatureVisual({ kind }: { kind: string }) {
           </div>
         ))}
       </div>
-    )
+    );
   }
   if (kind === "supplier") {
     return (
@@ -420,7 +430,7 @@ function FeatureVisual({ kind }: { kind: string }) {
           ))}
         </div>
       </div>
-    )
+    );
   }
 
   if (kind === "production") {
@@ -459,7 +469,7 @@ function FeatureVisual({ kind }: { kind: string }) {
           </div>
         </div>
       </div>
-    )
+    );
   }
 
   if (kind === "transfer") {
@@ -509,7 +519,7 @@ function FeatureVisual({ kind }: { kind: string }) {
           12 item · 84 unit · Diperbarui 10 menit lalu
         </div>
       </div>
-    )
+    );
   }
 
   if (kind === "opname") {
@@ -562,7 +572,7 @@ function FeatureVisual({ kind }: { kind: string }) {
           </div>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -610,7 +620,7 @@ function FeatureVisual({ kind }: { kind: string }) {
         ))}
       </div>
     </div>
-  )
+  );
 }
 
 function Hero() {
@@ -635,7 +645,12 @@ function Hero() {
               perhitungan HPP secara otomatis dalam satu sistem terpadu.
             </p>
             <div className="mb-7 flex flex-wrap gap-3">
-              <Link to="https://partner.millehub.com/register-user" className="btn btn-primary btn-lg" target="_blank" rel="noreferrer">
+              <Link
+                to="https://partner.millehub.com/register-user"
+                className="btn btn-primary btn-lg"
+                target="_blank"
+                rel="noreferrer"
+              >
                 Coba Gratis
               </Link>
               <Link to="/jadwalkan-demo" className="btn btn-secondary btn-lg">
@@ -661,7 +676,7 @@ function Hero() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 function ProblemsSection() {
@@ -700,7 +715,7 @@ function ProblemsSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 function FeaturesSection() {
@@ -753,7 +768,7 @@ function FeaturesSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 function ClosingCta() {
@@ -766,7 +781,12 @@ function ClosingCta() {
           Selisih?
         </h2>
         <div className="mt-9 flex flex-wrap justify-center gap-3">
-          <Link target="_blank" rel="noreferrer" to="https://partner.millehub.com/register-user" className="btn btn-primary btn-lg">
+          <Link
+            target="_blank"
+            rel="noreferrer"
+            to="https://partner.millehub.com/register-user"
+            className="btn btn-primary btn-lg"
+          >
             Coba Gratis 30 Hari
           </Link>
           <Link
@@ -778,7 +798,7 @@ function ClosingCta() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 export default function ProdukInventarisRantaiPasokan() {
@@ -789,5 +809,5 @@ export default function ProdukInventarisRantaiPasokan() {
       <FeaturesSection />
       <ClosingCta />
     </>
-  )
+  );
 }

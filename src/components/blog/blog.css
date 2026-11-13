@@ -1,0 +1,109 @@
+/* Animasi masuk kartu. Memakai "backwards" supaya efek hover (translate) tidak tertimpa setelah animasi selesai.
+   Data blog datang setelah fetch, jadi tidak memakai .reveal global. */
+.bl-in {
+  animation: bl-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+@keyframes bl-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bl-in {
+    animation: none;
+  }
+}
+
+/* Pelengkap untuk isi markdown di dalam .blog-article (elemen yang mungkin belum diatur di CSS globalmu) */
+.blog-md h2,
+.blog-md h3 {
+  scroll-margin-top: 6rem;
+}
+.blog-md h1,
+.blog-md h3,
+.blog-md h4 {
+  margin: 1.8em 0 0.5em;
+  font-family: var(--font-display-family);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+.blog-md h1 {
+  font-size: 1.7em;
+}
+.blog-md h3 {
+  font-size: 1.25em;
+}
+.blog-md h4 {
+  font-size: 1.05em;
+}
+.blog-md ol {
+  margin: 1.1em 0;
+  padding-left: 1.4em;
+  list-style: decimal;
+}
+.blog-md ol li + li {
+  margin-top: 0.4em;
+}
+.blog-md a {
+  color: var(--brand);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.blog-md img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.6em auto;
+  border-radius: 12px;
+}
+.blog-md hr {
+  margin: 2em 0;
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+.blog-md table {
+  display: block;
+  max-width: 100%;
+  margin: 1.4em 0;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 0.95em;
+}
+.blog-md th,
+.blog-md td {
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+.blog-md th {
+  background: var(--surface);
+}
+.blog-md code {
+  padding: 0.15em 0.4em;
+  font-size: 0.9em;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.blog-md pre {
+  margin: 1.4em 0;
+  padding: 16px;
+  overflow-x: auto;
+  background: #0e0e10;
+  color: #f4f4f5;
+  border-radius: 12px;
+}
+.blog-md pre code {
+  padding: 0;
+  background: none;
+  border: 0;
+  color: inherit;
+}
+.blog-md iframe,
+.blog-md video {
+  max-width: 100%;
+}

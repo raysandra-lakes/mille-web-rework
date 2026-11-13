@@ -166,7 +166,7 @@ function DeviceVisual({ type }: { type: string }) {
 export default function Berlangganan() {
   return (
     <>
-      <section className="relative overflow-hidden bg-[linear-gradient(165deg,#FAFAF8_0%,#F5FAFD_52%,#EEF8FD_100%)] py-16 lg:py-24">
+      <section id="header" className="relative overflow-hidden bg-[linear-gradient(165deg,#FAFAF8_0%,#F5FAFD_52%,#EEF8FD_100%)] py-16 lg:py-24">
         <div className="absolute right-[8%] top-[-10rem] size-[32rem] rounded-full bg-brand/10 blur-3xl" />
         <div className="container-page relative">
           <Breadcrumb items={["Berlangganan"]} />

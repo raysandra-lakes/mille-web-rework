@@ -3,25 +3,57 @@ import { Link } from "react-router";
 /* ─── Breadcrumb ─── */
 function Breadcrumb() {
   return (
-    <nav aria-label="Breadcrumb" style={{ marginBottom: 28, display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
+    <nav
+      aria-label="Breadcrumb"
+      style={{
+        marginBottom: 28,
+        display: "flex",
+        alignItems: "center",
+        gap: 6,
+        flexWrap: "wrap",
+      }}
+    >
       {[
         { label: "Beranda", to: "/" },
         { label: "Solusi Bisnis", to: "/" },
         { label: "Bakery", to: null },
       ].map((item, i) => (
-        <span key={item.label} style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          {i > 0 && <span style={{ fontSize: 12, color: "var(--border)" }}>/</span>}
+        <span
+          key={item.label}
+          style={{ display: "flex", alignItems: "center", gap: 6 }}
+        >
+          {i > 0 && (
+            <span style={{ fontSize: 12, color: "var(--border)" }}>/</span>
+          )}
           {item.to ? (
             <Link
               to={item.to}
-              style={{ fontSize: 13, color: "var(--muted-foreground)", textDecoration: "none", transition: "color 0.15s" }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "var(--brand)"; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "var(--muted-foreground)"; }}
+              style={{
+                fontSize: 13,
+                color: "var(--muted-foreground)",
+                textDecoration: "none",
+                transition: "color 0.15s",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.color = "var(--brand)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.color =
+                  "var(--muted-foreground)";
+              }}
             >
               {item.label}
             </Link>
           ) : (
-            <span style={{ fontSize: 13, fontWeight: 600, color: "var(--foreground)" }}>{item.label}</span>
+            <span
+              style={{
+                fontSize: 13,
+                fontWeight: 600,
+                color: "var(--foreground)",
+              }}
+            >
+              {item.label}
+            </span>
           )}
         </span>
       ))}
@@ -32,16 +64,55 @@ function Breadcrumb() {
 /* ─── Bakery Production Dashboard Visual ─── */
 function BakeryDashboard() {
   const batches = [
-    { product: "Roti Tawar", qty: 120, status: "Dipanggang", pct: 65, color: "#E8820C" },
-    { product: "Croissant", qty: 80, status: "Siap Distribusi", pct: 100, color: "#0EA86B" },
-    { product: "Cinnamon Roll", qty: 60, status: "Persiapan", pct: 20, color: "#4A7CF6" },
-    { product: "Sourdough", qty: 40, status: "Dipanggang", pct: 80, color: "#E8820C" },
+    {
+      product: "Roti Tawar",
+      qty: 120,
+      status: "Dipanggang",
+      pct: 65,
+      color: "#E8820C",
+    },
+    {
+      product: "Croissant",
+      qty: 80,
+      status: "Siap Distribusi",
+      pct: 100,
+      color: "#0EA86B",
+    },
+    {
+      product: "Cinnamon Roll",
+      qty: 60,
+      status: "Persiapan",
+      pct: 20,
+      color: "#4A7CF6",
+    },
+    {
+      product: "Sourdough",
+      qty: 40,
+      status: "Dipanggang",
+      pct: 80,
+      color: "#E8820C",
+    },
   ];
 
   const expiry = [
-    { product: "Croissant Almond", outlet: "Pusat", remaining: "4 jam", urgent: true },
-    { product: "Danish Pastry", outlet: "Kelapa Gading", remaining: "9 jam", urgent: false },
-    { product: "Roti Sobek", outlet: "Sunter", remaining: "16 jam", urgent: false },
+    {
+      product: "Croissant Almond",
+      outlet: "Pusat",
+      remaining: "4 jam",
+      urgent: true,
+    },
+    {
+      product: "Danish Pastry",
+      outlet: "Kelapa Gading",
+      remaining: "9 jam",
+      urgent: false,
+    },
+    {
+      product: "Roti Sobek",
+      outlet: "Sunter",
+      remaining: "16 jam",
+      urgent: false,
+    },
   ];
 
   const distribution = [
@@ -53,26 +124,126 @@ function BakeryDashboard() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
       {/* Batch production panel */}
-      <div style={{ background: "#111110", borderRadius: 16, overflow: "hidden", border: "1px solid rgba(255,255,255,0.08)", boxShadow: "0 20px 60px rgba(0,0,0,0.18)" }}>
-        <div style={{ background: "#17171A", padding: "10px 16px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 4 }}>
+      <div
+        style={{
+          background: "#111110",
+          borderRadius: 16,
+          overflow: "hidden",
+          border: "1px solid rgba(255,255,255,0.08)",
+          boxShadow: "0 20px 60px rgba(0,0,0,0.18)",
+        }}
+      >
+        <div
+          style={{
+            background: "#17171A",
+            padding: "10px 16px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: 4,
+          }}
+        >
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#27C93F" }} />
-            <span style={{ fontSize: 10, fontWeight: 700, color: "rgba(255,255,255,0.5)", letterSpacing: "0.06em" }}>JADWAL PRODUKSI HARI INI</span>
+            <div
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: "50%",
+                background: "#27C93F",
+              }}
+            />
+            <span
+              style={{
+                fontSize: 10,
+                fontWeight: 700,
+                color: "rgba(255,255,255,0.5)",
+                letterSpacing: "0.06em",
+              }}
+            >
+              JADWAL PRODUKSI HARI INI
+            </span>
           </div>
-          <span style={{ fontSize: 10, color: "rgba(255,255,255,0.35)" }}>Senin, 05:30 WIB</span>
+          <span style={{ fontSize: 10, color: "rgba(255,255,255,0.35)" }}>
+            Senin, 05:30 WIB
+          </span>
         </div>
-        <div style={{ padding: "12px", display: "flex", flexDirection: "column", gap: 7 }}>
+        <div
+          style={{
+            padding: "12px",
+            display: "flex",
+            flexDirection: "column",
+            gap: 7,
+          }}
+        >
           {batches.map((b) => (
-            <div key={b.product} style={{ background: "#1C1C20", borderRadius: 9, padding: "9px 12px", border: `1px solid ${b.color}20` }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 5 }}>
+            <div
+              key={b.product}
+              style={{
+                background: "#1C1C20",
+                borderRadius: 9,
+                padding: "9px 12px",
+                border: `1px solid ${b.color}20`,
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginBottom: 5,
+                }}
+              >
                 <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
-                  <span style={{ fontSize: 11.5, fontWeight: 700, color: "rgba(255,255,255,0.85)" }}>{b.product}</span>
-                  <span style={{ fontSize: 9, fontWeight: 700, padding: "2px 7px", borderRadius: 999, background: b.color + "22", color: b.color }}>{b.status}</span>
+                  <span
+                    style={{
+                      fontSize: 11.5,
+                      fontWeight: 700,
+                      color: "rgba(255,255,255,0.85)",
+                    }}
+                  >
+                    {b.product}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: 9,
+                      fontWeight: 700,
+                      padding: "2px 7px",
+                      borderRadius: 999,
+                      background: b.color + "22",
+                      color: b.color,
+                    }}
+                  >
+                    {b.status}
+                  </span>
                 </div>
-                <span style={{ fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.5)" }}>{b.qty} pcs</span>
+                <span
+                  style={{
+                    fontSize: 11,
+                    fontWeight: 600,
+                    color: "rgba(255,255,255,0.5)",
+                  }}
+                >
+                  {b.qty} pcs
+                </span>
               </div>
-              <div style={{ height: 4, background: "rgba(255,255,255,0.06)", borderRadius: 2, overflow: "hidden" }}>
-                <div style={{ width: `${b.pct}%`, height: "100%", background: b.color, borderRadius: 2, transition: "width 0.4s" }} />
+              <div
+                style={{
+                  height: 4,
+                  background: "rgba(255,255,255,0.06)",
+                  borderRadius: 2,
+                  overflow: "hidden",
+                }}
+              >
+                <div
+                  style={{
+                    width: `${b.pct}%`,
+                    height: "100%",
+                    background: b.color,
+                    borderRadius: 2,
+                    transition: "width 0.4s",
+                  }}
+                />
               </div>
             </div>
           ))}
@@ -80,40 +251,176 @@ function BakeryDashboard() {
       </div>
 
       {/* Expiry alerts + distribution row */}
-      <div className="dashboard-split" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+      <div
+        className="dashboard-split"
+        style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}
+      >
         {/* Expiry monitor */}
-        <div style={{ background: "var(--card)", borderRadius: 14, border: "1px solid var(--border)", padding: "14px 14px 12px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
-            <p style={{ fontSize: 10, fontWeight: 700, color: "var(--foreground)" }}>Monitor Kedaluwarsa</p>
-            <span style={{ fontSize: 9, fontWeight: 700, color: "#E84545", background: "#FEF0F0", padding: "2px 6px", borderRadius: 4 }}>1 segera</span>
+        <div
+          style={{
+            background: "var(--card)",
+            borderRadius: 14,
+            border: "1px solid var(--border)",
+            padding: "14px 14px 12px",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: 10,
+            }}
+          >
+            <p
+              style={{
+                fontSize: 10,
+                fontWeight: 700,
+                color: "var(--foreground)",
+              }}
+            >
+              Monitor Kedaluwarsa
+            </p>
+            <span
+              style={{
+                fontSize: 9,
+                fontWeight: 700,
+                color: "#E84545",
+                background: "#FEF0F0",
+                padding: "2px 6px",
+                borderRadius: 4,
+              }}
+            >
+              1 segera
+            </span>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
             {expiry.map((e) => (
-              <div key={e.product} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "5px 8px", borderRadius: 7, background: e.urgent ? "rgba(232,69,69,0.06)" : "var(--surface)", border: `1px solid ${e.urgent ? "rgba(232,69,69,0.2)" : "var(--border)"}` }}>
+              <div
+                key={e.product}
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  padding: "5px 8px",
+                  borderRadius: 7,
+                  background: e.urgent
+                    ? "rgba(232,69,69,0.06)"
+                    : "var(--surface)",
+                  border: `1px solid ${e.urgent ? "rgba(232,69,69,0.2)" : "var(--border)"}`,
+                }}
+              >
                 <div>
-                  <p style={{ fontSize: 10.5, fontWeight: 600, color: "var(--foreground)", marginBottom: 1 }}>{e.product}</p>
-                  <p style={{ fontSize: 9, color: "var(--muted-foreground)" }}>{e.outlet}</p>
+                  <p
+                    style={{
+                      fontSize: 10.5,
+                      fontWeight: 600,
+                      color: "var(--foreground)",
+                      marginBottom: 1,
+                    }}
+                  >
+                    {e.product}
+                  </p>
+                  <p style={{ fontSize: 9, color: "var(--muted-foreground)" }}>
+                    {e.outlet}
+                  </p>
                 </div>
-                <span style={{ fontSize: 10, fontWeight: 700, color: e.urgent ? "#E84545" : "var(--muted-foreground)" }}>{e.remaining}</span>
+                <span
+                  style={{
+                    fontSize: 10,
+                    fontWeight: 700,
+                    color: e.urgent ? "#E84545" : "var(--muted-foreground)",
+                  }}
+                >
+                  {e.remaining}
+                </span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Distribution */}
-        <div style={{ background: "var(--card)", borderRadius: 14, border: "1px solid var(--border)", padding: "14px 14px 12px" }}>
-          <p style={{ fontSize: 10, fontWeight: 700, color: "var(--foreground)", marginBottom: 10 }}>Distribusi Hari Ini</p>
-          <p style={{ fontFamily: "var(--font-display-family)", fontWeight: 800, fontSize: 20, letterSpacing: "-0.03em", color: "var(--foreground)", marginBottom: 2 }}>400 pcs</p>
-          <p style={{ fontSize: 10, color: "#0EA86B", fontWeight: 600, marginBottom: 10 }}>3 titik distribusi</p>
+        <div
+          style={{
+            background: "var(--card)",
+            borderRadius: 14,
+            border: "1px solid var(--border)",
+            padding: "14px 14px 12px",
+          }}
+        >
+          <p
+            style={{
+              fontSize: 10,
+              fontWeight: 700,
+              color: "var(--foreground)",
+              marginBottom: 10,
+            }}
+          >
+            Distribusi Hari Ini
+          </p>
+          <p
+            style={{
+              fontFamily: "var(--font-display-family)",
+              fontWeight: 800,
+              fontSize: 20,
+              letterSpacing: "-0.03em",
+              color: "var(--foreground)",
+              marginBottom: 2,
+            }}
+          >
+            400 pcs
+          </p>
+          <p
+            style={{
+              fontSize: 10,
+              color: "#0EA86B",
+              fontWeight: 600,
+              marginBottom: 10,
+            }}
+          >
+            3 titik distribusi
+          </p>
           <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
             {distribution.map((d) => (
               <div key={d.outlet}>
-                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 2 }}>
-                  <span style={{ fontSize: 9.5, color: "var(--muted-foreground)" }}>{d.outlet}</span>
-                  <span style={{ fontSize: 9.5, fontWeight: 600, color: "var(--foreground)" }}>{d.items} pcs</span>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginBottom: 2,
+                  }}
+                >
+                  <span
+                    style={{ fontSize: 9.5, color: "var(--muted-foreground)" }}
+                  >
+                    {d.outlet}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: 9.5,
+                      fontWeight: 600,
+                      color: "var(--foreground)",
+                    }}
+                  >
+                    {d.items} pcs
+                  </span>
                 </div>
-                <div style={{ height: 3, background: "var(--border)", borderRadius: 2 }}>
-                  <div style={{ width: `${d.pct * 2}%`, height: "100%", background: "linear-gradient(90deg, var(--brand), #0072CC)", borderRadius: 2 }} />
+                <div
+                  style={{
+                    height: 3,
+                    background: "var(--border)",
+                    borderRadius: 2,
+                  }}
+                >
+                  <div
+                    style={{
+                      width: `${d.pct * 2}%`,
+                      height: "100%",
+                      background:
+                        "linear-gradient(90deg, var(--brand), #0072CC)",
+                      borderRadius: 2,
+                    }}
+                  />
                 </div>
               </div>
             ))}
@@ -131,22 +438,82 @@ function Hero() {
       style={{
         paddingTop: "clamp(56px, 7vw, 88px)",
         paddingBottom: "clamp(64px, 8vw, 112px)",
-        background: "linear-gradient(165deg, #FAFAF8 0%, #FFFBF4 55%, #FEF7E8 100%)",
+        background:
+          "linear-gradient(165deg, #FAFAF8 0%, #FFFBF4 55%, #FEF7E8 100%)",
         position: "relative",
         overflow: "hidden",
       }}
     >
-      <div style={{ position: "absolute", top: -80, right: "8%", width: 480, height: 480, borderRadius: "50%", background: "radial-gradient(circle, rgba(74,124,246,0.06) 0%, transparent 70%)", pointerEvents: "none" }} />
-      <div style={{ position: "absolute", bottom: -60, left: "5%", width: 360, height: 360, borderRadius: "50%", background: "radial-gradient(circle, rgba(0,154,229,0.05) 0%, transparent 70%)", pointerEvents: "none" }} />
+      <div
+        style={{
+          position: "absolute",
+          top: -80,
+          right: "8%",
+          width: 480,
+          height: 480,
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(74,124,246,0.06) 0%, transparent 70%)",
+          pointerEvents: "none",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          bottom: -60,
+          left: "5%",
+          width: 360,
+          height: 360,
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(0,154,229,0.05) 0%, transparent 70%)",
+          pointerEvents: "none",
+        }}
+      />
 
       <div className="container-page">
         <Breadcrumb />
-        <div className="grid-2col-to-1" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(48px, 6vw, 88px)", alignItems: "center" }}>
+        <div
+          className="grid-2col-to-1"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "clamp(48px, 6vw, 88px)",
+            alignItems: "center",
+          }}
+        >
           {/* Left copy */}
           <div style={{ maxWidth: 520 }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 7, padding: "5px 14px", background: "var(--brand-subtle)", borderRadius: 999, marginBottom: 24 }}>
-              <div style={{ width: 5, height: 5, borderRadius: "50%", background: "var(--brand)" }} />
-              <span style={{ fontSize: 11.5, fontWeight: 700, color: "var(--brand)", letterSpacing: "0.06em", textTransform: "uppercase" }}>Solusi untuk Bakery</span>
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 7,
+                padding: "5px 14px",
+                background: "var(--brand-subtle)",
+                borderRadius: 999,
+                marginBottom: 24,
+              }}
+            >
+              <div
+                style={{
+                  width: 5,
+                  height: 5,
+                  borderRadius: "50%",
+                  background: "var(--brand)",
+                }}
+              />
+              <span
+                style={{
+                  fontSize: 11.5,
+                  fontWeight: 700,
+                  color: "var(--brand)",
+                  letterSpacing: "0.06em",
+                  textTransform: "uppercase",
+                }}
+              >
+                Solusi untuk Bakery
+              </span>
             </div>
 
             <h1
@@ -161,28 +528,72 @@ function Hero() {
               }}
             >
               Produksi Pas,{" "}
-              <span style={{ background: "linear-gradient(135deg, var(--brand) 0%, #0072CC 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+              <span
+                style={{
+                  background:
+                    "linear-gradient(135deg, var(--brand) 0%, #0072CC 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
                 Distribusi Lancar,
               </span>{" "}
               Tanpa Roti Terbuang.
             </h1>
 
-            <p style={{ fontSize: "clamp(15px, 1.2vw, 18px)", color: "var(--muted-foreground)", lineHeight: 1.68, marginBottom: 32 }}>
-              Produk bakery punya usia jual pendek. Mille membantu Anda merencanakan produksi harian yang presisi dan mendistribusikan produk ke titik jual dengan tepat waktu.
+            <p
+              style={{
+                fontSize: "clamp(15px, 1.2vw, 18px)",
+                color: "var(--muted-foreground)",
+                lineHeight: 1.68,
+                marginBottom: 32,
+              }}
+            >
+              Produk bakery punya usia jual pendek. Mille membantu Anda
+              merencanakan produksi harian yang presisi dan mendistribusikan
+              produk ke titik jual dengan tepat waktu.
             </p>
 
-            <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 28 }}>
-              <a target="_blank" rel="noreferrer" href="https://partner.millehub.com/register-user" className="btn btn-primary btn-lg">Coba Gratis</a>
-              <a href="/jadwalkan-demo" className="btn btn-secondary btn-lg">Jadwalkan Demo</a>
+            <div
+              style={{
+                display: "flex",
+                gap: 12,
+                flexWrap: "wrap",
+                marginBottom: 28,
+              }}
+            >
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="https://partner.millehub.com/register-user"
+                className="btn btn-primary btn-lg"
+              >
+                Coba Gratis
+              </a>
+              <a href="/jadwalkan-demo" className="btn btn-secondary btn-lg">
+                Jadwalkan Demo
+              </a>
             </div>
 
             <div style={{ display: "flex", gap: 18, flexWrap: "wrap" }}>
-              {["Gratis 14 hari", "Setup cepat", "Dukungan onboarding"].map((t) => (
-                <span key={t} style={{ fontSize: 13, color: "var(--muted-foreground)", display: "flex", alignItems: "center", gap: 5 }}>
-                  <span style={{ color: "#0EA86B", fontWeight: 700 }}>✓</span>
-                  {t}
-                </span>
-              ))}
+              {["Gratis 14 hari", "Setup cepat", "Dukungan onboarding"].map(
+                (t) => (
+                  <span
+                    key={t}
+                    style={{
+                      fontSize: 13,
+                      color: "var(--muted-foreground)",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 5,
+                    }}
+                  >
+                    <span style={{ color: "#0EA86B", fontWeight: 700 }}>✓</span>
+                    {t}
+                  </span>
+                ),
+              )}
             </div>
           </div>
 
@@ -199,7 +610,12 @@ const problems = [
   {
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+        <path
+          d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinecap="round"
+        />
       </svg>
     ),
     title: "Produksi Harus Presisi",
@@ -208,9 +624,25 @@ const problems = [
   {
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.75" />
-        <path d="M12 7v5l3 3" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
-        <path d="M5 5l14 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        <circle
+          cx="12"
+          cy="12"
+          r="9"
+          stroke="currentColor"
+          strokeWidth="1.75"
+        />
+        <path
+          d="M12 7v5l3 3"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinecap="round"
+        />
+        <path
+          d="M5 5l14 14"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+        />
       </svg>
     ),
     title: "Kedaluwarsa Ketat",
@@ -219,9 +651,26 @@ const problems = [
   {
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-        <path d="M5 12H3l9-9 9 9h-2" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
-        <path d="M10 21v-5h4v5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+        <path
+          d="M5 12H3l9-9 9 9h-2"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinecap="round"
+        />
+        <path
+          d="M10 21v-5h4v5"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </svg>
     ),
     title: "Distribusi ke Banyak Titik",
@@ -230,7 +679,12 @@ const problems = [
   {
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+        <path
+          d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinecap="round"
+        />
       </svg>
     ),
     title: "Sulit Hitung Margin per Produk",
@@ -240,32 +694,116 @@ const problems = [
 
 function ProblemSection() {
   return (
-    <section style={{ background: "var(--surface)", paddingBlock: "clamp(72px, 8vw, 108px)" }}>
+    <section
+      style={{
+        background: "var(--surface)",
+        paddingBlock: "clamp(72px, 8vw, 108px)",
+      }}
+    >
       <div className="container-page">
         <div style={{ maxWidth: 560, marginBottom: "clamp(40px, 5vw, 64px)" }}>
-          <h2 style={{ fontFamily: "var(--font-display-family)", fontWeight: 800, fontSize: "clamp(26px, 2.8vw, 42px)", lineHeight: 1.1, letterSpacing: "-0.025em", color: "var(--foreground)", marginBottom: 14 }}>
+          <h2
+            style={{
+              fontFamily: "var(--font-display-family)",
+              fontWeight: 800,
+              fontSize: "clamp(26px, 2.8vw, 42px)",
+              lineHeight: 1.1,
+              letterSpacing: "-0.025em",
+              color: "var(--foreground)",
+              marginBottom: 14,
+            }}
+          >
             Bakery Berpacu dengan Waktu di Setiap Tahap.
           </h2>
-          <p style={{ fontSize: "clamp(15px, 1.1vw, 17px)", color: "var(--muted-foreground)", lineHeight: 1.65 }}>
-            Dari dapur hingga etalase, setiap menit punya konsekuensi. Tanpa sistem yang tepat, kesalahan kecil bisa berujung pada kerugian yang signifikan.
+          <p
+            style={{
+              fontSize: "clamp(15px, 1.1vw, 17px)",
+              color: "var(--muted-foreground)",
+              lineHeight: 1.65,
+            }}
+          >
+            Dari dapur hingga etalase, setiap menit punya konsekuensi. Tanpa
+            sistem yang tepat, kesalahan kecil bisa berujung pada kerugian yang
+            signifikan.
           </p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 14 }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+            gap: 14,
+          }}
+        >
           {problems.map((p, i) => (
             <div
               key={p.title}
               className={`card reveal reveal-delay-${i + 1}`}
-              style={{ padding: "28px 26px 30px", position: "relative", transition: "box-shadow 0.2s, transform 0.2s" }}
-              onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.boxShadow = "0 8px 28px rgba(0,0,0,0.07)"; el.style.transform = "translateY(-2px)"; }}
-              onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.boxShadow = "none"; el.style.transform = "none"; }}
+              style={{
+                padding: "28px 26px 30px",
+                position: "relative",
+                transition: "box-shadow 0.2s, transform 0.2s",
+              }}
+              onMouseEnter={(e) => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.boxShadow = "0 8px 28px rgba(0,0,0,0.07)";
+                el.style.transform = "translateY(-2px)";
+              }}
+              onMouseLeave={(e) => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.boxShadow = "none";
+                el.style.transform = "none";
+              }}
             >
-              <span style={{ position: "absolute", top: 18, right: 20, fontSize: 11, fontWeight: 700, color: "var(--border)", letterSpacing: "0.04em" }}>{String(i + 1).padStart(2, "0")}</span>
-              <div style={{ width: 42, height: 42, borderRadius: 12, background: "var(--brand-subtle)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--brand)", marginBottom: 18 }}>
+              <span
+                style={{
+                  position: "absolute",
+                  top: 18,
+                  right: 20,
+                  fontSize: 11,
+                  fontWeight: 700,
+                  color: "var(--border)",
+                  letterSpacing: "0.04em",
+                }}
+              >
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <div
+                style={{
+                  width: 42,
+                  height: 42,
+                  borderRadius: 12,
+                  background: "var(--brand-subtle)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "var(--brand)",
+                  marginBottom: 18,
+                }}
+              >
                 {p.icon}
               </div>
-              <h3 style={{ fontFamily: "var(--font-display-family)", fontWeight: 700, fontSize: 16, letterSpacing: "-0.01em", color: "var(--foreground)", marginBottom: 7 }}>{p.title}</h3>
-              <p style={{ fontSize: 13.5, color: "var(--muted-foreground)", lineHeight: 1.6 }}>{p.body}</p>
+              <h3
+                style={{
+                  fontFamily: "var(--font-display-family)",
+                  fontWeight: 700,
+                  fontSize: 16,
+                  letterSpacing: "-0.01em",
+                  color: "var(--foreground)",
+                  marginBottom: 7,
+                }}
+              >
+                {p.title}
+              </h3>
+              <p
+                style={{
+                  fontSize: 13.5,
+                  color: "var(--muted-foreground)",
+                  lineHeight: 1.6,
+                }}
+              >
+                {p.body}
+              </p>
             </div>
           ))}
         </div>
@@ -279,9 +817,27 @@ const features = [
   {
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-        <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="1.75" />
-        <path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
-        <path d="M8 14h2M8 17h5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+        <rect
+          x="3"
+          y="4"
+          width="18"
+          height="18"
+          rx="2"
+          stroke="currentColor"
+          strokeWidth="1.75"
+        />
+        <path
+          d="M16 2v4M8 2v4M3 10h18"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinecap="round"
+        />
+        <path
+          d="M8 14h2M8 17h5"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinecap="round"
+        />
       </svg>
     ),
     title: "Perencanaan Produksi",
@@ -292,9 +848,26 @@ const features = [
   {
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.75" />
-        <path d="M12 7v5l3 3" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
-        <path d="M8.5 19.5l7-15" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeDasharray="2 2" />
+        <circle
+          cx="12"
+          cy="12"
+          r="9"
+          stroke="currentColor"
+          strokeWidth="1.75"
+        />
+        <path
+          d="M12 7v5l3 3"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinecap="round"
+        />
+        <path
+          d="M8.5 19.5l7-15"
+          stroke="currentColor"
+          strokeWidth="1.25"
+          strokeLinecap="round"
+          strokeDasharray="2 2"
+        />
       </svg>
     ),
     title: "Manajemen Kedaluwarsa",
@@ -305,9 +878,28 @@ const features = [
   {
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-        <path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
-        <rect x="9" y="11" width="14" height="10" rx="2" stroke="currentColor" strokeWidth="1.75" />
-        <path d="M16 11v-2" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+        <path
+          d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <rect
+          x="9"
+          y="11"
+          width="14"
+          height="10"
+          rx="2"
+          stroke="currentColor"
+          strokeWidth="1.75"
+        />
+        <path
+          d="M16 11v-2"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinecap="round"
+        />
       </svg>
     ),
     title: "Distribusi Multi-Titik",
@@ -318,8 +910,18 @@ const features = [
   {
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-        <path d="M3 9l9-6 9 6v11a1 1 0 01-1 1H4a1 1 0 01-1-1V9z" stroke="currentColor" strokeWidth="1.75" strokeLinejoin="round" />
-        <path d="M9 21V12h6v9" stroke="currentColor" strokeWidth="1.75" strokeLinejoin="round" />
+        <path
+          d="M3 9l9-6 9 6v11a1 1 0 01-1 1H4a1 1 0 01-1-1V9z"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M9 21V12h6v9"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinejoin="round"
+        />
       </svg>
     ),
     title: "Inventaris Bahan Baku",
@@ -330,7 +932,12 @@ const features = [
   {
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+        <path
+          d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinecap="round"
+        />
       </svg>
     ),
     title: "HPP & Margin",
@@ -341,7 +948,13 @@ const features = [
   {
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-        <path d="M2 20l5-10 4 6 3-4 4 8" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+        <path
+          d="M2 20l5-10 4 6 3-4 4 8"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
         <circle cx="20" cy="5" r="3" stroke="currentColor" strokeWidth="1.75" />
       </svg>
     ),
@@ -354,21 +967,61 @@ const features = [
 
 function FeaturesSection() {
   return (
-    <section style={{ background: "var(--background)", paddingBlock: "clamp(80px, 9vw, 120px)" }}>
+    <section
+      style={{
+        background: "var(--background)",
+        paddingBlock: "clamp(80px, 9vw, 120px)",
+      }}
+    >
       <div className="container-page">
-        <div className="grid-2col-to-1" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(32px, 4vw, 72px)", alignItems: "end", marginBottom: "clamp(40px, 5vw, 64px)" }}>
+        <div
+          className="grid-2col-to-1"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "clamp(32px, 4vw, 72px)",
+            alignItems: "end",
+            marginBottom: "clamp(40px, 5vw, 64px)",
+          }}
+        >
           <div>
-            <p className="type-eyebrow" style={{ marginBottom: 14 }}>Fitur untuk Bakery</p>
-            <h2 style={{ fontFamily: "var(--font-display-family)", fontWeight: 800, fontSize: "clamp(26px, 2.8vw, 42px)", lineHeight: 1.1, letterSpacing: "-0.025em", color: "var(--foreground)" }}>
+            <p className="type-eyebrow" style={{ marginBottom: 14 }}>
+              Fitur untuk Bakery
+            </p>
+            <h2
+              style={{
+                fontFamily: "var(--font-display-family)",
+                fontWeight: 800,
+                fontSize: "clamp(26px, 2.8vw, 42px)",
+                lineHeight: 1.1,
+                letterSpacing: "-0.025em",
+                color: "var(--foreground)",
+              }}
+            >
               Semua yang Dibutuhkan Bakery, dalam Satu Platform.
             </h2>
           </div>
-          <p style={{ fontSize: "clamp(14px, 1.1vw, 16px)", color: "var(--muted-foreground)", lineHeight: 1.7 }}>
-            Mille mengintegrasikan perencanaan produksi, monitoring kedaluwarsa, distribusi multi-titik, dan laporan margin — dalam satu sistem yang terhubung dari dapur hingga kasir.
+          <p
+            style={{
+              fontSize: "clamp(14px, 1.1vw, 16px)",
+              color: "var(--muted-foreground)",
+              lineHeight: 1.7,
+            }}
+          >
+            Mille mengintegrasikan perencanaan produksi, monitoring kedaluwarsa,
+            distribusi multi-titik, dan laporan margin — dalam satu sistem yang
+            terhubung dari dapur hingga kasir.
           </p>
         </div>
 
-        <div className="grid-3col-to-2" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14 }}>
+        <div
+          className="grid-3col-to-2"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: 14,
+          }}
+        >
           {features.map((f, i) => (
             <div
               key={f.title}
@@ -380,24 +1033,89 @@ function FeaturesSection() {
                 padding: "26px 26px 22px",
                 display: "flex",
                 flexDirection: "column",
-                transition: "box-shadow 0.2s, border-color 0.2s, transform 0.2s",
+                transition:
+                  "box-shadow 0.2s, border-color 0.2s, transform 0.2s",
               }}
-              onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.boxShadow = `0 10px 32px ${f.color}12`; el.style.borderColor = f.color + "40"; el.style.transform = "translateY(-2px)"; }}
-              onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.boxShadow = "none"; el.style.borderColor = "var(--border)"; el.style.transform = "none"; }}
+              onMouseEnter={(e) => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.boxShadow = `0 10px 32px ${f.color}12`;
+                el.style.borderColor = f.color + "40";
+                el.style.transform = "translateY(-2px)";
+              }}
+              onMouseLeave={(e) => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.boxShadow = "none";
+                el.style.borderColor = "var(--border)";
+                el.style.transform = "none";
+              }}
             >
-              <div style={{ width: 46, height: 46, borderRadius: 13, background: f.color + "15", display: "flex", alignItems: "center", justifyContent: "center", color: f.color, marginBottom: 18 }}>
+              <div
+                style={{
+                  width: 46,
+                  height: 46,
+                  borderRadius: 13,
+                  background: f.color + "15",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: f.color,
+                  marginBottom: 18,
+                }}
+              >
                 {f.icon}
               </div>
-              <h3 style={{ fontFamily: "var(--font-display-family)", fontWeight: 700, fontSize: 16, letterSpacing: "-0.015em", color: "var(--foreground)", marginBottom: 7 }}>{f.title}</h3>
-              <p style={{ fontSize: 13.5, color: "var(--muted-foreground)", lineHeight: 1.6, flex: 1, marginBottom: 16 }}>{f.desc}</p>
+              <h3
+                style={{
+                  fontFamily: "var(--font-display-family)",
+                  fontWeight: 700,
+                  fontSize: 16,
+                  letterSpacing: "-0.015em",
+                  color: "var(--foreground)",
+                  marginBottom: 7,
+                }}
+              >
+                {f.title}
+              </h3>
+              <p
+                style={{
+                  fontSize: 13.5,
+                  color: "var(--muted-foreground)",
+                  lineHeight: 1.6,
+                  flex: 1,
+                  marginBottom: 16,
+                }}
+              >
+                {f.desc}
+              </p>
               <a
                 href="#"
-                style={{ fontSize: 12.5, fontWeight: 600, color: f.color, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 5, transition: "gap 0.15s" }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.gap = "9px"; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.gap = "5px"; }}
+                style={{
+                  fontSize: 12.5,
+                  fontWeight: 600,
+                  color: f.color,
+                  textDecoration: "none",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 5,
+                  transition: "gap 0.15s",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.gap = "9px";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.gap = "5px";
+                }}
               >
                 {f.link}
-                <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                  <path
+                    d="M3 8h10M9 4l4 4-4 4"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </a>
             </div>
           ))}
@@ -410,77 +1128,329 @@ function FeaturesSection() {
 /* ─── OptiMille Section ─── */
 function OptiMilleSection() {
   const forecast = [
-    { product: "Roti Tawar", today: 120, recommended: 138, reason: "Weekend demand +15%" },
-    { product: "Croissant", today: 80, recommended: 72, reason: "Tren turun 3 hari" },
-    { product: "Cinnamon Roll", today: 60, recommended: 85, reason: "Penjualan meningkat" },
+    {
+      product: "Roti Tawar",
+      today: 120,
+      recommended: 138,
+      reason: "Weekend demand +15%",
+    },
+    {
+      product: "Croissant",
+      today: 80,
+      recommended: 72,
+      reason: "Tren turun 3 hari",
+    },
+    {
+      product: "Cinnamon Roll",
+      today: 60,
+      recommended: 85,
+      reason: "Penjualan meningkat",
+    },
   ];
 
   return (
-    <section style={{ background: "#0E0E10", paddingBlock: "clamp(72px, 8vw, 112px)", position: "relative", overflow: "hidden" }}>
-      <div style={{ position: "absolute", top: "10%", left: "25%", width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(0,154,229,0.07) 0%, transparent 70%)", pointerEvents: "none" }} />
+    <section
+      style={{
+        background: "#0E0E10",
+        paddingBlock: "clamp(72px, 8vw, 112px)",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      <div
+        style={{
+          position: "absolute",
+          top: "10%",
+          left: "25%",
+          width: 500,
+          height: 500,
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(0,154,229,0.07) 0%, transparent 70%)",
+          pointerEvents: "none",
+        }}
+      />
 
-      <div className="container-page" style={{ position: "relative", zIndex: 1 }}>
-        <div className="grid-2col-to-1" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px, 5vw, 72px)", alignItems: "start" }}>
+      <div
+        className="container-page"
+        style={{ position: "relative", zIndex: 1 }}
+      >
+        <div
+          className="grid-2col-to-1"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "clamp(40px, 5vw, 72px)",
+            alignItems: "start",
+          }}
+        >
           {/* Left: AI chat */}
-          <div style={{ background: "#17171A", borderRadius: 18, overflow: "hidden", border: "1px solid rgba(255,255,255,0.07)", boxShadow: "0 24px 64px rgba(0,0,0,0.3)" }}>
-            <div style={{ background: "#111113", padding: "10px 16px", display: "flex", alignItems: "center", gap: 8, borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
-              <div style={{ width: 20, height: 20, borderRadius: 6, background: "linear-gradient(135deg, var(--brand), #0072CC)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M8 2L9.8 6.2L14 7L10.9 10.1L11.7 14.2L8 12L4.3 14.2L5.1 10.1L2 7L6.2 6.2L8 2Z" fill="white" /></svg>
+          <div
+            style={{
+              background: "#17171A",
+              borderRadius: 18,
+              overflow: "hidden",
+              border: "1px solid rgba(255,255,255,0.07)",
+              boxShadow: "0 24px 64px rgba(0,0,0,0.3)",
+            }}
+          >
+            <div
+              style={{
+                background: "#111113",
+                padding: "10px 16px",
+                display: "flex",
+                alignItems: "center",
+                gap: 8,
+                borderBottom: "1px solid rgba(255,255,255,0.05)",
+              }}
+            >
+              <div
+                style={{
+                  width: 20,
+                  height: 20,
+                  borderRadius: 6,
+                  background: "linear-gradient(135deg, var(--brand), #0072CC)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <svg width="10" height="10" viewBox="0 0 16 16" fill="none">
+                  <path
+                    d="M8 2L9.8 6.2L14 7L10.9 10.1L11.7 14.2L8 12L4.3 14.2L5.1 10.1L2 7L6.2 6.2L8 2Z"
+                    fill="white"
+                  />
+                </svg>
               </div>
-              <span style={{ fontSize: 10.5, fontWeight: 700, color: "rgba(255,255,255,0.5)", letterSpacing: "0.05em" }}>OPTIMILLE — BAKERY</span>
+              <span
+                style={{
+                  fontSize: 10.5,
+                  fontWeight: 700,
+                  color: "rgba(255,255,255,0.5)",
+                  letterSpacing: "0.05em",
+                }}
+              >
+                OPTIMILLE — BAKERY
+              </span>
             </div>
 
             <div style={{ padding: "18px 18px 14px" }}>
               {/* User question */}
-              <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 14 }}>
-                <div style={{ background: "rgba(0,154,229,0.16)", border: "1px solid rgba(0,154,229,0.22)", borderRadius: "14px 14px 3px 14px", padding: "9px 14px", maxWidth: "85%" }}>
-                  <p style={{ fontSize: 13, color: "rgba(255,255,255,0.85)" }}>Berapa banyak roti tawar yang harus diproduksi besok?</p>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  marginBottom: 14,
+                }}
+              >
+                <div
+                  style={{
+                    background: "rgba(0,154,229,0.16)",
+                    border: "1px solid rgba(0,154,229,0.22)",
+                    borderRadius: "14px 14px 3px 14px",
+                    padding: "9px 14px",
+                    maxWidth: "85%",
+                  }}
+                >
+                  <p style={{ fontSize: 13, color: "rgba(255,255,255,0.85)" }}>
+                    Berapa banyak roti tawar yang harus diproduksi besok?
+                  </p>
                 </div>
               </div>
 
               {/* AI response */}
               <div style={{ display: "flex", gap: 9, marginBottom: 14 }}>
-                <div style={{ width: 26, height: 26, borderRadius: 8, background: "linear-gradient(135deg, var(--brand), #0072CC)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 2 }}>
-                  <svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M8 2L9.8 6.2L14 7L10.9 10.1L11.7 14.2L8 12L4.3 14.2L5.1 10.1L2 7L6.2 6.2L8 2Z" fill="white" /></svg>
+                <div
+                  style={{
+                    width: 26,
+                    height: 26,
+                    borderRadius: 8,
+                    background:
+                      "linear-gradient(135deg, var(--brand), #0072CC)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                    marginTop: 2,
+                  }}
+                >
+                  <svg width="11" height="11" viewBox="0 0 16 16" fill="none">
+                    <path
+                      d="M8 2L9.8 6.2L14 7L10.9 10.1L11.7 14.2L8 12L4.3 14.2L5.1 10.1L2 7L6.2 6.2L8 2Z"
+                      fill="white"
+                    />
+                  </svg>
                 </div>
                 <div style={{ flex: 1 }}>
-                  <div style={{ background: "#1C1C22", borderRadius: "3px 14px 14px 14px", padding: "14px 16px", border: "1px solid rgba(255,255,255,0.06)", marginBottom: 8 }}>
-                    <p style={{ fontSize: 10, fontWeight: 700, color: "rgba(255,255,255,0.3)", letterSpacing: "0.05em", textTransform: "uppercase", marginBottom: 10 }}>Rekomendasi Produksi Besok (Selasa)</p>
+                  <div
+                    style={{
+                      background: "#1C1C22",
+                      borderRadius: "3px 14px 14px 14px",
+                      padding: "14px 16px",
+                      border: "1px solid rgba(255,255,255,0.06)",
+                      marginBottom: 8,
+                    }}
+                  >
+                    <p
+                      style={{
+                        fontSize: 10,
+                        fontWeight: 700,
+                        color: "rgba(255,255,255,0.3)",
+                        letterSpacing: "0.05em",
+                        textTransform: "uppercase",
+                        marginBottom: 10,
+                      }}
+                    >
+                      Rekomendasi Produksi Besok (Selasa)
+                    </p>
 
                     {/* Forecast table */}
-                    <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 12 }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 8,
+                        marginBottom: 12,
+                      }}
+                    >
                       {forecast.map((f) => (
-                        <div key={f.product} style={{ background: "rgba(255,255,255,0.03)", borderRadius: 8, padding: "8px 10px", border: "1px solid rgba(255,255,255,0.05)" }}>
-                          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 3 }}>
-                            <span style={{ fontSize: 11.5, fontWeight: 600, color: "rgba(255,255,255,0.8)" }}>{f.product}</span>
-                            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                              <span style={{ fontSize: 10, color: "rgba(255,255,255,0.3)", textDecoration: "line-through" }}>{f.today}</span>
-                              <span style={{ fontSize: 12, fontWeight: 700, color: f.recommended > f.today ? "#0EA86B" : "#E8820C" }}>
-                                {f.recommended > f.today ? "▲" : "▼"} {f.recommended} pcs
+                        <div
+                          key={f.product}
+                          style={{
+                            background: "rgba(255,255,255,0.03)",
+                            borderRadius: 8,
+                            padding: "8px 10px",
+                            border: "1px solid rgba(255,255,255,0.05)",
+                          }}
+                        >
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                              marginBottom: 3,
+                            }}
+                          >
+                            <span
+                              style={{
+                                fontSize: 11.5,
+                                fontWeight: 600,
+                                color: "rgba(255,255,255,0.8)",
+                              }}
+                            >
+                              {f.product}
+                            </span>
+                            <div
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: 6,
+                              }}
+                            >
+                              <span
+                                style={{
+                                  fontSize: 10,
+                                  color: "rgba(255,255,255,0.3)",
+                                  textDecoration: "line-through",
+                                }}
+                              >
+                                {f.today}
+                              </span>
+                              <span
+                                style={{
+                                  fontSize: 12,
+                                  fontWeight: 700,
+                                  color:
+                                    f.recommended > f.today
+                                      ? "#0EA86B"
+                                      : "#E8820C",
+                                }}
+                              >
+                                {f.recommended > f.today ? "▲" : "▼"}{" "}
+                                {f.recommended} pcs
                               </span>
                             </div>
                           </div>
-                          <span style={{ fontSize: 10, color: "rgba(255,255,255,0.35)" }}>{f.reason}</span>
+                          <span
+                            style={{
+                              fontSize: 10,
+                              color: "rgba(255,255,255,0.35)",
+                            }}
+                          >
+                            {f.reason}
+                          </span>
                         </div>
                       ))}
                     </div>
 
                     {/* Main recommendation */}
-                    <div style={{ background: "rgba(0,154,229,0.08)", borderRadius: 9, padding: "10px 12px", border: "1px solid rgba(0,154,229,0.18)" }}>
-                      <p style={{ fontSize: 11.5, color: "rgba(255,255,255,0.65)", lineHeight: 1.55 }}>
-                        <span style={{ color: "var(--brand-light)", fontWeight: 700 }}>Rekomendasi: </span>
-                        Naikkan produksi <strong style={{ color: "rgba(255,255,255,0.85)" }}>Roti Tawar ke 138 pcs</strong> — besok Selasa, pola historis menunjukkan demand 15% lebih tinggi dari hari ini. Kurangi <strong style={{ color: "#E8820C" }}>Croissant ke 72 pcs</strong> untuk minimasi waste.
+                    <div
+                      style={{
+                        background: "rgba(0,154,229,0.08)",
+                        borderRadius: 9,
+                        padding: "10px 12px",
+                        border: "1px solid rgba(0,154,229,0.18)",
+                      }}
+                    >
+                      <p
+                        style={{
+                          fontSize: 11.5,
+                          color: "rgba(255,255,255,0.65)",
+                          lineHeight: 1.55,
+                        }}
+                      >
+                        <span
+                          style={{
+                            color: "var(--brand-light)",
+                            fontWeight: 700,
+                          }}
+                        >
+                          Rekomendasi:{" "}
+                        </span>
+                        Naikkan produksi{" "}
+                        <strong style={{ color: "rgba(255,255,255,0.85)" }}>
+                          Roti Tawar ke 138 pcs
+                        </strong>{" "}
+                        — besok Selasa, pola historis menunjukkan demand 15%
+                        lebih tinggi dari hari ini. Kurangi{" "}
+                        <strong style={{ color: "#E8820C" }}>
+                          Croissant ke 72 pcs
+                        </strong>{" "}
+                        untuk minimasi waste.
                       </p>
                     </div>
                   </div>
 
                   <div style={{ display: "flex", gap: 5, flexWrap: "wrap" }}>
-                    {["Tren 7 hari terakhir", "Cek stok bahan baku", "Jadwal distribusi besok"].map((s) => (
+                    {[
+                      "Tren 7 hari terakhir",
+                      "Cek stok bahan baku",
+                      "Jadwal distribusi besok",
+                    ].map((s) => (
                       <button
                         key={s}
-                        style={{ padding: "5px 10px", borderRadius: 20, background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.09)", fontSize: 10.5, color: "rgba(255,255,255,0.5)", cursor: "pointer", fontFamily: "var(--font-body-family)", transition: "background 0.15s" }}
-                        onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(0,154,229,0.14)"; e.currentTarget.style.color = "rgba(255,255,255,0.85)"; }}
-                        onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.05)"; e.currentTarget.style.color = "rgba(255,255,255,0.5)"; }}
+                        style={{
+                          padding: "5px 10px",
+                          borderRadius: 20,
+                          background: "rgba(255,255,255,0.05)",
+                          border: "1px solid rgba(255,255,255,0.09)",
+                          fontSize: 10.5,
+                          color: "rgba(255,255,255,0.5)",
+                          cursor: "pointer",
+                          fontFamily: "var(--font-body-family)",
+                          transition: "background 0.15s",
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.background =
+                            "rgba(0,154,229,0.14)";
+                          e.currentTarget.style.color =
+                            "rgba(255,255,255,0.85)";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background =
+                            "rgba(255,255,255,0.05)";
+                          e.currentTarget.style.color = "rgba(255,255,255,0.5)";
+                        }}
                       >
                         {s}
                       </button>
@@ -490,10 +1460,41 @@ function OptiMilleSection() {
               </div>
 
               {/* Input bar */}
-              <div style={{ display: "flex", gap: 8, background: "#111113", borderRadius: 10, padding: "8px 12px", border: "1px solid rgba(255,255,255,0.06)" }}>
-                <p style={{ flex: 1, fontSize: 12, color: "rgba(255,255,255,0.2)", fontStyle: "italic" }}>Tanya tentang produksi, distribusi, atau kedaluwarsa...</p>
-                <div style={{ width: 24, height: 24, borderRadius: 7, background: "linear-gradient(135deg, var(--brand), #0072CC)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M2 8l12-6-5 6 5 6-12-6z" fill="white" /></svg>
+              <div
+                style={{
+                  display: "flex",
+                  gap: 8,
+                  background: "#111113",
+                  borderRadius: 10,
+                  padding: "8px 12px",
+                  border: "1px solid rgba(255,255,255,0.06)",
+                }}
+              >
+                <p
+                  style={{
+                    flex: 1,
+                    fontSize: 12,
+                    color: "rgba(255,255,255,0.2)",
+                    fontStyle: "italic",
+                  }}
+                >
+                  Tanya tentang produksi, distribusi, atau kedaluwarsa...
+                </p>
+                <div
+                  style={{
+                    width: 24,
+                    height: 24,
+                    borderRadius: 7,
+                    background:
+                      "linear-gradient(135deg, var(--brand), #0072CC)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <svg width="10" height="10" viewBox="0 0 16 16" fill="none">
+                    <path d="M2 8l12-6-5 6 5 6-12-6z" fill="white" />
+                  </svg>
                 </div>
               </div>
             </div>
@@ -501,46 +1502,174 @@ function OptiMilleSection() {
 
           {/* Right: copy */}
           <div style={{ paddingTop: 16 }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 7, padding: "5px 13px", background: "rgba(0,154,229,0.12)", borderRadius: 999, border: "1px solid rgba(0,154,229,0.2)", marginBottom: 20 }}>
-              <div style={{ width: 15, height: 15, borderRadius: 5, background: "linear-gradient(135deg, var(--brand), #0072CC)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <svg width="8" height="8" viewBox="0 0 16 16" fill="none"><path d="M8 2L9.8 6.2L14 7L10.9 10.1L11.7 14.2L8 12L4.3 14.2L5.1 10.1L2 7L6.2 6.2L8 2Z" fill="white" /></svg>
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 7,
+                padding: "5px 13px",
+                background: "rgba(0,154,229,0.12)",
+                borderRadius: 999,
+                border: "1px solid rgba(0,154,229,0.2)",
+                marginBottom: 20,
+              }}
+            >
+              <div
+                style={{
+                  width: 15,
+                  height: 15,
+                  borderRadius: 5,
+                  background: "linear-gradient(135deg, var(--brand), #0072CC)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <svg width="8" height="8" viewBox="0 0 16 16" fill="none">
+                  <path
+                    d="M8 2L9.8 6.2L14 7L10.9 10.1L11.7 14.2L8 12L4.3 14.2L5.1 10.1L2 7L6.2 6.2L8 2Z"
+                    fill="white"
+                  />
+                </svg>
               </div>
-              <span style={{ fontSize: 11, fontWeight: 700, color: "var(--brand-light)", letterSpacing: "0.06em", textTransform: "uppercase" }}>OptiMille untuk Bakery</span>
+              <span
+                style={{
+                  fontSize: 11,
+                  fontWeight: 700,
+                  color: "var(--brand-light)",
+                  letterSpacing: "0.06em",
+                  textTransform: "uppercase",
+                }}
+              >
+                OptiMille untuk Bakery
+              </span>
             </div>
 
-            <h2 style={{ fontFamily: "var(--font-display-family)", fontWeight: 800, fontSize: "clamp(26px, 2.8vw, 40px)", lineHeight: 1.12, letterSpacing: "-0.025em", color: "#FFFFFF", marginBottom: 18 }}>
+            <h2
+              style={{
+                fontFamily: "var(--font-display-family)",
+                fontWeight: 800,
+                fontSize: "clamp(26px, 2.8vw, 40px)",
+                lineHeight: 1.12,
+                letterSpacing: "-0.025em",
+                color: "#FFFFFF",
+                marginBottom: 18,
+              }}
+            >
               Produksi Sesuai Permintaan,{" "}
-              <span style={{ background: "linear-gradient(135deg, var(--brand), #0072CC)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+              <span
+                style={{
+                  background: "linear-gradient(135deg, var(--brand), #0072CC)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
                 Bukan Sekadar Perkiraan.
               </span>
             </h2>
 
-            <p style={{ fontSize: "clamp(14px, 1.1vw, 16px)", color: "rgba(255,255,255,0.5)", lineHeight: 1.7, marginBottom: 32 }}>
-              OptiMille menganalisis pola penjualan harian, tren per produk, dan jadwal distribusi untuk memberikan rekomendasi jumlah produksi yang presisi — bukan angka tebakan.
+            <p
+              style={{
+                fontSize: "clamp(14px, 1.1vw, 16px)",
+                color: "rgba(255,255,255,0.5)",
+                lineHeight: 1.7,
+                marginBottom: 32,
+              }}
+            >
+              OptiMille menganalisis pola penjualan harian, tren per produk, dan
+              jadwal distribusi untuk memberikan rekomendasi jumlah produksi
+              yang presisi — bukan angka tebakan.
             </p>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 32 }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 14,
+                marginBottom: 32,
+              }}
+            >
               {[
-                { label: "Rekomendasi jumlah produksi harian per jenis produk", color: "var(--brand)" },
-                { label: "Prediksi demand berdasarkan hari dan tren historis", color: "#0072CC" },
-                { label: "Alert otomatis untuk produk mendekati batas kedaluwarsa", color: "#4A7CF6" },
-                { label: "Identifikasi produk yang konsisten waste vs yang selalu habis", color: "#0EA86B" },
+                {
+                  label: "Rekomendasi jumlah produksi harian per jenis produk",
+                  color: "var(--brand)",
+                },
+                {
+                  label: "Prediksi demand berdasarkan hari dan tren historis",
+                  color: "#0072CC",
+                },
+                {
+                  label:
+                    "Alert otomatis untuk produk mendekati batas kedaluwarsa",
+                  color: "#4A7CF6",
+                },
+                {
+                  label:
+                    "Identifikasi produk yang konsisten waste vs yang selalu habis",
+                  color: "#0EA86B",
+                },
               ].map((item) => (
-                <div key={item.label} style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                  <div style={{ width: 6, height: 6, borderRadius: "50%", background: item.color, flexShrink: 0 }} />
-                  <span style={{ fontSize: 14, color: "rgba(255,255,255,0.65)" }}>{item.label}</span>
+                <div
+                  key={item.label}
+                  style={{ display: "flex", alignItems: "center", gap: 10 }}
+                >
+                  <div
+                    style={{
+                      width: 6,
+                      height: 6,
+                      borderRadius: "50%",
+                      background: item.color,
+                      flexShrink: 0,
+                    }}
+                  />
+                  <span
+                    style={{ fontSize: 14, color: "rgba(255,255,255,0.65)" }}
+                  >
+                    {item.label}
+                  </span>
                 </div>
               ))}
             </div>
 
             <a
               href="#"
-              style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "12px 24px", background: "linear-gradient(135deg, var(--brand), #0072CC)", borderRadius: "var(--radius-md)", fontSize: 14, fontWeight: 600, color: "#FFFFFF", textDecoration: "none", transition: "transform 0.18s, box-shadow 0.18s", boxShadow: "0 4px 20px rgba(0,154,229,0.3)", fontFamily: "var(--font-body-family)" }}
-              onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.transform = "translateY(-1px)"; el.style.boxShadow = "0 8px 28px rgba(0,154,229,0.4)"; }}
-              onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.transform = "none"; el.style.boxShadow = "0 4px 20px rgba(0,154,229,0.3)"; }}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                padding: "12px 24px",
+                background: "linear-gradient(135deg, var(--brand), #0072CC)",
+                borderRadius: "var(--radius-md)",
+                fontSize: 14,
+                fontWeight: 600,
+                color: "#FFFFFF",
+                textDecoration: "none",
+                transition: "transform 0.18s, box-shadow 0.18s",
+                boxShadow: "0 4px 20px rgba(0,154,229,0.3)",
+                fontFamily: "var(--font-body-family)",
+              }}
+              onMouseEnter={(e) => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.transform = "translateY(-1px)";
+                el.style.boxShadow = "0 8px 28px rgba(0,154,229,0.4)";
+              }}
+              onMouseLeave={(e) => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.transform = "none";
+                el.style.boxShadow = "0 4px 20px rgba(0,154,229,0.3)";
+              }}
             >
               Kenali OptiMille
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                <path
+                  d="M3 8h10M9 4l4 4-4 4"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
             </a>
           </div>
         </div>
@@ -552,38 +1681,165 @@ function OptiMilleSection() {
 /* ─── Testimonial ─── */
 function TestimonialSection() {
   return (
-    <section style={{ background: "var(--background)", paddingBlock: "clamp(72px, 8vw, 108px)" }}>
+    <section
+      style={{
+        background: "var(--background)",
+        paddingBlock: "clamp(72px, 8vw, 108px)",
+      }}
+    >
       <div className="container-page">
-        <div className="testimonial-grid" style={{ display: "grid", gridTemplateColumns: "0.9fr 1.1fr", gap: "clamp(40px, 5vw, 72px)", alignItems: "center", background: "var(--card)", border: "1px solid var(--border)", borderRadius: "var(--radius-xl)", overflow: "hidden" }}>
+        <div
+          className="testimonial-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "0.9fr 1.1fr",
+            gap: "clamp(40px, 5vw, 72px)",
+            alignItems: "center",
+            background: "var(--card)",
+            border: "1px solid var(--border)",
+            borderRadius: "var(--radius-xl)",
+            overflow: "hidden",
+          }}
+        >
           {/* Image */}
-          <div className="testimonial-image" style={{ position: "relative", minHeight: 440 }}>
+          <div
+            className="testimonial-image"
+            style={{ position: "relative", minHeight: 440 }}
+          >
             <img
               src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&h=680&fit=crop&auto=format"
               alt="Etalase bakery dengan berbagai roti segar"
-              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", position: "absolute", inset: 0 }}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                display: "block",
+                position: "absolute",
+                inset: 0,
+              }}
             />
-            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(17,17,16,0.75) 0%, rgba(17,17,16,0.1) 55%)" }} />
-            <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "24px 28px" }}>
-              <div style={{ display: "inline-flex", alignItems: "center", gap: 7, padding: "5px 12px", background: "rgba(255,255,255,0.1)", backdropFilter: "blur(8px)", borderRadius: 7, border: "1px solid rgba(255,255,255,0.14)", marginBottom: 10 }}>
-                <div style={{ width: 18, height: 18, borderRadius: 4, background: "var(--brand)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <span style={{ fontSize: 7, fontWeight: 800, color: "#fff" }}>CL</span>
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background:
+                  "linear-gradient(to top, rgba(17,17,16,0.75) 0%, rgba(17,17,16,0.1) 55%)",
+              }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                bottom: 0,
+                left: 0,
+                right: 0,
+                padding: "24px 28px",
+              }}
+            >
+              <div
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 7,
+                  padding: "5px 12px",
+                  background: "rgba(255,255,255,0.1)",
+                  backdropFilter: "blur(8px)",
+                  borderRadius: 7,
+                  border: "1px solid rgba(255,255,255,0.14)",
+                  marginBottom: 10,
+                }}
+              >
+                <div
+                  style={{
+                    width: 18,
+                    height: 18,
+                    borderRadius: 4,
+                    background: "var(--brand)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <span style={{ fontSize: 7, fontWeight: 800, color: "#fff" }}>
+                    CL
+                  </span>
                 </div>
-                <span style={{ fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.85)" }}>[Customer Logo]</span>
+                <span
+                  style={{
+                    fontSize: 11,
+                    fontWeight: 700,
+                    color: "rgba(255,255,255,0.85)",
+                  }}
+                >
+                  [Customer Logo]
+                </span>
               </div>
-              <p style={{ fontSize: 14.5, fontWeight: 700, color: "#FFFFFF", fontFamily: "var(--font-display-family)", marginBottom: 2 }}>[Customer Name]</p>
-              <p style={{ fontSize: 12, color: "rgba(255,255,255,0.55)" }}>[Position] · [Business Name]</p>
+              <p
+                style={{
+                  fontSize: 14.5,
+                  fontWeight: 700,
+                  color: "#FFFFFF",
+                  fontFamily: "var(--font-display-family)",
+                  marginBottom: 2,
+                }}
+              >
+                [Customer Name]
+              </p>
+              <p style={{ fontSize: 12, color: "rgba(255,255,255,0.55)" }}>
+                [Position] · [Business Name]
+              </p>
             </div>
           </div>
 
           {/* Quote */}
-          <div style={{ padding: "clamp(32px, 4vw, 52px) clamp(28px, 4vw, 52px) clamp(32px, 4vw, 52px) 0" }}>
-            <div style={{ fontFamily: "Georgia, serif", fontSize: 88, lineHeight: 0.6, color: "var(--brand)", opacity: 0.15, marginBottom: 20, userSelect: "none" }}>"</div>
-            <blockquote style={{ fontFamily: "var(--font-display-family)", fontWeight: 600, fontSize: "clamp(18px, 1.8vw, 24px)", lineHeight: 1.48, letterSpacing: "-0.018em", color: "var(--foreground)", margin: 0, marginBottom: 28 }}>
-              "Waste produksi turun drastis sejak kami bisa merencanakan produksi berdasarkan data, bukan tebakan."
+          <div
+            style={{
+              padding:
+                "clamp(32px, 4vw, 52px) clamp(28px, 4vw, 52px) clamp(32px, 4vw, 52px) 0",
+            }}
+          >
+            <div
+              style={{
+                fontFamily: "Georgia, serif",
+                fontSize: 88,
+                lineHeight: 0.6,
+                color: "var(--brand)",
+                opacity: 0.15,
+                marginBottom: 20,
+                userSelect: "none",
+              }}
+            >
+              "
+            </div>
+            <blockquote
+              style={{
+                fontFamily: "var(--font-display-family)",
+                fontWeight: 600,
+                fontSize: "clamp(18px, 1.8vw, 24px)",
+                lineHeight: 1.48,
+                letterSpacing: "-0.018em",
+                color: "var(--foreground)",
+                margin: 0,
+                marginBottom: 28,
+              }}
+            >
+              "Waste produksi turun drastis sejak kami bisa merencanakan
+              produksi berdasarkan data, bukan tebakan."
             </blockquote>
             <div style={{ marginBottom: 28 }}>
-              <p style={{ fontSize: 14.5, fontWeight: 700, color: "var(--foreground)", fontFamily: "var(--font-display-family)", marginBottom: 2 }}>[Customer Name]</p>
-              <p style={{ fontSize: 13, color: "var(--muted-foreground)" }}>[Position] · [Business Name]</p>
+              <p
+                style={{
+                  fontSize: 14.5,
+                  fontWeight: 700,
+                  color: "var(--foreground)",
+                  fontFamily: "var(--font-display-family)",
+                  marginBottom: 2,
+                }}
+              >
+                [Customer Name]
+              </p>
+              <p style={{ fontSize: 13, color: "var(--muted-foreground)" }}>
+                [Position] · [Business Name]
+              </p>
             </div>
             <span className="badge badge-brand">Bakery</span>
           </div>
@@ -596,42 +1852,184 @@ function TestimonialSection() {
 /* ─── Closing CTA ─── */
 function ClosingCTA() {
   return (
-    <section style={{ background: "var(--foreground)", paddingBlock: "clamp(64px, 8vw, 104px)", position: "relative", overflow: "hidden" }}>
-      <div style={{ position: "absolute", top: "-50%", left: "8%", width: 600, height: 600, borderRadius: "50%", background: "radial-gradient(circle, rgba(0,154,229,0.12) 0%, transparent 65%)", pointerEvents: "none" }} />
-      <div style={{ position: "absolute", bottom: "-50%", right: "5%", width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(0,114,204,0.1) 0%, transparent 65%)", pointerEvents: "none" }} />
-      <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)", backgroundSize: "56px 56px", pointerEvents: "none" }} />
+    <section
+      style={{
+        background: "var(--foreground)",
+        paddingBlock: "clamp(64px, 8vw, 104px)",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      <div
+        style={{
+          position: "absolute",
+          top: "-50%",
+          left: "8%",
+          width: 600,
+          height: 600,
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(0,154,229,0.12) 0%, transparent 65%)",
+          pointerEvents: "none",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          bottom: "-50%",
+          right: "5%",
+          width: 500,
+          height: 500,
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(0,114,204,0.1) 0%, transparent 65%)",
+          pointerEvents: "none",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)",
+          backgroundSize: "56px 56px",
+          pointerEvents: "none",
+        }}
+      />
 
-      <div className="container-page" style={{ position: "relative", zIndex: 1, textAlign: "center" }}>
-        <p className="type-eyebrow" style={{ color: "rgba(255,255,255,0.4)", marginBottom: 16 }}>Mulai Sekarang</p>
-        <h2 style={{ fontFamily: "var(--font-display-family)", fontWeight: 800, fontSize: "clamp(26px, 3.2vw, 48px)", lineHeight: 1.1, letterSpacing: "-0.028em", color: "#FFFFFF", maxWidth: 620, margin: "0 auto 16px" }}>
+      <div
+        className="container-page"
+        style={{ position: "relative", zIndex: 1, textAlign: "center" }}
+      >
+        <p
+          className="type-eyebrow"
+          style={{ color: "rgba(255,255,255,0.4)", marginBottom: 16 }}
+        >
+          Mulai Sekarang
+        </p>
+        <h2
+          style={{
+            fontFamily: "var(--font-display-family)",
+            fontWeight: 800,
+            fontSize: "clamp(26px, 3.2vw, 48px)",
+            lineHeight: 1.1,
+            letterSpacing: "-0.028em",
+            color: "#FFFFFF",
+            maxWidth: 620,
+            margin: "0 auto 16px",
+          }}
+        >
           Siap Membuat Produksi Bakery Anda Lebih Efisien?
         </h2>
-        <p style={{ fontSize: "clamp(14px, 1.1vw, 17px)", color: "rgba(255,255,255,0.48)", lineHeight: 1.68, maxWidth: 480, margin: "0 auto 36px" }}>
-          Tim Mille siap membantu Anda merancang sistem produksi dan distribusi yang meminimalkan waste dan memaksimalkan penjualan.
+        <p
+          style={{
+            fontSize: "clamp(14px, 1.1vw, 17px)",
+            color: "rgba(255,255,255,0.48)",
+            lineHeight: 1.68,
+            maxWidth: 480,
+            margin: "0 auto 36px",
+          }}
+        >
+          Tim Mille siap membantu Anda merancang sistem produksi dan distribusi
+          yang meminimalkan waste dan memaksimalkan penjualan.
         </p>
-        <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center", marginBottom: 28 }}>
+        <div
+          style={{
+            display: "flex",
+            gap: 12,
+            flexWrap: "wrap",
+            justifyContent: "center",
+            marginBottom: 28,
+          }}
+        >
           <a
             href="/jadwalkan-demo"
-            style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "15px 34px", background: "linear-gradient(135deg, var(--brand), #0072CC)", borderRadius: "var(--radius-md)", fontSize: 15, fontWeight: 600, color: "#FFFFFF", textDecoration: "none", boxShadow: "0 8px 28px rgba(0,154,229,0.35)", fontFamily: "var(--font-body-family)", transition: "transform 0.18s, box-shadow 0.18s" }}
-            onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.transform = "translateY(-2px)"; el.style.boxShadow = "0 14px 40px rgba(0,154,229,0.45)"; }}
-            onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.transform = "none"; el.style.boxShadow = "0 8px 28px rgba(0,154,229,0.35)"; }}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              padding: "15px 34px",
+              background: "linear-gradient(135deg, var(--brand), #0072CC)",
+              borderRadius: "var(--radius-md)",
+              fontSize: 15,
+              fontWeight: 600,
+              color: "#FFFFFF",
+              textDecoration: "none",
+              boxShadow: "0 8px 28px rgba(0,154,229,0.35)",
+              fontFamily: "var(--font-body-family)",
+              transition: "transform 0.18s, box-shadow 0.18s",
+            }}
+            onMouseEnter={(e) => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.transform = "translateY(-2px)";
+              el.style.boxShadow = "0 14px 40px rgba(0,154,229,0.45)";
+            }}
+            onMouseLeave={(e) => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.transform = "none";
+              el.style.boxShadow = "0 8px 28px rgba(0,154,229,0.35)";
+            }}
           >
             Jadwalkan Demo
           </a>
           <a
-            target="_blank" 
+            target="_blank"
             rel="noreferrer"
             href="https://partner.millehub.com/register-user"
-            style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "14px 33px", background: "transparent", borderRadius: "var(--radius-md)", border: "1.5px solid rgba(255,255,255,0.18)", fontSize: 15, fontWeight: 600, color: "rgba(255,255,255,0.78)", textDecoration: "none", fontFamily: "var(--font-body-family)", transition: "border-color 0.18s, color 0.18s, background 0.18s" }}
-            onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "rgba(255,255,255,0.35)"; el.style.color = "#FFFFFF"; el.style.background = "rgba(255,255,255,0.05)"; }}
-            onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "rgba(255,255,255,0.18)"; el.style.color = "rgba(255,255,255,0.78)"; el.style.background = "transparent"; }}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              padding: "14px 33px",
+              background: "transparent",
+              borderRadius: "var(--radius-md)",
+              border: "1.5px solid rgba(255,255,255,0.18)",
+              fontSize: 15,
+              fontWeight: 600,
+              color: "rgba(255,255,255,0.78)",
+              textDecoration: "none",
+              fontFamily: "var(--font-body-family)",
+              transition: "border-color 0.18s, color 0.18s, background 0.18s",
+            }}
+            onMouseEnter={(e) => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.borderColor = "rgba(255,255,255,0.35)";
+              el.style.color = "#FFFFFF";
+              el.style.background = "rgba(255,255,255,0.05)";
+            }}
+            onMouseLeave={(e) => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.borderColor = "rgba(255,255,255,0.18)";
+              el.style.color = "rgba(255,255,255,0.78)";
+              el.style.background = "transparent";
+            }}
           >
             Coba Gratis
           </a>
         </div>
-        <div style={{ display: "flex", gap: 20, justifyContent: "center", flexWrap: "wrap" }}>
-          {["✓ Gratis 14 hari", "✓ Tanpa kartu kredit", "✓ Setup dalam 30 menit"].map((t) => (
-            <span key={t} style={{ fontSize: 12.5, color: "rgba(255,255,255,0.3)", fontWeight: 500 }}>{t}</span>
+        <div
+          style={{
+            display: "flex",
+            gap: 20,
+            justifyContent: "center",
+            flexWrap: "wrap",
+          }}
+        >
+          {[
+            "✓ Gratis 14 hari",
+            "✓ Tanpa kartu kredit",
+            "✓ Setup dalam 30 menit",
+          ].map((t) => (
+            <span
+              key={t}
+              style={{
+                fontSize: 12.5,
+                color: "rgba(255,255,255,0.3)",
+                fontWeight: 500,
+              }}
+            >
+              {t}
+            </span>
           ))}
         </div>
       </div>

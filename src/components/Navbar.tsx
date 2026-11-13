@@ -253,7 +253,7 @@ function BerlanggananMenu({ onClose }: { onClose: () => void }) {
     <div className="dropdown-panel" style={{ width: 380 }}>
       <div style={{ padding: "24px 28px 20px" }}>  
           <Link 
-            to="/optimille" 
+            to="/berlangganan#header" 
             onClick={onClose} 
             style={{ 
               fontFamily: "var(--font-display-family)",

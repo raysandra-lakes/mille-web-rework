@@ -15,8 +15,8 @@ import ProdukPelanggan from "../pages/ProdukPelanggan";
 import OptiMille from "../pages/OptiMille";
 import Berlangganan from "../pages/Berlangganan";
 import ProdukPointOfSale from "../pages/ProdukPointOfSale";
-import BlogIndex from "../pages/BlogIndex";
-import BlogDetail from "../pages/BlogDetail";
+import BlogPage from "../pages/BlogIndex";                 // ← path diperbaiki
+import BlogDetailPage from "../pages/BlogDetail";     // ← path diperbaiki
 import Support from "../pages/Support";
 import FAQ from "../pages/FAQ";
 import TentangPerusahaan from "../pages/TentangPerusahaan";
@@ -46,8 +46,8 @@ export const router = createBrowserRouter([
       { path: "produk/:slug", Component: FiturPage },
       { path: "optimille", Component: OptiMille },
       { path: "berlangganan", Component: Berlangganan },
-      { path: "blog", Component: BlogIndex },
-      { path: "blog/:slug", Component: BlogDetail },
+      { path: "blog", Component: BlogPage },                // ← sebelumnya BlogIndex
+      { path: "blog/:slug", Component: BlogDetailPage },    // ← sebelumnya BlogDetail
       { path: "support", Component: Support },
       { path: "faq", Component: FAQ },
       { path: "tentang-perusahaan", Component: TentangPerusahaan },

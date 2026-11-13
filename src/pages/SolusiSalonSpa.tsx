@@ -1,5 +1,5 @@
-import { createElement, type ReactNode } from "react"
-import { Link } from "react-router"
+import { createElement, type ReactNode } from "react";
+import { Link } from "react-router";
 
 // Keep semantic typography aligned with the existing solution pages.
 function Text({
@@ -8,20 +8,20 @@ function Text({
   className = "",
   children,
 }: {
-  as?: "p" | "h1" | "h2" | "h3"
-  variant?: string
-  className?: string
-  children: ReactNode
+  as?: "p" | "h1" | "h2" | "h3";
+  variant?: string;
+  className?: string;
+  children: ReactNode;
 }) {
-  return createElement(as, { className: `${variant} ${className}` }, children)
+  return createElement(as, { className: `${variant} ${className}` }, children);
 }
 
 function Icon({
   kind,
   className = "size-5",
 }: {
-  kind: string
-  className?: string
+  kind: string;
+  className?: string;
 }) {
   const paths: Record<string, ReactNode> = {
     calendar: (
@@ -62,7 +62,7 @@ function Icon({
       <path d="m12 3 2.4 6.6L21 12l-6.6 2.4L12 21l-2.4-6.6L3 12l6.6-2.4L12 3ZM20 2v4M18 4h4" />
     ),
     check: <path d="m5 12 4 4L19 6" />,
-  }
+  };
   return (
     <svg
       className={className}
@@ -76,20 +76,38 @@ function Icon({
     >
       {paths[kind]}
     </svg>
-  )
+  );
 }
 
 function Actions({ closing = false }: { closing?: boolean }) {
   return (
     <div className={`flex flex-wrap gap-3 ${closing ? "justify-center" : ""}`}>
-      <Link target={closing? "" : "_blank"} rel={closing ? "" : "noreferrer"} to={closing ? "/jadwalkan-demo" : "https://partner.millehub.com/register-user"}  className="btn btn-primary btn-lg">
+      <Link
+        target={closing ? "" : "_blank"}
+        rel={closing ? "" : "noreferrer"}
+        to={
+          closing
+            ? "/jadwalkan-demo"
+            : "https://partner.millehub.com/register-user"
+        }
+        className="btn btn-primary btn-lg"
+      >
         {closing ? "Jadwalkan Demo" : "Coba Gratis"}
       </Link>
-      <Link  target={closing? "_blank" : ""} rel={closing ? "noreferrer" : ""} to={closing ? "https://partner.millehub.com/register-user" : "/jadwalkan-demo"} className="btn btn-secondary btn-lg">
+      <Link
+        target={closing ? "_blank" : ""}
+        rel={closing ? "noreferrer" : ""}
+        to={
+          closing
+            ? "https://partner.millehub.com/register-user"
+            : "/jadwalkan-demo"
+        }
+        className="btn btn-secondary btn-lg"
+      >
         {closing ? "Coba Gratis" : "Jadwalkan Demo"}
       </Link>
     </div>
-  )
+  );
 }
 
 const therapists = [
@@ -111,13 +129,13 @@ const therapists = [
     initial: "C",
     commission: "Rp120.000",
   },
-]
+];
 const schedule = [
   { time: "09.00", bookings: ["Facial Glow", null, "Hair Spa"] },
   { time: "11.00", bookings: [null, "Body Massage", null] },
   { time: "13.00", bookings: ["Facial Glow", null, "Hair Spa"] },
   { time: "15.00", bookings: [null, "Body Massage", null] },
-]
+];
 
 function ReservationDashboard() {
   return (
@@ -257,7 +275,7 @@ function ReservationDashboard() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 const problems = [
@@ -281,7 +299,7 @@ const problems = [
     title: "Sulit Lacak Layanan Favorit",
     body: "Data treatment yang laris jarang dianalisis untuk strategi promosi.",
   },
-]
+];
 const features = [
   {
     icon: "calendar",
@@ -313,14 +331,14 @@ const features = [
     title: "Customer Insight",
     body: "Pahami preferensi dan riwayat kunjungan tiap pelanggan.",
   },
-]
+];
 
 function Cards({
   items,
   feature = false,
 }: {
-  items: typeof problems
-  feature?: boolean
+  items: typeof problems;
+  feature?: boolean;
 }) {
   return (
     <div
@@ -348,7 +366,7 @@ function Cards({
         </div>
       ))}
     </div>
-  )
+  );
 }
 
 function OptiMille() {
@@ -444,7 +462,7 @@ function OptiMille() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 export default function SolusiSalonSpa() {
@@ -591,5 +609,5 @@ export default function SolusiSalonSpa() {
         </div>
       </section>
     </>
-  )
+  );
 }

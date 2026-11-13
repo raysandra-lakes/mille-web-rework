@@ -1,5 +1,5 @@
-import { createElement, type ReactNode } from "react"
-import { Link } from "react-router"
+import { createElement, type ReactNode } from "react";
+import { Link } from "react-router";
 
 // Compose the site's existing typography tokens with semantic elements.
 function Text({
@@ -8,20 +8,20 @@ function Text({
   className = "",
   children,
 }: {
-  as?: "p" | "h1" | "h2" | "h3"
-  variant?: string
-  className?: string
-  children: ReactNode
+  as?: "p" | "h1" | "h2" | "h3";
+  variant?: string;
+  className?: string;
+  children: ReactNode;
 }) {
-  return createElement(as, { className: `${variant} ${className}` }, children)
+  return createElement(as, { className: `${variant} ${className}` }, children);
 }
 
 function Icon({
   kind,
   className = "size-5",
 }: {
-  kind: string
-  className?: string
+  kind: string;
+  className?: string;
 }) {
   const paths: Record<string, ReactNode> = {
     inventory: (
@@ -73,7 +73,7 @@ function Icon({
         <path d="m12 3 10 18H2L12 3ZM12 9v5M12 17h.01" />
       </>
     ),
-  }
+  };
   return (
     <svg
       className={className}
@@ -87,20 +87,38 @@ function Icon({
     >
       {paths[kind]}
     </svg>
-  )
+  );
 }
 
 function Actions({ closing = false }: { closing?: boolean }) {
   return (
     <div className={`flex flex-wrap gap-3 ${closing ? "justify-center" : ""}`}>
-      <Link target={closing? "" : "_blank"} rel={closing ? "" : "noreferrer"} to={closing ? "/jadwalkan-demo" : "https://partner.millehub.com/register-user"}  className="btn btn-primary btn-lg">
+      <Link
+        target={closing ? "" : "_blank"}
+        rel={closing ? "" : "noreferrer"}
+        to={
+          closing
+            ? "/jadwalkan-demo"
+            : "https://partner.millehub.com/register-user"
+        }
+        className="btn btn-primary btn-lg"
+      >
         {closing ? "Jadwalkan Demo" : "Coba Gratis"}
       </Link>
-      <Link target={closing? "_blank" : ""} rel={closing ? "noreferrer" : ""} to={closing ? "https://partner.millehub.com/register-user" : "/jadwalkan-demo"}  className="btn btn-secondary btn-lg">
+      <Link
+        target={closing ? "_blank" : ""}
+        rel={closing ? "noreferrer" : ""}
+        to={
+          closing
+            ? "https://partner.millehub.com/register-user"
+            : "/jadwalkan-demo"
+        }
+        className="btn btn-secondary btn-lg"
+      >
         {closing ? "Coba Gratis" : "Jadwalkan Demo"}
       </Link>
     </div>
-  )
+  );
 }
 
 const products = [
@@ -118,7 +136,7 @@ const products = [
     critical: false,
   },
   { name: "Classic Cap", sku: "ACC-012", stock: [28, 36, 45], critical: false },
-]
+];
 
 function RetailDashboard() {
   return (
@@ -229,7 +247,7 @@ function RetailDashboard() {
         ))}
       </div>
     </div>
-  )
+  );
 }
 
 const problems = [
@@ -253,7 +271,7 @@ const problems = [
     title: "Sulit Tahu Produk Terlaris",
     body: "Data penjualan ada di tiap outlet, tapi jarang disatukan jadi insight.",
   },
-]
+];
 const features = [
   {
     icon: "inventory",
@@ -285,14 +303,14 @@ const features = [
     title: "Laporan Performa Outlet",
     body: "Bandingkan penjualan dan stok antar cabang.",
   },
-]
+];
 
 function Cards({
   items,
   feature = false,
 }: {
-  items: typeof problems
-  feature?: boolean
+  items: typeof problems;
+  feature?: boolean;
 }) {
   return (
     <div
@@ -320,7 +338,7 @@ function Cards({
         </div>
       ))}
     </div>
-  )
+  );
 }
 
 function OptiMille() {
@@ -420,7 +438,7 @@ function OptiMille() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 export default function SolusiTokoRetail() {
@@ -580,5 +598,5 @@ export default function SolusiTokoRetail() {
         </div>
       </section>
     </>
-  )
+  );
 }
